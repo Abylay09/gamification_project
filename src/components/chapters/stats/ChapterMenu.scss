@@ -1,0 +1,24 @@
+.progress{
+    height: 12px;
+}
+.coin-img{
+    width: 24px;
+    height: 24px;
+    margin-right: 16px;
+}
+.coin-block{
+    width: 90px;
+}
+.star-block{
+    margin-right: 25px;
+    &__number{
+        margin: 0 16px;
+    }
+}
+.top-menu{
+    padding-top: 12px;
+}
+.test{
+    min-width: 265px;
+    width: 60%;
+}
