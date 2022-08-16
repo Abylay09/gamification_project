@@ -1,3 +1,25 @@
 .gap-5 {
     gap: 16px!important;
 }
+.chapter-item {
+    padding: 16px;
+    border-radius: 8px;
+    border : 2px solid #2A80FF;
+    &__title{
+        font-size: 13px;
+        font-weight: 500;
+    }
+}
+
+.chapter-item__progress{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+.center-circle{
+    width: 84%;
+    height: 84%;
+    background-color: #2A80FF;
+    border-radius: 100px;
+}

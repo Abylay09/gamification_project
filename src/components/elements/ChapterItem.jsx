@@ -1,28 +1,27 @@
 import React from 'react'
-import { Stack } from 'react-bootstrap'
 import Health from './awards/Health'
 import Gold from './awards/Gold'
-
+import 'react-circular-progressbar/dist/styles.css';
 import "./ChapterItem.scss"
-function ChapterItem() {
-  return (
-    <Stack gap={5}>
-      <div className="chapter-item bg-light border">
-        <div className='chapter-item__text'>
-            <p>Делимость натуральных чисел</p>
-            <div>
-                <Health/>
-                <Gold/>
-            </div>
-        </div>
-        <div className="chapter-item__progress">
+import CircleProgressBar from './CircleProgressBar';
 
-        </div>
-      </div>
-      <div className="bg-light border">Second item</div>
-      <div className="bg-light border">Third item</div>
-    </Stack>
-  )
+function ChapterItem(props) {
+    return (
+        // <Stack gap={5}>
+            <div className="chapter-item  d-flex align-items-center justify-content-between">
+                <div className='chapter-item__text'>
+                    <p className="chapter-item__title">{props.title}</p>
+                    <div className="chapter-item__awards">
+                        <Health />
+                        <Gold />
+                    </div>
+                </div>
+                <div className="chapter-item__progress" >
+                    <CircleProgressBar />
+                </div>
+            </div>
+        // </Stack>
+    )
 }
 
 export default ChapterItem
