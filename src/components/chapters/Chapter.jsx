@@ -24,6 +24,7 @@ export default function Chapter() {
             {/* Название Главы*/}
             <Row > 
                 <Col className='mt-2'>
+                    
                     <div className='d-flex align-items-center justify-content-between px-2'>
                         <ChapterHeader />
                     </div>
