@@ -1,0 +1,24 @@
+.bottom-menu{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    border-top-left-radius: 12px ;
+    border-top-right-radius: 12px;
+}
+// .bottom-menu__items{
+//     padding: 24px 24px 40px 24px;
+// }
+.bottom-menu__item{
+    // margin: 0 5.75px;
+    // padding: 0 16px;
+    width: 64px;
+    text-align: center;
+    &-title{
+        font-size: 11px; 
+        font-weight: 400;
+        color: #fff;
+        margin-top: 4px;
+        margin-bottom: 0;
+    }
+}

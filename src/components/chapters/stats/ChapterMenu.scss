@@ -1,24 +1,39 @@
-.progress{
+.progress {
     height: 12px;
 }
-.coin-img{
+
+.coin-img {
     width: 24px;
     height: 24px;
     margin-right: 16px;
 }
-.coin-block{
-    width: 90px;
+
+.coin-block {
+    width: 75px;
 }
-.star-block{
+
+.star-block {
     margin-right: 25px;
-    &__number{
+
+    &__number {
         margin: 0 16px;
     }
 }
-.top-menu{
-    padding-top: 12px;
+
+.coin-number {
+    font-size: 17px;
+    font-weight: 600;
+    color: #FDB30B;
 }
-.test{
-    min-width: 265px;
-    width: 60%;
+
+.level-block {
+    width: 200px;
+    // width: 65%;
+}
+
+.star-block__number {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 24px;
+    color: #08C7D2;
 }
