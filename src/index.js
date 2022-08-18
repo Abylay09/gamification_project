@@ -1,16 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import './index.scss';
 import App from './App';
+import Lessons from "./components/lessons/Lessons";
+
 import reportWebVitals from './reportWebVitals';
+import Lecture from './components/lessons/Lecture';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Routes>
+        <Route path="/" element={<App />} />
+        <Route path="/lessons" element={<Lessons />} />
+        <Route path="/lecture" element={<Lecture/>} />
+        {/* <Route path="/" element={<App />}>
+          <Route path="/test" element={<Lessons />}>
+          </Route>
+        </Route> */}
+      </Routes>
     </BrowserRouter>
   </React.StrictMode>
 

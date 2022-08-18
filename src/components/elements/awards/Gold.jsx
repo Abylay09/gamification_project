@@ -1,9 +1,9 @@
 import React from 'react'
 import "./Awards.scss"
 
-function Gold() {
+function Gold(props) {
   return (
-        <span className='gold'>+500 GOLD</span>
+        <span className='gold'>{props.title}</span>
         // < >+500 GOLD</>
   )
 }

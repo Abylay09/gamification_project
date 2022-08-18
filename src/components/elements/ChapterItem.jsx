@@ -4,7 +4,7 @@ import Gold from './awards/Gold'
 import 'react-circular-progressbar/dist/styles.css';
 import "./ChapterItem.scss"
 import CircleProgressBar from './CircleProgressBar';
-
+import {Link} from "react-router-dom"
 function ChapterItem(props) {
     return (
         // <Stack gap={5}>
@@ -12,8 +12,9 @@ function ChapterItem(props) {
                 <div className='chapter-item__text'>
                     <p className="chapter-item__title">{props.title}</p>
                     <div className="chapter-item__awards">
-                        <Health />
-                        <Gold />
+                        <Health title="+25 HP"/>
+                        <Gold title="+150 GOLD"/>
+                        <Link to="/test">Ссылка</Link>
                     </div>
                 </div>
                 <div className="chapter-item__progress" >

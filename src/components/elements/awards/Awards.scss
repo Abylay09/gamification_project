@@ -1,15 +1,25 @@
 .health{
     background-color: #00BED1;
+    // margin: 0 8px;
+}
+.trophy{
+    background-color: #D57CD7;
+    margin-right: 8px;
 }
 .gold{
     background-color: #FFC10C;
     margin-left: 8px;
 }
-.health, .gold{
+.health, .gold, .trophy{
     border-radius: 8px;
     padding: 4px 8px;
+    // font-size: 11px;
+    // font-weight: 400;
+    // color: #fff;
+}
+
+.health, .gold, .trophy span{
     font-size: 11px;
     font-weight: 400;
     color: #fff;
 }
-

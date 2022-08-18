@@ -1,8 +1,8 @@
 import React from 'react'
 import "./Awards.scss"
-function Health() {
+function Health(props) {
   return (
-    <span className='health'>+25 HP</span>
+    <span className='health'>{props.title}</span>
   )
 }
 

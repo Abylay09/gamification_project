@@ -6,23 +6,23 @@ function BottomMenu() {
         <div className='bottom-menu' style={{ backgroundColor: "#27272F", }}>
             <Container>
                 <Row style={{ padding: "24px 12px 40px 12px" }}>
-                    <Col style={{ textAlign: "center" }}>
+                    <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/pet-icon.svg"} alt="" />
                         <p className='bottom-menu__item-title' >Питомец</p>
                     </Col>
-                    <Col style={{ textAlign: "center" }}>
+                    <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/shop-icon.svg"} alt="" />
                         <p className='bottom-menu__item-title' >Питомец</p>
                     </Col>
-                    <Col style={{ textAlign: "center" }}>
+                    <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/home-icon.svg"} alt="" />
                         <p className='bottom-menu__item-title' >Питомец</p>
                     </Col>
-                    <Col style={{ textAlign: "center" }}>
+                    <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/indicator-icon.svg"} alt="" />
                         <p className='bottom-menu__item-title' >Питомец</p>
                     </Col>
-                    <Col style={{ textAlign: "center" }}>
+                    <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/room-icon.svg"} alt="" />
                         <p className='bottom-menu__item-title' >Питомец</p>
                     </Col>

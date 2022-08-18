@@ -1,5 +1,5 @@
 import React from 'react'
-function Button() {
+function Button(props) {
   return (
     <button type="button" class="btn w-100"
       style=
@@ -10,7 +10,7 @@ function Button() {
         color: "#fff",
         marginBottom: '150px',
         marginTop: '20px'
-      }}>Начать</button>
+      }}>{props.text}</button>
   )
 }
 

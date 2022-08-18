@@ -8,6 +8,7 @@ import ChapterHeader from './ChapterHeader'
 import Health from '../elements/awards/Health'
 import Gold from '../elements/awards/Gold'
 import "./Chapter.scss"
+import Trophy from '../elements/awards/Trophy'
 
 
 export default function Chapter() {
@@ -22,15 +23,16 @@ export default function Chapter() {
                 </Col>
             </Row>
             {/* Название Главы*/}
-            <Row > 
+            <Row >
                 <Col className='mt-2'>
-                    
+
                     <div className='d-flex align-items-center justify-content-between px-2'>
                         <ChapterHeader />
                     </div>
                     <div className='d-flex justify-content-center my-4'>
-                        <Health/>
-                        <Gold />
+                        <Trophy title="Рекомендуется" />
+                        <Health title="+25 HP"/>
+                        <Gold title="+500 GOLD"/>
                     </div>
                 </Col>
             </Row>
@@ -40,15 +42,11 @@ export default function Chapter() {
                 <ChapterItem title="Признаки делимости на 2, 3, 5, 9, 10" />
                 <ChapterItem title="Простые и составные числа. Разложение натурального числа на простые множители" />
                 <ChapterItem title="Наибольший общий делитель и наименьшее общее кратное" />
-                <ChapterItem title="Делимость натуральных чисел" />
-                <ChapterItem title="Признаки делимости на 2, 3, 5, 9, 10" />
-                <ChapterItem title="Простые и составные числа. Разложение натурального числа на простые множители" />
-                <ChapterItem title="Наибольший общий делитель и наименьшее общее кратное" />
             </Stack>
             {/* кнопка*/}
             <Row>
                 <Col >
-                    <Button />
+                    <Button text ="Начать"/>
                 </Col>
             </Row>
             {/* Нижнее меню */}
