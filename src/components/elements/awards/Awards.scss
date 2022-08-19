@@ -13,12 +13,13 @@
 .health, .gold, .trophy{
     border-radius: 8px;
     padding: 4px 8px;
+    line-height: 16px;
     // font-size: 11px;
     // font-weight: 400;
     // color: #fff;
 }
 
-.health, .gold, .trophy span{
+.health, .gold, .trophy {
     font-size: 11px;
     font-weight: 400;
     color: #fff;

@@ -6,8 +6,8 @@ import App from './App';
 import Lessons from "./components/lessons/Lessons";
 
 import reportWebVitals from './reportWebVitals';
-import Lecture from './components/lessons/Lecture';
-
+import Lecture from './components/lessons/Lecture'; 
+import Slider from './components/slider/Slider';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 
@@ -17,10 +17,7 @@ root.render(
         <Route path="/" element={<App />} />
         <Route path="/lessons" element={<Lessons />} />
         <Route path="/lecture" element={<Lecture/>} />
-        {/* <Route path="/" element={<App />}>
-          <Route path="/test" element={<Lessons />}>
-          </Route>
-        </Route> */}
+        <Route path="/slider" element={<Slider/>} />
       </Routes>
     </BrowserRouter>
   </React.StrictMode>

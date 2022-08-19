@@ -8,7 +8,7 @@ function Button(props) {
         borderRadius: "12px",
         padding: "15px 0",
         color: "#fff",
-        marginBottom: '150px',
+        marginBottom : props.regularMarginBottom,
         marginTop: '20px'
       }}>{props.text}</button>
   )

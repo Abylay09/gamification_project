@@ -14,7 +14,6 @@ function ChapterItem(props) {
                     <div className="chapter-item__awards">
                         <Health title="+25 HP"/>
                         <Gold title="+150 GOLD"/>
-                        <Link to="/test">Ссылка</Link>
                     </div>
                 </div>
                 <div className="chapter-item__progress" >

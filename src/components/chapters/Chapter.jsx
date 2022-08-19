@@ -46,7 +46,7 @@ export default function Chapter() {
             {/* кнопка*/}
             <Row>
                 <Col >
-                    <Button text ="Начать"/>
+                    <Button regularMarginBottom = '150px' text ="Начать"/>
                 </Col>
             </Row>
             {/* Нижнее меню */}

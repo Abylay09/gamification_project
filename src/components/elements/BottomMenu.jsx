@@ -12,19 +12,19 @@ function BottomMenu() {
                     </Col>
                     <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/shop-icon.svg"} alt="" />
-                        <p className='bottom-menu__item-title' >Питомец</p>
+                        <p className='bottom-menu__item-title' >Лавка</p>
                     </Col>
                     <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/home-icon.svg"} alt="" />
-                        <p className='bottom-menu__item-title' >Питомец</p>
+                        <p className='bottom-menu__item-title' >Домой</p>
                     </Col>
                     <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/indicator-icon.svg"} alt="" />
-                        <p className='bottom-menu__item-title' >Питомец</p>
+                        <p className='bottom-menu__item-title' >Показатели </p>
                     </Col>
                     <Col xs  style={{ textAlign: "center" }}>
                         <img src={process.env.PUBLIC_URL + "/images/bottom-menu/room-icon.svg"} alt="" />
-                        <p className='bottom-menu__item-title' >Питомец</p>
+                        <p className='bottom-menu__item-title' >Комната</p>
                     </Col>
                 </Row>
             </Container>
