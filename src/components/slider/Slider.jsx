@@ -13,7 +13,7 @@ function Slider() {
         <ambientLight intensity={0.1} />
         <directionalLight color="red" position={[0, 0, 5]} />
         {/* <Model/> */}
-        <Suspense>
+        <Suspense fallback = {null}>
           {/* <mesh position={[1, -2, -10]}> */}
           <mesh>
             <Model />
