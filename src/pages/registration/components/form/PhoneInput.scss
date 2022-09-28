@@ -1,0 +1,52 @@
+.phone-form {}
+
+.content-info__text {
+    color: #fff;
+    font-weight: 500;
+    font-size: 27px;
+    line-height: 34px;
+    margin-top: 12px;
+}
+
+.form-title {
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 26px;
+}
+
+.input__wrapper {
+    position: relative;
+}
+
+.phone-input__wrapper-title {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    margin: 0;
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    display: none;
+}
+
+.phone-input {
+    padding: 16px 16px 16px 16px;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 22px;
+    border-radius: 12px;
+    margin-bottom: 84px;
+}
+
+.phone-input:focus {
+    border: 1px solid #0073EA;
+    box-shadow: 0px 0px 8px rgba(130, 145, 182, 0.2);
+}
+
+.phone-input:focus {
+    &+.phone-input__wrapper-title {
+        display: block;
+    }
+
+    padding: 36px 16px 16px 16px;
+}

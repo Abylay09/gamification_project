@@ -1,0 +1,46 @@
+.sms-title {
+    font-weight: 500;
+    font-size: 21px;
+    line-height: 26px;
+    margin-bottom: 4px;
+}
+
+.sms-subtitle {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.signin-sms__inputs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 0;
+    transition: opacity 0.3s ease;
+}
+
+.signin-sms__inputs input {
+    width: 100%;
+    flex: 0 0 60px;
+    padding: 0;
+    margin: 0 0 84px 0;
+    text-align: center;
+    min-height: 60px;
+    font-size: 16px;
+    box-shadow: none;
+    outline: none;
+    border-color: transparent;
+    border-radius: 12px;
+    background-color: #F5F8FF;
+}
+
+.signin-sms__wrap input::placeholder {
+    font-size: 21px;
+    font-weight: bold;
+    color: #2A80FF;
+}
+
+.signin-sms__wrap input:not(:first-child) {
+    margin-left: 1%;
+}

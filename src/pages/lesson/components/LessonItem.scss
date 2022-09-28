@@ -1,0 +1,40 @@
+.lesson-item{
+    border-radius: 8px;
+    border : 2px solid transparent;
+    box-shadow: 0px 0px 8px rgba(130, 145, 182, 0.2);
+    &__title{
+        font-size: 13px;
+        font-family: "SF Pro Display", sans-serif;
+        font-weight: 500;
+        margin-bottom: 12px;
+    }
+    &:hover{
+        border : 2px solid #2A80FF;
+    }
+}
+
+.lesson-item__title {
+    font-weight: 500;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 12px;
+}
+.chapter-item__progress{
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    margin-left: 8px;
+}
+.center-circle{
+    width: 84%;
+    height: 84%;
+    background-color: #2A80FF;
+    border-radius: 100px;
+}
+
+.center-circle__number{
+    line-height: 22px;
+    font-size: 15px;
+    font-weight: bold;
+    color: #fff;
+}

@@ -1,0 +1,20 @@
+.price-wrapper {
+    gap: 8px;
+}
+
+.price-gold,
+.price-hp {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+    border-radius: 8px;
+    color: #fff;
+}
+
+.price-gold {
+    background: #FFC10C;
+}
+
+.price-hp {
+    background: #00BED1;
+}

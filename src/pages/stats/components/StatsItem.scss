@@ -1,0 +1,52 @@
+.rate-item {
+    p {
+        margin-bottom: 0;
+    }
+}
+
+.rate-item {
+    padding: 12px 16px;
+    border: 1px solid #EFEFEF;
+    border-radius: 12px;
+
+    &__number {
+        width: 24px;
+        height: 24px;
+        padding: 2px 8px;
+        background-color: #FDB30B;
+        border-radius: 50px;
+        font-weight: 500;
+        font-size: 16px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // line-height: 20px;
+        color: #fff;
+    }
+
+    &__info {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    &__name {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    &__type {
+        font-weight: 400;
+        font-size: 11px;
+        line-height: 16px;
+        color: #27272F;
+    }
+
+    &__level {
+        font-weight: 600;
+        font-size: 13px;
+        line-height: 20px;
+        color: #27272F;
+    }
+}

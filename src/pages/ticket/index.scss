@@ -1,0 +1,81 @@
+.coupon-top__item {
+    position: relative;
+}
+
+.coupon-top__item.active {
+    color: #2A80FF;
+    border-bottom: 1px solid #2A80FF;
+}
+
+
+
+
+.coupon-ticket {
+    position: relative;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.coupon-body {
+    text-align: center;
+}
+
+.coupon-title {
+    font-weight: 700;
+    font-size: 15px;
+    line-height: 22px;
+}
+
+.coupon-text {
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    margin-bottom: 8px;
+}
+
+.coupon-subtitle {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.coupon-circle {
+    position: absolute;
+    bottom: -6px;
+    // width: calc(100% ); // 6px это сам подбери, чтобы боковые выходили за экран, вообще это ширина 1 шара 
+    // либо так, если через width проблемы будут 
+    left: -6px;  
+    right: -6px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.coupon-circle__item { 
+    // max-width: 12px; 
+    // max-height: 12px; 
+    min-width: 12px; 
+    min-height: 12px; 
+    border-radius: 50%; 
+    background-color: #EFEFEF; 
+  }
+
+// .coupon-circle {
+//     position: absolute;
+//     top: 100%;
+//     transform: translateY(-50%);
+//     left: 0;
+// }
+
+// .coupon-circle__item {
+//     display: inline-block;
+//     width: 12px;
+//     height: 12px;
+//     background-color: #c2c0c0;
+//     border-radius: 50px;
+
+// }
+
+// .coupon-circle__item+.coupon-circle__item {
+//     margin-left: 17px;
+// }
