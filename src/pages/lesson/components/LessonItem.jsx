@@ -14,12 +14,12 @@ const progressStyle = {
     },
 }
 
-function LessonItem() {
+function LessonItem({uid,title,order}) {
     const progress =80;
     return (
         <div className='lesson-item d-flex justify-content-between align-items-center p-3'>
             <div>
-                <p className='lesson-item__title'>Делимость натуральных чисел</p>
+                <p className='lesson-item__title'>{title}</p>
                 <HealthGold gold={150} hp={20} />
             </div>
 
@@ -28,7 +28,7 @@ function LessonItem() {
                     <div className='center-circle d-flex align-items-center justify-content-center' >
                         {progress >= 100 ?
                             <img src={check} alt="" /> :
-                            <span className='center-circle__number'>2</span>}
+                            <span className='center-circle__number'>{order}</span>}
                     </div>
                 </CircularProgressbarWithChildren>
             </div>

@@ -1,6 +1,13 @@
 import React, { Suspense, useRef } from 'react'
 import { Canvas, useFrame, } from '@react-three/fiber'
 import { OrbitControls, useGLTF, useAnimations } from '@react-three/drei'
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation } from "swiper";
+
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/scrollbar";
+import "swiper/css/navigation";
 // import Rabbit from './components/Rabbit'
 // const wrapper = {
 //     minHeight: '100vh',
@@ -11,41 +18,41 @@ function Tiger(props) {
     const { nodes, materials, animations } = useGLTF('/tiger.glb')
     const { actions } = useAnimations(animations, group)
     return (
-      <group ref={group} {...props} dispose={null} scale = {1} >
-        <group name="Sketchfab_Scene">
-          <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={1}>
-            <group name="24d5c560279b4e48b582cd645dc010f5fbx" rotation={[Math.PI / 2, 0, 0]}>
-              <group name="Object_2">
-                <group name="RootNode">
-                  <group name="Sphere001" rotation={[-Math.PI / 2, 0, 0]} />
-                  <group name="Lowpoly001" position={[0, 104.61, 2.35]} rotation={[-Math.PI / 2, 0, -Math.PI]} scale={0.01} />
-                  <group name="Armature" rotation={[-Math.PI / 2, 0, 0]}>
-                    <group name="Object_7">
-                      <primitive object={nodes._rootJoint} />
-                      <group name="Object_9" rotation={[-Math.PI / 2, 0, 0]} />
-                      <group name="Object_12" position={[0, 104.61, 2.35]} rotation={[-Math.PI / 2, 0, -Math.PI]} scale={0.01} />
-                      <skinnedMesh name="Object_10" geometry={nodes.Object_10.geometry} material={materials.Eyes} skeleton={nodes.Object_10.skeleton} />
-                      <skinnedMesh name="Object_11" geometry={nodes.Object_11.geometry} material={materials.Shine} skeleton={nodes.Object_11.skeleton} />
-                      <skinnedMesh name="Object_13" geometry={nodes.Object_13.geometry} material={materials.PantherNaked_Final} skeleton={nodes.Object_13.skeleton} />
-                      <skinnedMesh name="Object_14" geometry={nodes.Object_14.geometry} material={materials.Mouth_Cat} skeleton={nodes.Object_14.skeleton} />
+        <group ref={group} {...props} dispose={null} scale={1} >
+            <group name="Sketchfab_Scene">
+                <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]} scale={1}>
+                    <group name="24d5c560279b4e48b582cd645dc010f5fbx" rotation={[Math.PI / 2, 0, 0]}>
+                        <group name="Object_2">
+                            <group name="RootNode">
+                                <group name="Sphere001" rotation={[-Math.PI / 2, 0, 0]} />
+                                <group name="Lowpoly001" position={[0, 104.61, 2.35]} rotation={[-Math.PI / 2, 0, -Math.PI]} scale={0.01} />
+                                <group name="Armature" rotation={[-Math.PI / 2, 0, 0]}>
+                                    <group name="Object_7">
+                                        <primitive object={nodes._rootJoint} />
+                                        <group name="Object_9" rotation={[-Math.PI / 2, 0, 0]} />
+                                        <group name="Object_12" position={[0, 104.61, 2.35]} rotation={[-Math.PI / 2, 0, -Math.PI]} scale={0.01} />
+                                        <skinnedMesh name="Object_10" geometry={nodes.Object_10.geometry} material={materials.Eyes} skeleton={nodes.Object_10.skeleton} />
+                                        <skinnedMesh name="Object_11" geometry={nodes.Object_11.geometry} material={materials.Shine} skeleton={nodes.Object_11.skeleton} />
+                                        <skinnedMesh name="Object_13" geometry={nodes.Object_13.geometry} material={materials.PantherNaked_Final} skeleton={nodes.Object_13.skeleton} />
+                                        <skinnedMesh name="Object_14" geometry={nodes.Object_14.geometry} material={materials.Mouth_Cat} skeleton={nodes.Object_14.skeleton} />
+                                    </group>
+                                </group>
+                            </group>
+                        </group>
                     </group>
-                  </group>
                 </group>
-              </group>
             </group>
-          </group>
         </group>
-      </group>
     )
-  }
+}
 
-  
+
 function Wolf(props) {
     const group = useRef()
     const { nodes, materials, animations } = useGLTF('/terris_wolf.glb')
     const { actions } = useAnimations(animations, group)
     return (
-        <group ref={group} {...props} dispose={null} scale = {0.015}>
+        <group ref={group} {...props} dispose={null} scale={0.015}>
             <group name="Sketchfab_Scene">
                 <group name="Sketchfab_model" rotation={[-Math.PI / 2, 0, 0]}>
                     <group name="139f500375b64fb297d5f5b80c725347fbx" rotation={[Math.PI / 2, 0, 0]}>
@@ -236,21 +243,73 @@ function Rabbit(props) {
 function PetSliderPage() {
     return (
         <div style={{ width: "100vw", height: "100vh" }}>
-            <Canvas camera={{ fov: 100, position: [0, 70, 255] }}>
-                <Suspense fallback={null}>
-                    <ambientLight />
-                    <directionalLight intensity={0} position={[0, 0, 50]} />
-                    {/* <Model /> */}
-                    {/* <Ruby/> */}
-                    {/* <Taryk /> */}
-                    {/* <Wolf /> */}
-                    <Tiger/>
+            <Swiper
+                direction={"horizontal"}
+                slidesPerView={1}
+                mousewheel={true}
+                spaceBetween={24}
+                navigation={true}
+                modules={[Navigation]}
+                allowTouchMove={false}
+            >
+                <SwiperSlide>
+                    <div style={{ height: "450px", backgroundColor: "#272121", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        <Canvas camera={{ fov: 100, position: [0, 70, 255] }}>
+                            <Suspense fallback={null}>
+                                <ambientLight />
+                                <directionalLight intensity={0} position={[0, 0, 50]} />
+                                {/* <Model /> */}
+                                {/* <Ruby/> */}
+                                {/* <Taryk /> */}
+                                {/* <Wolf /> */}
+                                <Tiger />
 
-                    {/* <Skycat/> */}
-                    {/* <Rabbit/> */}
-                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
-                </Suspense>
-            </Canvas>
+                                {/* <Skycat/> */}
+                                {/* <Rabbit/> */}
+                                <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                            </Suspense>
+                        </Canvas>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div style={{ height: "450px", backgroundColor: "#f5f5f5", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        <Canvas camera={{ fov: 100, position: [0, 70, 255] }}>
+                            <Suspense fallback={null}>
+                                <ambientLight />
+                                <directionalLight intensity={0} position={[0, 0, 50]} />
+                                <Model />
+                                <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                            </Suspense>
+                        </Canvas>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div style={{ height: "450px", backgroundColor: "#272121", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        <Canvas camera={{ fov: 100, position: [0, 70, 255] }}>
+                            <Suspense fallback={null}>
+                                <ambientLight />
+                                <directionalLight intensity={0} position={[0, 0, 50]} />
+                                <Taryk />
+                                <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                            </Suspense>
+                        </Canvas>
+                    </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                    <div style={{ height: "450px", backgroundColor: "#272121", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        <Canvas camera={{ fov: 100, position: [0, 70, 255] }}>
+                            <Suspense fallback={null}>
+                                <ambientLight />
+                                <directionalLight intensity={0} position={[0, 0, 50]} />
+                                {/* <Model /> */}
+                                <Ruby/>
+                                <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                            </Suspense>
+                        </Canvas>
+                    </div>
+                </SwiperSlide>
+            </Swiper>
+
         </div>
     )
 }

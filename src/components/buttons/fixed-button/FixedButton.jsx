@@ -12,9 +12,9 @@ const buttonStyle = {
     marginTop: '26px'
 }
 
-function FixedButton({ text }) {
+function FixedButton({ text, onClick }) {
     return (
-        <button type="button" class="btn w-100"
+        <button type="button" class="btn w-100" onClick={onClick}
             // onClick={props.func}
             style={buttonStyle}>{text}</button>
     )
