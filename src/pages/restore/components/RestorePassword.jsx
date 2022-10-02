@@ -5,10 +5,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/bubble.png"
 
-import { setPhone, nextStep, setPassword } from 'redux/features/signUpSlice';
+import { setPhone, nextStep, setPassword } from 'redux/features/restoreSlice';
 import { useSignUpMutation } from 'redux/services/signUp';
 
-import "./PasswordInput.scss"
+import "./RestorePassword.scss"
 import { useMutation, useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -19,24 +19,24 @@ const topInfo = {
     borderTopLeftRadius: "12px",
     borderTopRightRadius: "12px"
 }
-function PasswordInput() {
+function RestorePassword() {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const phone = useSelector((state) => state.signUp.phone)
-    const passwd = useSelector((state) => state.signUp.password)
+    const phone = useSelector((state) => state.restore.phone)
+    const passwd = useSelector((state) => state.restore.password)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const watchPassword = watch("password", "");
     const watchPasswordProve = watch("passwordProve", "")
 
     const mutation = useMutation(userInfo => {
-        axios.post("http://195.49.212.191:8779/user/signup", userInfo)
+        axios.post("http://195.49.212.191:8779/user/restore", userInfo)
     })
 
     const onSubmit = () => {
         if (watchPassword === watchPasswordProve) {
-            mutation.mutate({login : phone, password : passwd});
-            if(mutation.isSuccess) {
-                dispatch(nextStep());
+            mutation.mutate({ login: phone, step: 3, password: passwd, });
+            if (mutation.isSuccess) {
+                navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
             }
         } else {
             console.log(watchPasswordProve)
@@ -45,7 +45,7 @@ function PasswordInput() {
     return (
         <>
             {/* <div style={{ paddingBottom: "165px" }}> */}
-            <div style={{ paddingBottom: "30%", marginTop : "24px" }}>
+            <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>
             </div>
@@ -81,7 +81,7 @@ function PasswordInput() {
                             })}
                         />
                         <p className='password-input__wrapper-title'>Пароль</p>
-                        <AuthButton text={"Продолжить"}  />
+                        <AuthButton text={"Продолжить"} />
                     </div>
                 </div>
             </form>
@@ -89,4 +89,4 @@ function PasswordInput() {
     )
 }
 
-export default PasswordInput    
+export default RestorePassword    

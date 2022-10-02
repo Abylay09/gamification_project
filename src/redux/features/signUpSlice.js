@@ -20,9 +20,16 @@ export const signUpSlice = createSlice({
         setPassword : (state, action) => {
             state.password = action.payload
             console.log( state.password );
+        },
+        setSms : (state, action) => {
+            state.sms += action.payload
+            console.log( state.sms );
+        },
+        removeSms : (state) => {
+            state.sms = ""
         }
     }
 })
 
-export const {nextStep, setPhone, setPassword} = signUpSlice.actions;
+export const {nextStep, setPhone, setPassword, setSms, removeSms} = signUpSlice.actions;
 export default signUpSlice.reducer;

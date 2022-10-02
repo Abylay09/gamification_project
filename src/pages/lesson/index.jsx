@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
-import { useEffect } from 'react'
-import { Link, NavLink, useParams } from 'react-router-dom'
+import React, {useEffect} from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Stack, Row, Col } from 'react-bootstrap'
 import Layout from 'layout/Layout'
 import LessonItem from './components/LessonItem'
@@ -8,53 +7,64 @@ import FixedButton from 'components/buttons/fixed-button/FixedButton'
 import Graduation from 'components/modals/Graduation'
 import ClosedLesson from 'components/info/ClosedLesson'
 import LessonHeader from './components/LessonHeader'
-import { useGetLessonsGroupQuery } from 'redux/services/lessonApi'
-import { useSelector, useDispatch } from 'react-redux'
-import { setTitle } from 'redux/features/lessonGroupSlice'
+import { useGetLessonsGroupQuery, useGetLessonQuery } from 'redux/services/lessonApi'
+import { useQueryClient, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 function LessonPage() {
-    const [data, setData] = useState(null);
-    const lessons = useSelector(state => state.lessonGroup);
     const params = useParams();
-    const dispatch = useDispatch()
-
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
     
-    // const { isLoading, isSuccess, error, data } = useGetLessonsGroupQuery("11870796-3253-11ed-a261-0242ac120002")
 
-    let { currentData, isLoading, isSuccess, isError, error, refetch } = useGetLessonsGroupQuery(params.id)
-    if (isLoading) return <div>Loading...</div>
-    if(currentData)
-    return (
-        <Layout >
-            <Row>
-                <Col>
-                    <LessonHeader title={currentData.lessons_group.title} order = {currentData.lessons_group.order} 
-                        prev = {currentData.lessons_group.prev} next = {currentData.lessons_group.next}
-                    />
-                    {/* <LessonHeader title={data.lessons_group.title} order = {data.lessons_group.order} 
-                        prev = {data.lessons_group.prev} next = {data.lessons_group.next}
-                    /> */}
-                </Col>
-            </Row>
-            <Row>
-                <Col >
-                    <Stack gap={3}>
-                        <LessonItem />
-                        <LessonItem />
-                        <LessonItem />
-                        <LessonItem />
-                        <LessonItem />
-                        <LessonItem />
-                        <LessonItem />
-                        <LessonItem />
-                        <FixedButton text={"начать"} />
-                    </Stack>
-                </Col>
-            </Row>
-            {/* popup с поздравлением */}
-            {/* <Graduation show={true} /> */}
-        </Layout >
-    )
+    const { data: lessonGroup, status, isSuccess } = useQuery(["LessonGroup", params], async () => {
+        const response = await axios.get("http://195.49.212.191:8779/lessons/lessons-group/", {
+            params: {
+                uid: params.id
+            },
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
+        const result = await response.data;
+        return result;
+    }, {
+        enabled : !!params.id,
+        cacheTime : 0
+    })
+
+    if (status === "loading") {
+        return <div>Loading</div>
+    }
+    else if (status === "error") {
+        return <div>Error</div>
+    }
+
+    const navigatePage = (id) => {
+        navigate(`/lecture/${id}`)
+    }
+        return (
+            <Layout  >
+                <Row>
+                    <Col>
+                        <LessonHeader title={lessonGroup.lessons_group.title} order={lessonGroup.lessons_group.order}
+                            prev={lessonGroup.lessons_group.prev} next={lessonGroup.lessons_group.next}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >
+                        <Stack gap={3}>
+                            <LessonItem  
+                            title = {lessonGroup.lessons_group.lessons[1]?.title} 
+                            order = {lessonGroup.lessons_group.lessons[1]?.order}/>
+                            <FixedButton text={"начать"} onClick = {() => navigatePage(lessonGroup.lessons_group.lessons[1].uid)}/>
+                        </Stack>
+                    </Col>
+                </Row>
+                {/* popup с поздравлением */}
+                {/* <Graduation show={true} /> */}
+            </Layout >
+        )
 }
 
 export default LessonPage

@@ -13,19 +13,19 @@ function BottomMenu() {
             <ul className='bottom-menu-list'>
                 <li>
                     <div className='menu-icon'><img src={PetIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/"}>Питомец</Link>
+                    <Link className='menu-link' to={"/pet"}>Питомец</Link>
                 </li>
                 <li>
                     <div className='menu-icon'><img src={Shopicon} alt="" /></div>
-                    <Link className='menu-link' to={"/"}>Лавка</Link>
+                    <Link className='menu-link' to={"/shop"}>Лавка</Link>
                 </li>
                 <li>
                     <div className='menu-icon'><img src={HomeIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/"}>Домой</Link>
+                    <Link className='menu-link' to={"/lessons/11870796-3253-11ed-a261-0242ac120002"}>Домой</Link>
                 </li>
                 <li>
                     <div className='menu-icon'><img src={IndicatorIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/"}>Показатели</Link>
+                    <Link className='menu-link' to={"/stats"}>Показатели</Link>
                 </li>
                 <li>
                     <div className='menu-icon'><img src={RoomIcon} alt="" /></div>
