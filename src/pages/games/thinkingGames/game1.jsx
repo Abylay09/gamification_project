@@ -3,7 +3,7 @@ import { Container, Row, Col } from 'react-bootstrap'
 import "./game1.scss"
 
 let positionX = 0, positionY = 0, doc = document.getElementsByTagName("html")[0]
-export default class Game1 extends React.Component {
+export default class Game3 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

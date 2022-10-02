@@ -3,7 +3,7 @@ import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import "./game1.scss"
 
-export default class Game1 extends React.Component {
+export default class Game2 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

@@ -26,16 +26,6 @@ function Layout({ children }) {
                     {children}
                 </Col>
             </Row>
-            {/* <div className='suka'>
-                <div className='suk'>
-                    {children}
-                </div>
-
-            </div> */}
-
-
-
-
             <BottomMenu />
 
         </Container>

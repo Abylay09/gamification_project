@@ -6,12 +6,36 @@ import FixedButton from 'components/buttons/fixed-button/FixedButton'
 
 import PurpleCross from "assets/common/purple-cross.png"
 import "./index.scss"
+import { useQuery } from '@tanstack/react-query';
+import axios from 'axios';
+import { useNavigate, useParams } from 'react-router-dom';
 function LectureInfoPage() {
-    const data = "Известно, что любое натуральное число a можно представить в виде суммы некоторого числа десятков и однозначного числа.Например: 37 = 3⋅10 + 7; 124 = 12⋅10 + 4; 6782 = 678⋅10 + 2. В общем виде можно записать так: a = m⋅10 + n, где n — это последняя цифра в записи числа a. Первое слагаемое, т.е.выражение m⋅10, делится и на 2, и на 5, и на 10, т.к.множитель 10 в этом произведении делится на каждое из названных чисел. Поэтому делимость числа a на 2, на 5 или на 10 зависит от последней цифры числа a, т.е.от цифры n. Если последняя цифра числа чётная, то оно делится на 2."
     const [show, showMore] = useState(false);
-
+    const params = useParams();
+    const navigate = useNavigate()
     function executeOnClick(isExpanded) {
         console.log(isExpanded);
+    }
+    const token = localStorage.getItem("token");
+
+    const { data: lecture, status } = useQuery(["lecture"], async () => {
+        const response = await axios.get("http://195.49.212.191:8779/lessons/lesson/", {
+            params: {
+                uid: params.id
+            },
+            headers: {
+                'Authorization': `Basic ${token}`
+            }
+        })
+        const result = await response.data;
+        console.log(result);
+        return result;
+    })
+    if (status === "loading") {
+        return <div>Loading</div>
+    }
+    else if (status === "error") {
+        return <div>Error</div>
     }
 
     return (
@@ -20,7 +44,7 @@ function LectureInfoPage() {
                 <Col>
                     <div className='d-flex py-4'>
                         <img style={{ height: "20px" }} src={PurpleCross} alt="" />
-                        <h3 className="lecture-title">Признаки делимости на 2, 3, 5, 9, 10</h3>
+                        <h3 className="lecture-title">{lecture.lesson.lectures[0].title}</h3>
                     </div>
                 </Col>
             </Row>
@@ -28,7 +52,7 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <div className='react-player-container mt-4'>
-                        <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url='https://www.youtube.com/watch?v=ysz5S6PUM-U' />
+                        <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url="https://openskill.uz/static_assets/21ec1001-6e14-4dbf-a20d-12bbd0fbf9be.mp4" />
                     </div>
                 </Col>
             </Row>
@@ -38,14 +62,14 @@ function LectureInfoPage() {
                     <Stack>
                         <h4 className='lecture-text-subtitle' >Теория</h4>
                         <p className='lecture-text' >
-                            {show ? data : data.substring(0, data.length / 3)}
+                            {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)}
                         </p>
                         <p style={{ color: "#2A80FF", fontSize: "13px" }} onClick={() => showMore(!show)}>Показать еще</p>
-                        
+
                     </Stack>
                 </Col>
             </Row>
-            
+
         </Container>
     )
 }

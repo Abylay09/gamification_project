@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
 import { useState } from 'react'
+
 function LecturePage() {
     const [uidLink, setLink] = useState("")
     const params = useParams();
@@ -18,7 +19,7 @@ function LecturePage() {
     const { data: lesson, status } = useQuery(["lesson"], async () => {
         const response = await axios.get("http://195.49.212.191:8779/lessons/lesson/", {
             params: {
-                uid: params.id
+                uid: params.id || "89ee46c4-842e-4615-abac-ae60086b80d6"
             },
             headers: {
                 'Authorization': `Basic ${token}`
@@ -33,14 +34,13 @@ function LecturePage() {
     else if (status === "error") {
         return <div>Error</div>
     }
-    console.log(lesson);
+
     return (
         // <Container className='min-vh-100'>
-        <Container >
+        <Container className='min-vh-100'>
             <Row>
                 <Col>
                     <div className='d-flex align-items-center py-4' onClick={() => navigate(-1)}>
-                        {/* <div className='d-flex align-items-center py-4' > */}
                         <img style={{ height: "20px" }} src={BlueLeftArrow} alt="" />
                         <h3 className="page-title"  >{lesson.lesson.title}</h3>
                     </div>
@@ -52,7 +52,7 @@ function LecturePage() {
                     <h4 className='section-title my-4' >Лекции</h4>
                     <Stack gap={3}>
                         {lesson.lesson.lectures.map(item => {
-                            return <LectureItem title={item.title} order={item.order} />
+                            return <div onClick={() => navigate(`/lecture-info/${lesson.lesson.uid}`)}><LectureItem title={item.title} order={item.order} /></div>
                         })}
                     </Stack>
                 </Col>

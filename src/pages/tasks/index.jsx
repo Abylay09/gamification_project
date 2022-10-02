@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Button } from 'react-bootstrap'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import PurpleCross from "assets/common/purple-cross.png"
 import { useMutation, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
@@ -9,6 +9,7 @@ import { useEffect } from 'react'
 function TaskPage() {
     const params = useParams()
     const [inputValue, setInputValue] = useState("")
+    const navigate = useNavigate();
     let token = localStorage.getItem("token");
     const { data: query, status } = useQuery(["task-info"], async () => {
         const response = await axios.get("http://195.49.212.191:8779/lessons/task", {
@@ -19,14 +20,6 @@ function TaskPage() {
                 'Authorization': `Bearer ${token}`
             }
         })
-        // const response = await axios.get("http://195.49.212.191:8779/lessons/task", {
-        //     params: {
-        //         uid: params.id
-        //     },
-        //     headers: {
-        //         'Authorization': `Bearer ${token}`
-        //     }
-        // })
         const result = await response.data;
         return result;
     }, {
@@ -54,8 +47,8 @@ function TaskPage() {
             <Row>
                 <Col>
                     <div className='d-flex py-4'>
-                        <img style={{ height: "20px" }} src={PurpleCross} alt="" />
-                        <h3 className="lecture-title"></h3>
+                        <img onClick={() => navigate("/lecture/89ee46c4-842e-4615-abac-ae60086b80d6")} style={{ height: "20px" }} src={PurpleCross} alt="" />
+                        <h3 className="lecture-title" ></h3>
                     </div>
                 </Col>
             </Row>

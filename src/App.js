@@ -18,12 +18,15 @@ import ProtectedRoutes from 'utils/ProtectedRoutes';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
 import RestorePage from 'pages/restore';
 import TaskPage from 'pages/tasks';
+import Game1 from 'pages/games/attentionGames/game1';
+import Game2 from 'pages/games/memoryGames/game1';
+import Game3 from 'pages/games/thinkingGames/game1';
 
 function App() {
   const queryClient = new QueryClient({
-    defaultOptions : {
-      queries : {
-        refetchOnWindowFocus : false
+    defaultOptions: {
+      queries: {
+        refetchOnWindowFocus: false
       }
     }
   })
@@ -40,15 +43,28 @@ function App() {
             <Route path="/lessons" element={<LessonPage />}>
               <Route path=":id" element={<LessonPage />} />
             </Route>
-            <Route path="/lecture/:id" element={<LecturePage />} />
+            <Route  path="/lecture" element={<LecturePage />}>
+              <Route path=":id" element={<LecturePage />} />
+            </Route>
             <Route path="/task/:id" element={<TaskPage />} />
-            <Route path="/lecture-info" element={<LectureInfoPage />} />
+            <Route path="/lecture-info" element={<LectureInfoPage />} >
+                <Route path=":id" element={<LectureInfoPage />} />
+            </Route>
             <Route path="/pet" element={<PetPage />} />
             <Route path="/quests" element={<QuestsPage />} />
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/ticket" element={<TicketPage />} />
             <Route path="/choose-pet" element={<PetSliderPage />} />
             <Route path="/stats" element={<StatsPage />} />
+
+            <Route path="/ticket" element={<TicketPage />} />
+            <Route path="/choose-pet" element={<PetSliderPage />} />
+            <Route path="/stats" element={<StatsPage />} />
+
+            {/* <Route path="/attention" element={<Game1 />} />
+            <Route path="/memory" element={<Game2/>} />
+            <Route path="/thinking" element={<Game3/>} /> */}
+
           </Route>
           <Route path="*" element={<ErrorPage />} />
           {/* <Route path="/profile" element={<ProfilePage />} /> */}

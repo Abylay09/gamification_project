@@ -8,7 +8,6 @@ function TaskItem({exp,gold,order, uid, onClick}) {
             <div className='task mb-4' onClick={() => onClick(uid)}>
                 <p className='task__title mb-0' >Уровень {order}</p>
                 <p className='task__number'></p>
-                <span>{uid}</span>
                 <div className='d-flex' style = {{gap : "8px"}}>
                     <Health hp={exp} />
                     <Gold gold={gold} />

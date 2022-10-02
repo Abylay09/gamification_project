@@ -68,7 +68,7 @@ function LoginPassword() {
                         <div className='get-password' onClick={() => navigate("/registration")}>
                             Зарегистрироваться
                         </div>
-                        <div className='get-password' onClick={() => navigate("/restore")}>
+                        <div className='get-password py-1 mt-0' onClick={() => navigate("/restore")}>
                             Восстановить пароль
                         </div>
                     </div>

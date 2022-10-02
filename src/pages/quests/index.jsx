@@ -10,7 +10,7 @@ import "./index.scss"
 function QuestsPage() {
     const [borderStyle, setBorderStyle] = useState(false)
     return (
-        <Container>
+        <Container className='' style={{minHeight : "100vh"}}>
             <QuestsMenu />
 
             <Stack direction="horizontal" gap={3} className="quest-items flex-wrap justify-content-between">
