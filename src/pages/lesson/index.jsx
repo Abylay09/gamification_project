@@ -21,11 +21,11 @@ function LessonPage() {
     
     // const { isLoading, isSuccess, error, data } = useGetLessonsGroupQuery("11870796-3253-11ed-a261-0242ac120002")
 
-    const { currentData, isLoading, isSuccess, isError, error, refetch } = useGetLessonsGroupQuery(params.id)
+    let { currentData, isLoading, isSuccess, isError, error, refetch } = useGetLessonsGroupQuery(params.id)
     if (isLoading) return <div>Loading...</div>
-
+    if(currentData)
     return (
-        <Layout  >
+        <Layout >
             <Row>
                 <Col>
                     <LessonHeader title={currentData.lessons_group.title} order = {currentData.lessons_group.order} 

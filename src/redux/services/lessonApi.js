@@ -17,12 +17,16 @@ export const lessonApi = createApi({
     endpoints: (build) => ({
         getLessonsGroup: build.query({
             // query: (id) => `lessons-group/${id}`,
-            query: (id ) => ({
-                url: `lessons-group`,
-                params: {
-                    "uid": id
+            query: (id ) => {
+                console.log("id", id)
+                return {
+                    url: `lessons-group`,
+                    method: "GET",
+                    params: {
+                        "uid": id
                 }
-            })
+                }
+            }
         })
     })
 })

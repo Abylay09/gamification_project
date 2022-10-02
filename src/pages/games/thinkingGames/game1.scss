@@ -1,0 +1,44 @@
+.container {
+  max-height: 100vh;
+  min-height: 100vh;
+  max-width: 100vw;
+  min-width: 100vw;
+  overflow: hidden;
+}
+.arrow {
+  position: fixed;
+  max-width: 36px !important;
+  max-height: 36px !important;
+  min-width: 36px !important;
+  min-height: 36px !important;
+  padding: 0 !important;
+  transition: all 0s;
+  font-size: 36px;
+  z-index: 0;
+  font-weight: bold;
+}
+.row:first-child {
+  background-color: white;
+  z-index: 1;
+  position: relative;
+}
+.direction- {
+  &left {
+    transform: rotate(0deg)
+  }
+  &up {
+    transform: rotate(90deg)
+  }
+  &right {
+    transform: rotate(180deg)
+  }
+  &down {
+    transform: rotate(270deg)
+  }
+}
+span {
+  font-size: 1.5rem;
+  &:last-child {
+    font-weight: bold;
+  }
+}
