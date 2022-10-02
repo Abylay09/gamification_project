@@ -2,12 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useSelector, useDispatch } from 'react-redux'
 import AuthButton from 'components/buttons/AuthButton';
-import "./SmsInput.scss"
+import "./RestoreSms.scss"
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { setSms, removeSms } from 'redux/features/signUpSlice';
+import { setSms, removeSms } from 'redux/features/restoreSlice';
 import { useNavigate } from 'react-router-dom';
-function SmsInput() {
+import { nextStep } from 'redux/features/restoreSlice';
+
+function RestoreSms() {
     const [counter, setCounter] = useState("");
     useEffect(() => {
         const timer =
@@ -23,45 +25,44 @@ function SmsInput() {
     const fourth = watch("fourthNum");
     const dispatch = useDispatch();
 
-    let sms = useSelector((state) => state.signUp.sms)
-    const login = useSelector((state) => state.signUp.phone)
-    const password = useSelector((state) => state.signUp.password)
+    let sms = useSelector((state) => state.restore.sms)
+    const login = useSelector((state) => state.restore.phone)
+    const password = useSelector((state) => state.restore.password)
 
-    const token = localStorage.getItem("token");
+
 
     const mutation = useMutation(data => {
-        return axios.post("http://195.49.212.191:3001/user/check-code", data, {
-            headers: {
-                'Authorization': `Basic ${token}`
-            }
-        })
+        return axios.post("http://195.49.212.191:3001/user/restore", data)
+    }, {
+        onSuccess : () => {
+            dispatch(nextStep())
+        },
+        onError : () => {
+            alert("Введен неправильный смс")
+        }
     })
 
     const smsMutation = useMutation(userInfo => {
-        axios.post("http://195.49.212.191:8779/user/update-code ", userInfo)
+        axios.post("http://195.49.212.191:8779/user/restore", userInfo)
     })
 
     function sendSms() {
-        smsMutation.mutate({ login:  login})
+        smsMutation.mutate({ login: login, step : 1 })
         setCounter(5)
     }
 
     const onSubmit = () => {
         if (counter == 0) {
             // mutation.mutate({ login: "11111", password: "B1325028", code: sms })
-            mutation.mutate({login : login, password : password, code : sms })
+            mutation.mutate({ login: login, step: 2, code: sms })
             dispatch(removeSms())
             setCounter(5)
             reset({
-                firstNum : "",
-                secondNum : "",
-                thirdNum : "",
-                fourthNum : "",
+                firstNum: "",
+                secondNum: "",
+                thirdNum: "",
+                fourthNum: "",
             })
-            if(mutation.isSuccess){
-                localStorage.setItem("token", mutation.data.data.token)
-                navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
-            }
         } else {
             alert("Повторить попытку можно через 60 секунд")
         }
@@ -102,4 +103,4 @@ function SmsInput() {
     )
 }
 
-export default SmsInput
+export default RestoreSms

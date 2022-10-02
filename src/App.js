@@ -16,22 +16,32 @@ import LoginPage from 'pages/login';
 import ErrorPage from 'pages/error-page';
 import ProtectedRoutes from 'utils/ProtectedRoutes';
 import { QueryClientProvider, QueryClient } from '@tanstack/react-query';
+import RestorePage from 'pages/restore';
+import TaskPage from 'pages/tasks';
 
 function App() {
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient({
+    defaultOptions : {
+      queries : {
+        refetchOnWindowFocus : false
+      }
+    }
+  })
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100" >
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegPage />} />
+          <Route path="/restore" element={<RestorePage />} />
+
           <Route path='/' element={<ProtectedRoutes />}>
             <Route index path="/" element={<ProfilePage />} />
             <Route path="/lessons" element={<LessonPage />}>
               <Route path=":id" element={<LessonPage />} />
             </Route>
             <Route path="/lecture/:id" element={<LecturePage />} />
-            <Route path="/lecture-info" element={<LectureInfoPage />} />
+            <Route path="/task/:id" element={<TaskPage />} />
             <Route path="/lecture-info" element={<LectureInfoPage />} />
             <Route path="/pet" element={<PetPage />} />
             <Route path="/quests" element={<QuestsPage />} />

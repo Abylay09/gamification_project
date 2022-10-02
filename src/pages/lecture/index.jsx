@@ -9,7 +9,9 @@ import StickyButton from 'components/buttons/StickyButton'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import axios from 'axios'
+import { useState } from 'react'
 function LecturePage() {
+    const [uidLink, setLink] = useState("")
     const params = useParams();
     const navigate = useNavigate()
     const token = localStorage.getItem("token");
@@ -38,7 +40,7 @@ function LecturePage() {
             <Row>
                 <Col>
                     <div className='d-flex align-items-center py-4' onClick={() => navigate(-1)}>
-                    {/* <div className='d-flex align-items-center py-4' > */}
+                        {/* <div className='d-flex align-items-center py-4' > */}
                         <img style={{ height: "20px" }} src={BlueLeftArrow} alt="" />
                         <h3 className="page-title"  >{lesson.lesson.title}</h3>
                     </div>
@@ -62,12 +64,17 @@ function LecturePage() {
                     <Stack>
                         {/* <TaskItem /> */}
                         {lesson.lesson.tasks.map(item => {
-                            return <TaskItem exp={item.exp} gold={item.gold} order={item.order} />
+                            return <TaskItem exp={item.exp} gold={item.gold} order={item.order}
+                                uid={item.uid} onClick={setLink} />
                         })}
 
                     </Stack>
 
-                    <StickyButton text={"Погнали!"} />
+                    <StickyButton text={"Погнали!"} onClick={() => {
+                        console.log(uidLink);
+                        navigate(`/task/${uidLink}`)
+                    }
+                    } />
 
                     {/* <FixedButton text={"Погнали!"} /> */}
                 </Col>

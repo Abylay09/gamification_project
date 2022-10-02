@@ -11,9 +11,9 @@ const buttonStyle = {
     marginTop: '55px'
 }
 
-function StickyButton({ text }) {
+function StickyButton({ text, onClick }) {
     return (
-        <button type="button" class="btn w-100"
+        <button type="button" class="btn w-100" onClick={onClick}
             // onClick={props.func}
             style={buttonStyle}>{text}</button>
     )
