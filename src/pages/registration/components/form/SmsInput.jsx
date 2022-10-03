@@ -30,11 +30,16 @@ function SmsInput() {
     const token = localStorage.getItem("token");
 
     const mutation = useMutation(data => {
-        return axios.post("http://195.49.212.191:3001/user/check-code", data, {
+        return axios.post("http://195.49.212.191:8779/user/check-code", data, {
             headers: {
                 'Authorization': `Basic ${token}`
             }
         })
+    }, {
+        // onSuccess: () => {
+        //     localStorage.setItem("token", mutation.data.data.token)
+        //     navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
+        // }
     })
 
     const smsMutation = useMutation(userInfo => {
@@ -42,23 +47,24 @@ function SmsInput() {
     })
 
     function sendSms() {
-        smsMutation.mutate({ login:  login})
+        smsMutation.mutate({ login: login })
         setCounter(5)
     }
 
     const onSubmit = () => {
         if (counter == 0) {
             // mutation.mutate({ login: "11111", password: "B1325028", code: sms })
-            mutation.mutate({login : login, password : password, code : sms })
-            dispatch(removeSms())
+            console.log(sms);
+            mutation.mutate({ login: login, password: password, code: sms })
+            // dispatch(removeSms())
             setCounter(5)
-            reset({
-                firstNum : "",
-                secondNum : "",
-                thirdNum : "",
-                fourthNum : "",
-            })
-            if(mutation.isSuccess){
+            // reset({
+            //     firstNum : "",
+            //     secondNum : "",
+            //     thirdNum : "",
+            //     fourthNum : "",
+            // })
+            if (mutation.isSuccess) {
                 localStorage.setItem("token", mutation.data.data.token)
                 navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
             }
