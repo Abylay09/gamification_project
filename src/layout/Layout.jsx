@@ -16,7 +16,7 @@ function Layout({ children }) {
                 <Col className='d-flex justify-content-end' xs={6}>
                     <div className='d-flex align-items-center' style={{ gap: "16px" }}>
                         <img src={coins} alt="" />
-                        <span>500</span>
+                        <span style={{fontWeight : '400'}}>500</span>
                     </div>
                 </Col>
             </Row>

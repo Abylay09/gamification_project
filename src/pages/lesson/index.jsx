@@ -19,7 +19,7 @@ function LessonPage() {
     const { data: lessonGroup, status, isSuccess } = useQuery(["LessonGroup", params], async () => {
         const response = await axios.get("http://195.49.212.191:8779/lessons/lessons-group/", {
             params: {
-                uid: params.id
+                uid: params.id ?  params.id : "11870796-3253-11ed-a261-0242ac120002"
             },
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -28,7 +28,7 @@ function LessonPage() {
         const result = await response.data;
         return result;
     }, {
-        enabled : !!params.id,
+        // enabled : !!params.id,
         cacheTime : 0
     })
 

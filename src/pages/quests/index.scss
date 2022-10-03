@@ -17,6 +17,7 @@
 
 .quest-items {
     gap: 16px;
+    
 }
 
 .show {
@@ -47,6 +48,10 @@
         margin-bottom: 0;
         font-size: 13px;
         font-weight: bold;
+    }
+
+    &:hover{
+        border: 1px solid #2A80FF;
     }
 }
 

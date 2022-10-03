@@ -79,9 +79,6 @@ function LecturePage() {
                     {/* <FixedButton text={"Погнали!"} /> */}
                 </Col>
             </Row>
-
-
-
         </Container>
     )
 }

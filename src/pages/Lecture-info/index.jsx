@@ -43,7 +43,7 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <div className='d-flex py-4'>
-                        <img style={{ height: "20px" }} src={PurpleCross} alt="" />
+                        <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate("/lecture")}/>
                         <h3 className="lecture-title">{lecture.lesson.lectures[0].title}</h3>
                     </div>
                 </Col>

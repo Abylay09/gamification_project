@@ -151,7 +151,7 @@ export default class Game3 extends React.Component {
   }
   render() {
     return this.state.time > 0 ? (
-      <Container onTouchMove={e => this.touchMove(e)} onTouchStart={e => this.touchStart(e)}>
+      <Container className='container-custom' onTouchMove={e => this.touchMove(e)} onTouchStart={e => this.touchStart(e)}>
         <Row>
             <Col xs="4">
               Баллы: {this.state.exp}
@@ -175,7 +175,7 @@ export default class Game3 extends React.Component {
           }
         </Row>
       </Container>
-    ) : <Container>
+    ) : <Container className='container-custom'>
           <Row>
             <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
               <span>Спасибо за игру ваш счёт</span>
