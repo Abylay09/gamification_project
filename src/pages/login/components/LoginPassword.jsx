@@ -31,21 +31,21 @@ function LoginPassword() {
         return axios.post("http://195.49.212.191:8779/user/signin", userInfo)
     })
 
-
     const onSubmit = () => {
-        // const response = await login({login:  phone, password:  passwd});
+        mutation.mutate({ login: phone, password: passwd }, {
+            onSuccess: (response) => {
+                localStorage.setItem('token', response.data.token)
+                navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
+            },
+            onError: () => {
+                 alert("Неправильные данные")
+            }
+        });
 
-        mutation.mutate({ login: phone, password: passwd });
-        if (mutation.isSuccess) {
-            localStorage.setItem('token', mutation.data.data.token)
-        } else {
-            console.log(mutation.error)
-        }
-        navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
     }
+
     return (
         <>
-            {/* <div style={{ paddingBottom: "165px" }}> */}
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" className='login-img' onClick={() => console.log(mutation.data)} />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>
