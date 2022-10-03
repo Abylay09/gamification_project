@@ -65,7 +65,7 @@ export default class Game1 extends React.Component {
   }
   render() {
     return this.state.time > 0 ? (
-      <Container>
+      <Container className='container-custom-attention-1'>
           <Row>
               <Col xs="6">
                 Баллы: {this.state.exp}
@@ -85,7 +85,7 @@ export default class Game1 extends React.Component {
             </Col>
           </Row>
       </Container>
-    ) : <Container>
+    ) : <Container className='container-custom-attention-1'>
           <Row>
             <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
               <span>Спасибо за игру ваш счёт</span>
