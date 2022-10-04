@@ -2,6 +2,9 @@ import { clear } from '@testing-library/user-event/dist/clear'
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import "./game1.scss"
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import FixedButton from 'components/buttons/fixed-button/FixedButton'
 
 export default class Game2 extends React.Component {
   constructor(props) {
@@ -109,7 +112,7 @@ export default class Game2 extends React.Component {
         </Row>
           <Row>
             <Col>
-            <div class="grid">
+            <div className="grid">
               { this.state.arr.map((x) => (<ul>{x.map((y, index) => (<li key={index} className={y[2] === "true" ? "active" : ""} onClick={() => this.addValue(y)}></li>))}</ul>)) }
             </div>
             </Col>
@@ -120,7 +123,9 @@ export default class Game2 extends React.Component {
             <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
               <span>Спасибо за игру ваш счёт</span>
               <span>{this.state.exp}</span>
-              <button>Вернуться</button>
+              <Link className="w-100" to="/quests">
+                <FixedButton text={"Вернуться"}/>
+              </Link>
             </Col>
           </Row>
         </Container>

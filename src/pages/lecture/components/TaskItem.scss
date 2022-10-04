@@ -15,7 +15,13 @@
         font-weight: 400;
         margin: 4px 0 10px 0;
     }
+    &:active{
+        cursor: pointer;
+        box-shadow: 0px 0px 8px rgba(42, 128, 255, 0.2);
+        // border-color: rgb(42, 128, 255);
+    }
     &:hover{
         cursor: pointer;
+        box-shadow: 0px 0px 8px rgba(42, 128, 255, 1);
     }
 }

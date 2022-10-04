@@ -63,11 +63,11 @@ function RestorePassword() {
                         <p className='password-input__wrapper-title'>Пароль</p>
                     </div>
 
-                    <div class="form-validation my-3 p-2 rounded">
+                    <div className="form-validation my-3 p-2 rounded">
                         <p>Пароль должен содержать не менее:</p>
-                        <span class={`form-validation__rule ${watchPassword.length >= 8 ? "rule--right" : ""}`} >8 символов </span>
-                        <span class={`form-validation__rule ${watchPassword.match(/[0-9]/) ? "rule--right" : ""}`}  >Одной цифры (0-9)</span>
-                        <span class={`form-validation__rule ${watchPassword.match(/[А-ЯA-Z]/) ? "rule--right" : ""}`}  >Одной буквы Верхнего регистра</span>
+                        <span className={`form-validation__rule ${watchPassword.length >= 8 ? "rule--right" : ""}`} >8 символов </span>
+                        <span className={`form-validation__rule ${watchPassword.match(/[0-9]/) ? "rule--right" : ""}`}  >Одной цифры (0-9)</span>
+                        <span className={`form-validation__rule ${watchPassword.match(/[А-ЯA-Z]/) ? "rule--right" : ""}`}  >Одной буквы Верхнего регистра</span>
                     </div>
 
                     <div className='input__wrapper'>

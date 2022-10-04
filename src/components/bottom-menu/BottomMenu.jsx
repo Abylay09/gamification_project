@@ -17,7 +17,7 @@ function BottomMenu() {
                 </li>
                 <li>
                     <div className='menu-icon'><img src={Shopicon} alt="" /></div>
-                    <Link className='menu-link' to={"/shop"}>Лавка</Link>
+                    <Link className='menu-link' to={"/quests"}>Мини игры</Link>
                 </li>
                 <li>
                     <div className='menu-icon'><img src={HomeIcon} alt="" /></div>

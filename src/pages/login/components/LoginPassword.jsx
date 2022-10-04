@@ -32,16 +32,25 @@ function LoginPassword() {
     })
 
 
-    const onSubmit = () => {
+    const onSubmit = async () => {
         // const response = await login({login:  phone, password:  passwd});
 
-        mutation.mutate({ login: phone, password: passwd });
-        if (mutation.isSuccess) {
-            localStorage.setItem('token', mutation.data.data.token)
-        } else {
-            console.log(mutation.error)
-        }
-        navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
+        // mutation.mutate({ login: phone, password: passwd })
+        await axios.post("http://195.49.212.191:8779/user/signin", { login: phone, password: passwd }).then(res => {
+            console.log("res", res.status)
+            if(res.status == 200) {
+                localStorage.setItem('token', res.data.token)
+                navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
+            } else
+                alert("Не верный логин или пароль")
+        })
+        // console.log(mutation)
+        // if (mutation.isSuccess) {
+        //     localStorage.setItem('token', mutation.data.data.token)
+        // } else {
+        //     console.log(mutation.error)
+        // }
+        // navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
     }
     return (
         <>

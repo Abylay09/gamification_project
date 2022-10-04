@@ -1,6 +1,9 @@
 import React from 'react'
 import { Container, Row, Col } from 'react-bootstrap'
 import "./game1.scss"
+import { useNavigate, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom'
+import FixedButton from 'components/buttons/fixed-button/FixedButton'
 
 let positionX = 0, positionY = 0, doc = document.getElementsByTagName("html")[0]
 export default class Game3 extends React.Component {
@@ -180,7 +183,9 @@ export default class Game3 extends React.Component {
             <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
               <span>Спасибо за игру ваш счёт</span>
               <span>{this.state.exp}</span>
-              <button>Вернуться</button>
+              <Link className="w-100" to="/quests">
+                <FixedButton text={"Вернуться"}/>
+              </Link>
             </Col>
           </Row>
         </Container>

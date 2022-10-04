@@ -47,7 +47,7 @@ function TaskPage() {
             <Row>
                 <Col>
                     <div className='d-flex py-4'>
-                        <img onClick={() => navigate("/lecture/89ee46c4-842e-4615-abac-ae60086b80d6")} style={{ height: "20px" }} src={PurpleCross} alt="" />
+                        <img onClick={() => navigate(-1)} style={{ height: "20px" }} src={PurpleCross} alt="" />
                         <h3 className="lecture-title" ></h3>
                     </div>
                 </Col>
