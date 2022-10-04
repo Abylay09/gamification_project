@@ -9,12 +9,13 @@ import "./PhoneInput.scss"
 function PhoneInput() {
     const dispatch = useDispatch();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
     const onSubmit = () => {
         dispatch(nextStep());
     }
+    
     return (
         <>
-            {/* <div style={{ paddingBottom: "165px" }}> */}
             <div style={{ paddingBottom: "30%" }}>
                 <img src={logo} alt="" />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>

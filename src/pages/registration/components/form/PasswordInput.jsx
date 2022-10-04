@@ -2,16 +2,15 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
-import AuthButton from 'components/buttons/AuthButton';
-import logo from "assets/login/bubble.png"
-
-import { setPhone, nextStep, setPassword } from 'redux/features/signUpSlice';
-import { useSignUpMutation } from 'redux/services/signUp';
-
-import "./PasswordInput.scss"
 import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import AuthButton from 'components/buttons/AuthButton';
+import { setPhone, nextStep, setPassword } from 'redux/features/signUpSlice';
+
+import logo from "assets/login/bubble.png"
+import "./PasswordInput.scss"
+
 const topInfo = {
     margin: "0 -12px",
     padding: "36px 24px 64px 24px",
@@ -34,17 +33,20 @@ function PasswordInput() {
 
     const onSubmit = () => {
         if (watchPassword === watchPasswordProve) {
-            mutation.mutate({login : phone, password : passwd});
-            if(mutation.isSuccess) {
-                dispatch(nextStep());
-            }
+            mutation.mutate({login : phone, password : passwd},{
+                onSuccess : () => {
+                    dispatch(nextStep());
+                },
+                onError : () => {
+                    alert("Ошибка. Возможно были введены неправильные данные")
+                }
+            });
         } else {
-            console.log(watchPasswordProve)
+            alert("Пароли не совпадают")
         }
     }
     return (
         <>
-            {/* <div style={{ paddingBottom: "165px" }}> */}
             <div style={{ paddingBottom: "30%", marginTop : "24px" }}>
                 <img src={logo} alt="" />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>

@@ -22,7 +22,7 @@ export const signUpSlice = createSlice({
             console.log( state.password );
         },
         setSms : (state, action) => {
-            state.sms += action.payload
+            state.sms = action.payload 
             console.log( state.sms );
         },
         removeSms : (state) => {
