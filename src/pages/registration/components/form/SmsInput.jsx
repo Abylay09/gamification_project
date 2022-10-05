@@ -56,7 +56,8 @@ function SmsInput() {
         if (isEmpty(firstNum) || isEmpty(secondNum) || isEmpty(thirdNum) || isEmpty(fourthNum)) {
             alert("Заполните смс форму")
         } else {
-            mutation.mutate({ login: login, password: password, code: firstNum + secondNum + thirdNum + fourthNum }, {
+            // mutation.mutate({ login: login, password: password, code: firstNum + secondNum + thirdNum + fourthNum }, {
+            mutation.mutate({ login: "99999", password: "Ab09092000", code: firstNum + secondNum + thirdNum + fourthNum }, {
                 onSuccess: (response) => {
                     localStorage.setItem("token", response.data.token)
                     navigate("/lesson")
@@ -66,7 +67,6 @@ function SmsInput() {
                     alert("Вы ввели неправильный смс код")
                 }
             })
-            navigate("/lesson")
         }
     }
     // const onSubmit = () => {

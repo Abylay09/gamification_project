@@ -5,7 +5,10 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import "./index.scss"
 import Indicator from './components/Indicator';
+import StickyButton from 'components/buttons/StickyButton';
+import { useNavigate } from 'react-router-dom';
 function PetPage() {
+    const navigate = useNavigate()
     return (
         <Layout>
             <Tabs>
@@ -16,6 +19,8 @@ function PetPage() {
 
                 <TabPanel>
                     Питомец
+
+                    <StickyButton text={"Играть!"} onClick = {() => navigate("/quests")} />
                 </TabPanel>
                 <TabPanel>
                     <Indicator />
