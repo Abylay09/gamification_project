@@ -94,7 +94,7 @@ export default class Game1 extends React.Component {
               <span>Спасибо за игру ваш счёт</span>
               <span>{this.state.exp}</span>
               <Link className="w-100" to="/quests">
-                <FixedButton text={"Вернуться"}/>
+                <FixedButton text={"Вернуться"} />
               </Link>
             </Col>
           </Row>

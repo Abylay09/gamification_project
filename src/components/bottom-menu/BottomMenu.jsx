@@ -49,7 +49,7 @@ function BottomMenu() {
                 </li>
                 <li className='bottom-menu-list__item'>
 
-                    <NavLink className='menu-link' to={"/stats"}>
+                    <NavLink className='menu-link' to={"/profile"}>
                         <div className='menu-icon-wrapper'>
                             <RoomIcon fill='#ffffff' className='menu-icon--fill' />
                         </div>
