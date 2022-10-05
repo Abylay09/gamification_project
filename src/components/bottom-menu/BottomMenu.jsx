@@ -1,35 +1,60 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
-import HomeIcon from "assets/bottom-menu/home-icon.svg"
-import PetIcon from "assets/bottom-menu/pet-icon.svg"
-import IndicatorIcon from "assets/bottom-menu/indicator-icon.svg"
-import RoomIcon from "assets/bottom-menu/room-icon.svg"
-import Shopicon from "assets/bottom-menu/shop-icon.svg"
+import { Link, NavLink } from 'react-router-dom'
+import { ReactComponent as PetIcon } from "assets/bottom-menu/pet-icon.svg";
+import { ReactComponent as Shopicon } from "assets/bottom-menu/shop-icon.svg";
+import { ReactComponent as HomeIcon } from "assets/bottom-menu/home-icon.svg";
+import { ReactComponent as IndicatorIcon } from "assets/bottom-menu/indicator-icon.svg";
+import { ReactComponent as RoomIcon } from "assets/bottom-menu/room-icon.svg";
+
+
+
 
 import "./BottomMenu.scss"
 function BottomMenu() {
     return (
         <div className='bottom-menu-wrapper '>
             <ul className='bottom-menu-list'>
-                <li>
-                    <div className='menu-icon'><img src={PetIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/pet"}>Питомец</Link>
+                <li className='bottom-menu-list__item'>
+                    {/* <div className='menu-icon'><img src={PetIcon} alt="" /></div> */}
+                    <NavLink className='menu-link' to={"/pet"}>
+                        <div className='menu-icon-wrapper'>
+                            <PetIcon className='menu-icon--stroke' stroke='#ffffff' />
+                        </div>
+                        Питомец
+                    </NavLink>
                 </li>
-                <li>
-                    <div className='menu-icon'><img src={Shopicon} alt="" /></div>
-                    <Link className='menu-link' to={"/quests"}>Мини игры</Link>
+                <li className='bottom-menu-list__item'>
+                    <NavLink className='menu-link' to={"/shop"}>
+                        <div className='menu-icon-wrapper'>
+                            <Shopicon className='menu-icon--stroke' />
+                        </div>
+                        Лавка
+                    </NavLink>
                 </li>
-                <li>
-                    <div className='menu-icon'><img src={HomeIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/lessons/11870796-3253-11ed-a261-0242ac120002"}>Домой</Link>
+                <li className='bottom-menu-list__item'>
+                    <NavLink className='menu-link' to={"/lesson"}>
+                        <div className='menu-icon-wrapper'>
+                            <HomeIcon fill='#ffffff' className='menu-icon--fill' />
+                        </div>
+                        Домой
+                    </NavLink>
                 </li>
-                <li>
-                    <div className='menu-icon'><img src={IndicatorIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/stats"}>Показатели</Link>
+                <li className='bottom-menu-list__item'>
+                    <NavLink className='menu-link' to={"/stats"}>
+                        <div className='menu-icon-wrapper'>
+                            <IndicatorIcon className='menu-icon--stroke' stroke='#ffffff' />
+                        </div>
+                        Показатели
+                    </NavLink>
                 </li>
-                <li>
-                    <div className='menu-icon'><img src={RoomIcon} alt="" /></div>
-                    <Link className='menu-link' to={"/"}>Комната</Link>
+                <li className='bottom-menu-list__item'>
+
+                    <NavLink className='menu-link' to={"/stats"}>
+                        <div className='menu-icon-wrapper'>
+                            <RoomIcon fill='#ffffff' className='menu-icon--fill' />
+                        </div>
+                        Комната
+                    </NavLink>
                 </li>
             </ul>
         </div>

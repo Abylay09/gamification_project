@@ -4,13 +4,12 @@ import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
 import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/username-and-password.png"
-import { setPhone, nextStep, setPassword } from 'redux/features/signInSlice';
-import { useSigninMutation } from 'redux/services/signIn';
-import "./LoginPassword.scss"
+import { setPassword } from 'redux/features/signInSlice';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import useReceiveToken from 'utils/hooks/receiveToken';
+import { login } from 'utils/api/Login';
+
+import "./LoginPassword.scss"
 const topInfo = {
     margin: "0 -12px",
     padding: "36px 24px 64px 24px",
@@ -22,23 +21,22 @@ function LoginPassword() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    // const token = useReceiveToken();
 
     const phone = useSelector((state) => state.signIn.phone)
     const passwd = useSelector((state) => state.signIn.password)
 
     const mutation = useMutation(userInfo => {
-        return axios.post("http://195.49.212.191:8779/user/signin", userInfo)
+        return login.auth(userInfo)
     })
 
     const onSubmit = () => {
         mutation.mutate({ login: phone, password: passwd }, {
             onSuccess: (response) => {
                 localStorage.setItem('token', response.data.token)
-                navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
+                navigate("/lesson/11870796-3253-11ed-a261-0242ac120002")
             },
             onError: () => {
-                 alert("Неправильные данные")
+                alert("Неправильные данные")
             }
         });
 

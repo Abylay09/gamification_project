@@ -8,6 +8,7 @@ import logo from "assets/login/puzzles.png"
 import "./RestorePhone.scss"
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
+import { restore } from 'utils/api/restore';
 
 function RestorePhone() {
     const dispatch = useDispatch();
@@ -15,20 +16,20 @@ function RestorePhone() {
     const phone = useSelector((state) => state.restore.phone)
 
     const mutation = useMutation(userPhone => {
-        return axios.post("http://195.49.212.191:8779/user/restore", userPhone, {
-            cacheTime: 10
-        },)
-    }, {
-        onSuccess: () => {
-            console.log("success");
-            dispatch(nextStep());
-        }
+        return restore.sendCode(userPhone)
     })
 
     const onSubmit = async () => {
-        mutation.mutate({ login: phone, step: 1 },)
-
+        mutation.mutate(phone, {
+            onSuccess: () => {
+                dispatch(nextStep());
+            },
+            onError: () => {
+                alert("Неправильный номер телефона")
+            }
+        })
     }
+
     return (
         <>
             <div style={{ paddingBottom: "30%" }}>

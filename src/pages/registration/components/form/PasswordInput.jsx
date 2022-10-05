@@ -3,11 +3,9 @@ import { useForm } from 'react-hook-form'
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import AuthButton from 'components/buttons/AuthButton';
-import { setPhone, nextStep, setPassword } from 'redux/features/signUpSlice';
-
+import { nextStep, setPassword } from 'redux/features/signUpSlice';
+import { registration } from 'utils/api/registration';
 import logo from "assets/login/bubble.png"
 import "./PasswordInput.scss"
 
@@ -20,15 +18,14 @@ const topInfo = {
 }
 function PasswordInput() {
     const dispatch = useDispatch();
-    const navigate = useNavigate();
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const phone = useSelector((state) => state.signUp.phone)
     const passwd = useSelector((state) => state.signUp.password)
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const watchPassword = watch("password", "");
     const watchPasswordProve = watch("passwordProve", "")
 
     const mutation = useMutation(userInfo => {
-        axios.post("http://195.49.212.191:8779/user/signup", userInfo)
+        return registration.signup(userInfo)
     })
 
     const onSubmit = () => {

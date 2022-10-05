@@ -6,12 +6,11 @@ import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/bubble.png"
 
 import { setPhone, nextStep, setPassword } from 'redux/features/restoreSlice';
-import { useSignUpMutation } from 'redux/services/signUp';
 
 import "./RestorePassword.scss"
-import { useMutation, useQuery } from '@tanstack/react-query';
-import axios from 'axios';
+import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
+import { restore } from 'utils/api/restore';
 const topInfo = {
     margin: "0 -12px",
     padding: "36px 24px 64px 24px",
@@ -29,22 +28,26 @@ function RestorePassword() {
     const watchPasswordProve = watch("passwordProve", "")
 
     const mutation = useMutation(userInfo => {
-        axios.post("http://195.49.212.191:8779/user/restore", userInfo)
+        return restore.changePassword(userInfo)
     })
 
     const onSubmit = () => {
         if (watchPassword === watchPasswordProve) {
-            mutation.mutate({ login: phone, step: 3, password: passwd, });
-            if (mutation.isSuccess) {
-                navigate("/lessons/11870796-3253-11ed-a261-0242ac120002")
-            }
+            mutation.mutate({ login: phone, password: passwd }, {
+                onSuccess: (response) => {
+                    localStorage.setItem("token", response.data.token)
+                    navigate("/lesson")
+                },
+                onError: () => {
+                    alert("Ошибка")
+                }
+            });
         } else {
-            console.log(watchPasswordProve)
+            alert("Пароли не совпадают")
         }
     }
     return (
         <>
-            {/* <div style={{ paddingBottom: "165px" }}> */}
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>

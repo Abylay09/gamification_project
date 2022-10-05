@@ -4,69 +4,62 @@ import { useSelector, useDispatch } from 'react-redux'
 import AuthButton from 'components/buttons/AuthButton';
 import "./RestoreSms.scss"
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
-import { setSms, removeSms } from 'redux/features/restoreSlice';
 import { useNavigate } from 'react-router-dom';
 import { nextStep } from 'redux/features/restoreSlice';
+import { restore } from 'utils/api/restore';
 
 function RestoreSms() {
-    const [counter, setCounter] = useState("");
+    const [counter, setCounter] = useState(5);
+    const [firstNum, setFirstNum] = useState("");
+    const [secondNum, setSecondNum] = useState("");
+    const [thirdNum, setThirdNum] = useState("");
+    const [fourthNum, setFourthNum] = useState("");
+
     useEffect(() => {
         const timer =
             counter > 0 && setInterval(() => setCounter(counter - 1), 1000);
         return () => clearInterval(timer);
     }, [counter]);
+
     const navigate = useNavigate();
 
     const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
-    const first = watch("firstNum");
-    const second = watch("secondNum");
-    const third = watch("thirdNum");
-    const fourth = watch("fourthNum");
     const dispatch = useDispatch();
 
-    let sms = useSelector((state) => state.restore.sms)
     const login = useSelector((state) => state.restore.phone)
-    const password = useSelector((state) => state.restore.password)
 
-
+    function isEmpty(text) {
+        return text === ""
+    }
 
     const mutation = useMutation(data => {
-        return axios.post("http://195.49.212.191:3001/user/restore", data)
-    }, {
-        onSuccess : () => {
-            dispatch(nextStep())
-        },
-        onError : () => {
-            alert("Введен неправильный смс")
-        }
+        return restore.checkCode(data)
     })
 
-    const smsMutation = useMutation(userInfo => {
-        axios.post("http://195.49.212.191:8779/user/restore", userInfo)
+    const smsMutation = useMutation(login => {
+        return restore.sendCode(login)
+    }, {
+        cacheTime : 0
     })
 
     function sendSms() {
-        smsMutation.mutate({ login: login, step : 1 })
+        smsMutation.mutate(login)
         setCounter(5)
     }
 
     const onSubmit = () => {
-        if (counter == 0) {
-            // mutation.mutate({ login: "11111", password: "B1325028", code: sms })
-            mutation.mutate({ login: login, step: 2, code: sms })
-            dispatch(removeSms())
-            setCounter(5)
-            reset({
-                firstNum: "",
-                secondNum: "",
-                thirdNum: "",
-                fourthNum: "",
-            })
+        if (isEmpty(firstNum) || isEmpty(secondNum) || isEmpty(thirdNum) || isEmpty(fourthNum)) {
+            alert("Заполните смс форму")
         } else {
-            alert("Повторить попытку можно через 60 секунд")
+            mutation.mutate({ login: login, sms: firstNum + secondNum + thirdNum + fourthNum }, {
+                onSuccess: () => {
+                    dispatch(nextStep())
+                },
+                onError: () => {
+                    alert("Вы ввели неправильный смс код")
+                }
+            })
         }
-
     }
 
     return (
@@ -79,24 +72,24 @@ function RestoreSms() {
                 <p className="sms-title ">Код подтверждения</p>
                 <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
                 <div className='signin-sms__inputs'>
-                    <input autoComplete="off" className="sms-input" type="tel" placeholder='-' maxlength="1" {...register("firstNum", {
-                        onChange: (event) => dispatch(setSms("" + event.target.value))
+                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("firstNum", {
+                        onChange: (event) => setFirstNum(event.target.value)
                     })} />
-                    <input autoComplete="off" className="sms-input" type="tel" placeholder='-' maxlength="1" {...register("secondNum", {
-                        onChange: (event) => dispatch(setSms("" + event.target.value))
+                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("secondNum", {
+                        onChange: (event) => setSecondNum(event.target.value)
                     })} />
-                    <input autoComplete="off" className="sms-input" type="tel" placeholder='-' maxlength="1" {...register("thirdNum", {
-                        onChange: (event) => dispatch(setSms("" + event.target.value))
+                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("thirdNum", {
+                        onChange: (event) => setThirdNum(event.target.value)
                     })} />
-                    <input autoComplete="off" className="sms-input" type="tel" placeholder='-' maxlength="1" {...register("fourthNum", {
-                        onChange: (event) => dispatch(setSms("" + event.target.value))
+                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("fourthNum", {
+                        onChange: (event) => setFourthNum(event.target.value)
                     })} />
                 </div>
                 <AuthButton text="Подтвердить" />
 
                 {counter === 0
                     ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
-                    : <p className='repeat-sms' >Отправить смс повторно через {counter}</p>}
+                    : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
             </form>
         </div>
 

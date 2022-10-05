@@ -13,14 +13,6 @@ function LoginPage() {
                     {step === 2 && <LoginPassword />}
                 </div>
             </Stack >
-
-            {/* <Stack className='h-100' >
-                <div className='mt-auto flex-column' >
-                    {step === 1 && <PhoneInput />}
-                    {step === 2 && <PasswordInput />}
-                    {step === 3 && <SmsInput />}
-                </div>
-            </Stack> */}
         </Container >
     )
 }

@@ -43,7 +43,7 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <div className='d-flex py-4'>
-                        <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate(-1)}/>
+                        <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate(-1)} />
                         <h3 className="lecture-title">{lecture.lesson.lectures[0].title}</h3>
                     </div>
                 </Col>
@@ -52,7 +52,7 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <div className='react-player-container mt-4'>
-                        <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url="https://openskill.uz/static_assets/21ec1001-6e14-4dbf-a20d-12bbd0fbf9be.mp4" />
+                        <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url="http://openskill.uz/static_assets/21ec1001-6e14-4dbf-a20d-12bbd0fbf9be.mp4" />
                     </div>
                 </Col>
             </Row>

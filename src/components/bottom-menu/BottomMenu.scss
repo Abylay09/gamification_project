@@ -13,13 +13,14 @@
     justify-content: space-between;
     padding: 0;
     margin-bottom: 0;
-    li{
+
+    li {
         width: 64px;
         text-align: center;
     }
 }
 
-.menu-icon {
+.menu-icon-wrapper {
     text-align: center;
 }
 
@@ -30,3 +31,17 @@
     line-height: 16px;
     color: #fff;
 }
+
+.bottom-menu-list__item:hover {
+    cursor: pointer;
+    .menu-icon--stroke{
+        stroke: #A1D7A3;
+    }
+    .menu-icon--fill{
+        fill:#A1D7A3;
+    }
+    .menu-link {
+        color: #A1D7A3;
+    }
+}
+

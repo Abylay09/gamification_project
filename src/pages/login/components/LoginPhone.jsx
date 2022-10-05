@@ -14,7 +14,6 @@ function LoginPhone() {
     }
     return (
         <>
-            {/* <div style={{ paddingBottom: "165px" }}> */}
             <div style={{ paddingBottom: "30%" }}>
                 <img src={logo} alt="" />
                 <p className='phone-info__text'>Добро пожаловать в OpenSkill</p>
@@ -40,7 +39,7 @@ function LoginPhone() {
 
                         {errors?.phone && <p className='error-msg'>Поле обязательна к заполнению</p>}
 
-                        <AuthButton text={"Продолжить"} onClick={() => console.log("data")} />
+                        <AuthButton text={"Продолжить"}  />
                     </div>
                 </div>
             </form>
