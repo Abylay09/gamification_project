@@ -33,7 +33,7 @@ function LoginPassword() {
         mutation.mutate({ login: phone, password: passwd }, {
             onSuccess: (response) => {
                 localStorage.setItem('token', response.data.token)
-                navigate("/lesson/11870796-3253-11ed-a261-0242ac120002")
+                navigate("/lesson")
             },
             onError: () => {
                 alert("Неправильные данные")

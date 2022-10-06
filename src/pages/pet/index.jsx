@@ -1,28 +1,31 @@
 import React from 'react'
 import Layout from 'layout/Layout'
-// import { Tab, Tabs } from 'react-bootstrap';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import "./index.scss"
 import Indicator from './components/Indicator';
 import StickyButton from 'components/buttons/StickyButton';
 import { useNavigate } from 'react-router-dom';
+import "./index.scss"
+
 function PetPage() {
     const navigate = useNavigate()
     return (
         <Layout>
-            <Tabs>
+            <Tabs className="custom-tabs">
                 <TabList>
                     <Tab>Питомец</Tab>
                     <Tab>Индикаторы</Tab>
                 </TabList>
 
-                <TabPanel>
-                    Питомец
+                <TabPanel className="custom-tab">
+                    <div className='tab-inner'>
+                        <div className='tab-inner__content'>Питомец</div>
+                        <button  onClick={() => navigate("/quests")} className='tab-inner__btn'>Играть</button>
+                    </div>
 
-                    <StickyButton text={"Играть!"} onClick = {() => navigate("/quests")} />
+                    {/* <StickyButton text={"Играть!"} onClick={() => navigate("/quests")} /> */}
                 </TabPanel>
-                <TabPanel>
+                <TabPanel className="custom-tab">
                     <Indicator />
                 </TabPanel>
             </Tabs>

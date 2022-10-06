@@ -3,7 +3,6 @@ import { Container, Row, Col, Stack } from 'react-bootstrap'
 import ShowMoreText from "react-show-more-text";
 import ReactPlayer from 'react-player'
 import FixedButton from 'components/buttons/fixed-button/FixedButton'
-
 import PurpleCross from "assets/common/purple-cross.png"
 import "./index.scss"
 import { useQuery } from '@tanstack/react-query';
@@ -42,7 +41,7 @@ function LectureInfoPage() {
         <Container>
             <Row>
                 <Col>
-                    <div className='d-flex py-4'>
+                    <div className='page-header d-flex py-4'>
                         <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate(-1)} />
                         <h3 className="lecture-title">{lecture.lesson.lectures[0].title}</h3>
                     </div>
@@ -62,9 +61,10 @@ function LectureInfoPage() {
                     <Stack>
                         <h4 className='lecture-text-subtitle' >Теория</h4>
                         <p className='lecture-text' >
-                            {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)}
+                            {lecture.lesson.lectures[0].content}
+                            {/* {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)} */}
                         </p>
-                        <p style={{ color: "#2A80FF", fontSize: "13px" }} onClick={() => showMore(!show)}>Показать еще</p>
+                        {/* <p style={{ color: "#2A80FF", fontSize: "13px" }} onClick={() => showMore(!show)}>Показать еще</p> */}
 
                     </Stack>
                 </Col>

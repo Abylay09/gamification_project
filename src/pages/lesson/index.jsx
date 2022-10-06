@@ -7,7 +7,6 @@ import FixedButton from 'components/buttons/fixed-button/FixedButton'
 import Graduation from 'components/modals/Graduation'
 import ClosedLesson from 'components/info/ClosedLesson'
 import LessonHeader from './components/LessonHeader'
-import { useGetLessonsGroupQuery, useGetLessonQuery } from 'redux/services/lessonApi'
 import { useQueryClient, useQuery } from '@tanstack/react-query'
 import axios from 'axios'
 function LessonPage() {

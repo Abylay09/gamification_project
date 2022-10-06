@@ -34,9 +34,9 @@
 
 .bottom-menu-list__item:hover {
     cursor: pointer;
-    .menu-icon--stroke{
-        stroke: #A1D7A3;
-    }
+    // .menu-icon--stroke{
+    //     stroke: #A1D7A3;
+    // }
     .menu-icon--fill{
         fill:#A1D7A3;
     }
@@ -45,3 +45,16 @@
     }
 }
 
+.menu-icon--fill--active{
+    fill: #A1D7A3;
+}
+.menu-icon--fill{
+    fill: #ffffff;
+}
+
+.current-item__icon--stroke{
+    stroke: #A1D7A3;
+}
+.current-item__title--active{
+    color: #A1D7A3;
+}

@@ -36,11 +36,10 @@ function LecturePage() {
     }
 
     return (
-        // <Container className='min-vh-100'>
         <Container className='min-vh-100'>
             <Row>
                 <Col>
-                    <div className='d-flex align-items-center py-4' onClick={() => navigate(-1)}>
+                    <div className='page-header d-flex align-items-center py-4' onClick={() => navigate(-1)}>
                         <img style={{ height: "20px" }} src={BlueLeftArrow} alt="" />
                         <h3 className="page-title"  >{lesson.lesson.title}</h3>
                     </div>

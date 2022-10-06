@@ -1,4 +1,3 @@
-import Layout from 'layout/Layout';
 import LessonPage from 'pages/lesson';
 import PetSliderPage from 'pages/pet-selection';
 import RegPage from './pages/registration';
@@ -39,7 +38,7 @@ function App() {
           <Route path="/restore" element={<RestorePage />} />
 
           <Route path='/' element={<ProtectedRoutes />}>
-            <Route path='/lesson'>
+            <Route  path='/lesson'>
               <Route index element={<LessonPage />} />
               <Route path='/lesson:id' element={<LessonPage />} />
             </Route>
