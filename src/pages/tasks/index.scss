@@ -7,8 +7,12 @@
 
 .condition-input {
     background: #F5F8FF;
-    border: 1px solid #2A80FF;
+    border: none;
     border-radius: 12px;
     height: 64px;
     padding-left: 15px;
+    &:focus{
+        outline: none;
+        border: 2.5px solid #2A80FF;
+    }
 }

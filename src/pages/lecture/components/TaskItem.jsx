@@ -5,7 +5,7 @@ import "./TaskItem.scss"
 function TaskItem({exp,gold,order, uid, onClick}) {
     return (
         <div>
-            <div className='task mb-4' onClick={() => onClick(uid)}>
+            <div className='task mb-4' onClick={() => onClick()}>
                 <p className='task__title mb-0' >Уровень {order}</p>
                 <p className='task__number'></p>
                 <div className='d-flex' style = {{gap : "8px"}}>

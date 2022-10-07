@@ -2,36 +2,28 @@ import React from 'react'
 import { Container, Row, Col, Stack } from 'react-bootstrap'
 import BlueLeftArrow from "assets/common/blue-left-arrow.png"
 import LectureItem from './components/LectureItem'
-import "./index.scss"
 import TaskItem from './components/TaskItem'
 import FixedButton from 'components/buttons/fixed-button/FixedButton'
 import StickyButton from 'components/buttons/StickyButton'
 import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
-import axios from 'axios'
+import { getDataList } from 'utils/api/getDataList'
 import { useState } from 'react'
 
+import "./index.scss"
+
 function LecturePage() {
-    const [uidLink, setLink] = useState("")
+    // const [uidLink, setLink] = useState("")
     const params = useParams();
     const navigate = useNavigate()
-    const token = localStorage.getItem("token");
-    const { data: lesson, status } = useQuery(["lesson"], async () => {
-        const response = await axios.get("http://195.49.212.191:8779/lessons/lesson/", {
-            params: {
-                uid: params.id || "89ee46c4-842e-4615-abac-ae60086b80d6"
-            },
-            headers: {
-                'Authorization': `Basic ${token}`
-            }
-        })
-        const result = await response.data;
-        return result;
+    const { data: lesson, status, isSuccess, isLoading, isError } = useQuery(["lesson"], () => {
+        return getDataList.getLecture(params.id)
     })
-    if (status === "loading") {
+
+    if (isLoading) {
         return <div>Loading</div>
     }
-    else if (status === "error") {
+    else if (isError) {
         return <div>Error</div>
     }
 
@@ -64,16 +56,16 @@ function LecturePage() {
                         {/* <TaskItem /> */}
                         {lesson.lesson.tasks.map(item => {
                             return <TaskItem exp={item.exp} gold={item.gold} order={item.order}
-                                uid={item.uid} onClick={setLink} />
+                                onClick={() => navigate(`/task/${item.uid}`)} />
                         })}
 
                     </Stack>
 
-                    <StickyButton text={"Погнали!"} onClick={() => {
+                    {/* <StickyButton text={"Погнали!"} onClick={() => {
                         console.log(uidLink);
                         navigate(`/task/${uidLink}`)
                     }
-                    } />
+                    } /> */}
 
                     {/* <FixedButton text={"Погнали!"} /> */}
                 </Col>

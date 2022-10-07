@@ -20,6 +20,7 @@ import TaskPage from 'pages/tasks';
 import Game1 from 'pages/games/attentionGames/game1';
 import Game2 from 'pages/games/memoryGames/game1';
 import Game3 from 'pages/games/thinkingGames/game1';
+import Ticket from 'pages/ticket/components/Ticket';
 
 function App() {
   const queryClient = new QueryClient({
@@ -38,28 +39,33 @@ function App() {
           <Route path="/restore" element={<RestorePage />} />
 
           <Route path='/' element={<ProtectedRoutes />}>
-            <Route  path='/lesson'>
-              <Route index element={<LessonPage />} />
-              <Route path='/lesson:id' element={<LessonPage />} />
-            </Route>
+            <Route index path='lesson' element={<LessonPage />} />
+            <Route path='lesson/:id' element={<LessonPage />} />
 
-            <Route path="/lecture" >
-              <Route index path="/lecture" element={<LecturePage />} />
+            <Route path="lecture" >
+              <Route index path="lecture" element={<LecturePage />} />
               <Route path=":id" element={<LecturePage />} />
             </Route>
 
-            <Route path="/lecture-info" >
-              <Route index path="/lecture-info" element={<LectureInfoPage />} />
+            <Route path="lecture-info" >
+              <Route index path="lecture-info" element={<LectureInfoPage />} />
               <Route path=":id" element={<LectureInfoPage />} />
             </Route>
 
             <Route path="/pet" element={<PetPage />} />
 
             <Route path="/shop" element={<ShopPage />} />
-            <Route path="/ticket" element={<TicketPage />} />
-            <Route path="/stats" element={<StatsPage />} />
-            <Route path="/profile" element={<ProfilePage />} />
-            <Route path="/choose-pet" element={<PetSliderPage />} />
+            {/* <Route path="/ticket" element={<TicketPage />} /> */}
+            <Route path="ticket" >
+              <Route index path="ticket" element={<TicketPage />} />
+              <Route path=":id" element={<Ticket />} />
+            </Route>
+
+
+            <Route path="stats" element={<StatsPage />} />
+            <Route path="profile" element={<ProfilePage />} />
+            <Route path="choose-pet" element={<PetSliderPage />} />
+
             <Route path="/quests">
               <Route index path="/quests" element={<QuestsPage />} />
               <Route path="attention" element={<Game1 />} />
@@ -67,32 +73,7 @@ function App() {
               <Route path="thinking" element={<Game3 />} />
             </Route>
             <Route path="/task/:id" element={<TaskPage />} />
-            {/* <Route path="/quests" element={<QuestsPage />} /> */}
 
-            {/* <Route index path="/" element={<ProfilePage />} />
-            <Route path="/lessons" element={<LessonPage />}>
-              <Route path=":id" element={<LessonPage />} />
-            </Route>
-            <Route path="/lecture" element={<LecturePage />}>
-              <Route path=":id" element={<LecturePage />} />
-            </Route>
-
-            <Route path="/task/:id" element={<TaskPage />} />
-
-            <Route path="/lecture-info" element={<LectureInfoPage />}>
-              <Route path=":id" element={<LectureInfoPage />} />
-            </Route>
-
-            <Route path="/pet" element={<PetPage />} />
-            <Route path="/quests" element={<QuestsPage />} />
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="/ticket" element={<TicketPage />} />
-            <Route path="/choose-pet" element={<PetSliderPage />} />
-            <Route path="/stats" element={<StatsPage />} />
-
-            <Route path="/attention" element={<Game1 />} />
-            <Route path="/memory" element={<Game2 />} />
-            <Route path="/thinking" element={<Game3 />} /> */}
 
           </Route>
           <Route path="*" element={<ErrorPage />} />
@@ -105,58 +86,4 @@ function App() {
 }
 
 export default App;
-// function App() {
-//   const queryClient = new QueryClient({
-//     defaultOptions: {
-//       queries: {
-//         refetchOnWindowFocus: false
-//       }
-//     }
-//   })
-//   return (
-//     <QueryClientProvider client={queryClient}>
-//       <div className="App h-100" >
-//         <Routes>
-//           <Route path="/login" element={<LoginPage />} />
-//           <Route path="/registration" element={<RegPage />} />
-//           <Route path="/restore" element={<RestorePage />} />
 
-//           <Route path='/' element={<ProtectedRoutes />}>
-//             <Route index path="/" element={<ProfilePage />} />
-//             <Route path="/lessons" element={<LessonPage />}>
-//               <Route path=":id" element={<LessonPage />} />
-//             </Route>
-//             <Route path="/lecture" element={<LecturePage />}>
-//               {/* <Route path=":id" element={<LecturePage />} /> */}
-//             </Route>
-//             {/* <Route path="/lecture/:id" element={<LecturePage />} /> */}
-//             <Route path="/task/:id" element={<TaskPage />} />
-//             <Route path="/lecture-info" element={<LectureInfoPage />} >
-//               <Route path=":id" element={<LectureInfoPage />} />
-//             </Route>
-//             <Route path="/pet" element={<PetPage />} />
-//             <Route path="/quests" element={<QuestsPage />} />
-//             <Route path="/shop" element={<ShopPage />} />
-//             <Route path="/ticket" element={<TicketPage />} />
-//             <Route path="/choose-pet" element={<PetSliderPage />} />
-//             <Route path="/stats" element={<StatsPage />} />
-
-//             <Route path="/ticket" element={<TicketPage />} />
-//             <Route path="/choose-pet" element={<PetSliderPage />} />
-//             <Route path="/stats" element={<StatsPage />} />
-
-//             {/* <Route path="/attention" element={<Game1 />} />
-//             <Route path="/memory" element={<Game2/>} />
-//             <Route path="/thinking" element={<Game3/>} /> */}
-
-//           </Route>
-//           <Route path="*" element={<ErrorPage />} />
-//           {/* <Route path="/profile" element={<ProfilePage />} /> */}
-//         </Routes>
-//       </div>
-//     </QueryClientProvider>
-
-//   );
-// }
-
-// export default App;

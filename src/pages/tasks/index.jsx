@@ -3,35 +3,23 @@ import { Container, Row, Col, Button } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import PurpleCross from "assets/common/purple-cross.png"
 import { useMutation, useQuery } from '@tanstack/react-query'
-import axios from 'axios'
+import { getDataList } from 'utils/api/getDataList'
+import { postDataList } from 'utils/api/postDataList'
+
 import "./index.scss"
-import { useEffect } from 'react'
 function TaskPage() {
     const params = useParams()
     const [inputValue, setInputValue] = useState("")
     const navigate = useNavigate();
-    let token = localStorage.getItem("token");
-    const { data: query, status } = useQuery(["task-info"], async () => {
-        const response = await axios.get("http://195.49.212.191:8779/lessons/task", {
-            params: {
-                uid: params.id
-            },
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
-        const result = await response.data;
-        return result;
+
+    const { data: query, status } = useQuery(["task-info"], () => {
+        return getDataList.getTask(params.id)
     }, {
         cacheTime: 0
     })
 
     const mutation = useMutation(answer => {
-        return axios.post("http://195.49.212.191:8779/lessons/check-task", answer, {
-            headers: {
-                'Authorization': `Bearer ${token}`
-            }
-        })
+        return postDataList.checkTask(answer)
     })
 
 
@@ -43,7 +31,7 @@ function TaskPage() {
         return < div > Error</ div>
     }
     return (
-        <Container>
+        <Container className='vh-100 min-vh-100 d-flex flex-column'>
             <Row>
                 <Col>
                     <div className='d-flex py-4'>
@@ -53,29 +41,25 @@ function TaskPage() {
                 </Col>
             </Row>
 
-            <Row>
-                <Col className='mt-5'>
-                    <h5 className="condition">{query.data.condition}</h5>
-                </Col>
-            </Row>
+            <Row className='flex-grow-1'>
+                <Col className='d-flex flex-column'>
+                    <div>
+                        <h5 className="condition">{query.data.condition}</h5>
+                        <div className='text-center mt-4'>
+                            <input onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder='Ответ' />
+                        </div>
+                    </div>
 
-            <Row>
-                <Col className='text-center mt-4'>
-                    <input onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder='Ответ' />
-                </Col>
-            </Row>
-
-            <Row>
-                <Col className='text-center mt-4'>
-                    <Button className='w-100 py-3' variant="primary" onClick={() => {
+                    <Button className='w-100 py-3 mt-auto' style = {{marginBottom : "64px"}} variant="primary" onClick={() => {
                         mutation.mutate({ uid: query.data.task_uid, answer: inputValue }, {
                             onSuccess: (data) => {
-                                data.data.validate ? alert("Правильный ответ") : alert("Неправильный ответ")
+                                data.validate ? alert("Правильный ответ") : alert("Неправильный ответ")
                             }
                         })
                     }}>Проверить</Button>
                 </Col>
             </Row>
+
         </Container>
     )
 }

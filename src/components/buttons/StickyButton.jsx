@@ -5,10 +5,9 @@ const buttonStyle = {
     padding: "15px 0",
     color: "#fff",
     position: "sticky",
-    bottom: "64px",
+    bottom: "120px",
     left: "0",
-    // marginBottom: props.regularMarginBottom,
-    marginTop: '55px'
+    marginTop: '20px'
 }
 
 function StickyButton({ text, onClick }) {
