@@ -5,7 +5,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import AuthButton from 'components/buttons/AuthButton';
 import { registration } from 'utils/api/registration';
-
+import Image from "assets/login/bonbon-dialog.png"
 import "./SmsInput.scss"
 
 const initDigits = ["", "", "", ""]
@@ -55,7 +55,7 @@ export default function SmsInput() {
         if (digits.length < 4) {
             alert("Заполните смс форму")
         } else {
-            mutation.mutate({ login: login, password: password, code:  digits.join("") }, {
+            mutation.mutate({ login: login, password: password, code: digits.join("") }, {
                 onSuccess: (response) => {
                     localStorage.setItem("token", response.data.token)
                     navigate("/lesson")
@@ -101,33 +101,40 @@ export default function SmsInput() {
     }
 
     return (
-        <div style={{
-            margin: "0 -12px", padding: "36px 24px 64px 24px", backgroundColor: "#fff", borderTopLeftRadius: "12px",
-            borderTopRightRadius: "12px"
-        }}>
-            <form form className="signin-sms__wrap w-100 mt-4" onSubmit={onSubmit} >
-                <p className="sms-title ">Код подтверждения</p>
-                <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
-                <div className='signin-sms__inputs' style={{ gap: "15px" }}>
-                    {digits.map((digit, index) => (
-                        <input
-                            key={index}
-                            className="sms-input"
-                            value={digit}
-                            placeholder='-'
-                            onChange={event => handleChange(index, event.target.value)}
-                            onKeyDown={event => handleKeyDown(index, event)}
-                            ref={element => inputRefs.current[index] = element}
-                        />
-                    ))}
-                </div>
-                <AuthButton text="Подтвердить" />
+        <>
+            <div style={{ paddingBottom: "30%" }}>
+                <img src={Image} alt="" />
+            </div>
+            <div style={{
+                margin: "0 -12px", padding: "36px 24px 64px 24px", backgroundColor: "#fff", borderTopLeftRadius: "12px",
+                borderTopRightRadius: "12px"
+            }}>
 
-                {counter === 0
-                    ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
-                    : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
-            </form>
-        </div>
+                <form form className="signin-sms__wrap w-100 mt-4" onSubmit={onSubmit} >
+                    <p className="sms-title ">Код подтверждения</p>
+                    <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
+                    <div className='signin-sms__inputs' style={{ gap: "15px" }}>
+                        {digits.map((digit, index) => (
+                            <input
+                                key={index}
+                                className="sms-input"
+                                value={digit}
+                                placeholder='-'
+                                onChange={event => handleChange(index, event.target.value)}
+                                onKeyDown={event => handleKeyDown(index, event)}
+                                ref={element => inputRefs.current[index] = element}
+                            />
+                        ))}
+                    </div>
+                    <AuthButton text="Подтвердить" />
+
+                    {counter === 0
+                        ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
+                        : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
+                </form>
+            </div>
+        </>
+
     )
 }
 

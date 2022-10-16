@@ -21,6 +21,9 @@ import Game1 from 'pages/games/attentionGames/game1';
 import Game2 from 'pages/games/memoryGames/game1';
 import Game3 from 'pages/games/thinkingGames/game1';
 import Ticket from 'pages/ticket/components/Ticket';
+import AccountPage from 'pages/account';
+import CardGame from 'pages/games/attentionGames/CardGame';
+import MemoryImages from 'pages/games/memoryGames/MemoryImages';
 
 function App() {
   const queryClient = new QueryClient({
@@ -34,6 +37,59 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <div className="App h-100" >
         <Routes>
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/registration" element={<RegPage />} />
+          <Route path="/restore" element={<RestorePage />} />
+
+          <Route element={<ProtectedRoutes />}>
+
+            <Route path='/lesson' >
+              <Route index element={<LessonPage />} />
+              <Route path=':id' element={<LessonPage />} />
+            </Route>
+
+            <Route path="/lecture" >
+              <Route index path="lecture" element={<LecturePage />} />
+              <Route path=":id" element={<LecturePage />} />
+            </Route>
+
+            <Route path="/lecture-info" >
+              <Route index path="lecture-info" element={<LectureInfoPage />} />
+              <Route path=":id" element={<LectureInfoPage />} />
+            </Route>
+
+            <Route path="/task/:id" element={<TaskPage />} />
+
+            <Route path="/shop" element={<ShopPage />} />
+
+            <Route path="/ticket" >
+              <Route index path="/ticket" element={<TicketPage />} />
+              <Route path=":id" element={<Ticket />} />
+            </Route>
+
+
+
+            
+
+            {/* <Route path="/account" element={<AccountPage />} /> */}
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/pet" element={<PetPage />} />
+            <Route path="/stats" element={<StatsPage />} />
+            <Route path="/profile" element={<AccountPage />} />
+
+            <Route path="/quests">
+              <Route index path="/quests" element={<QuestsPage />} />
+              <Route path="attention" element={<Game1 />} />
+              <Route path="memory" element={<Game2 />} />
+              <Route path="memory/images" element={<MemoryImages />} />
+              <Route path="thinking" element={<Game3 />} />
+              <Route path="thinking-cards" element={<CardGame />} />
+            </Route>
+          </Route>
+
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        {/* <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegPage />} />
           <Route path="/restore" element={<RestorePage />} />
@@ -55,7 +111,6 @@ function App() {
             <Route path="/pet" element={<PetPage />} />
 
             <Route path="/shop" element={<ShopPage />} />
-            {/* <Route path="/ticket" element={<TicketPage />} /> */}
             <Route path="ticket" >
               <Route index path="ticket" element={<TicketPage />} />
               <Route path=":id" element={<Ticket />} />
@@ -77,8 +132,7 @@ function App() {
 
           </Route>
           <Route path="*" element={<ErrorPage />} />
-          {/* <Route path="/profile" element={<ProfilePage />} /> */}
-        </Routes>
+        </Routes> */}
       </div>
     </QueryClientProvider>
 

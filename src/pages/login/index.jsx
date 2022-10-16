@@ -11,6 +11,7 @@ function LoginPage() {
                 <div className='mt-auto flex-column' style={{ gap: "150px" }}>
                     {step === 1 && <LoginPhone />}
                     {step === 2 && <LoginPassword />}
+                    
                 </div>
             </Stack >
         </Container >

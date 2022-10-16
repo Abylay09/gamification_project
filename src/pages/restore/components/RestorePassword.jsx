@@ -50,7 +50,6 @@ function RestorePassword() {
         <>
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" />
-                <p className='content-info__text'>Добро пожаловать в OpenSkill</p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="phone-form">
                 <div style={topInfo}>

@@ -36,7 +36,6 @@ function LectureInfoPage() {
     else if (status === "error") {
         return <div>Error</div>
     }
-
     return (
         <Container>
             <Row>
@@ -62,13 +61,14 @@ function LectureInfoPage() {
                         <h4 className='lecture-text-subtitle' >Теория</h4>
                         <p className='lecture-text' >
                             {lecture.lesson.lectures[0].content}
-                            {/* {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)} */}
                         </p>
-                        {/* <p style={{ color: "#2A80FF", fontSize: "13px" }} onClick={() => showMore(!show)}>Показать еще</p> */}
 
                     </Stack>
                 </Col>
             </Row>
+
+            {/* {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)} */}
+            {/* <p style={{ color: "#2A80FF", fontSize: "13px" }} onClick={() => showMore(!show)}>Показать еще</p> */}
 
         </Container>
     )

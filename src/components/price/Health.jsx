@@ -6,7 +6,7 @@ const styleHealth = {
     fontWeight: "400",
     fontSize: "11px",
     lineHeight: "16px",
-    color: "#FFFFFF"
+    color: "#FFFFFF",
 }
 function Health({ hp }) {
     return (

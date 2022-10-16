@@ -1,0 +1,36 @@
+.my-switch .form-check-input:checked {
+    border-color: transparent;
+}
+
+.account-sound {
+    border: 1px solid #EFEFEF;
+    border-radius: 12px;
+    padding: 18px 16px;
+}
+
+.account-rating {
+    background: #CDD9FF;
+    border-radius: 12px;
+}
+
+.account-page__title {
+    font-weight: 600;
+    font-size: 17px;
+    line-height: 24px;
+}
+
+.account-rating__title {
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 20px;
+}
+
+.account-rating__text {
+    font-weight: 400;
+    font-size: 11px;
+    line-height: 16px;
+}
+
+.account-rating--stats {
+    background: #EBB1FF
+}

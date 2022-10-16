@@ -46,7 +46,7 @@ function LoginPassword() {
         <>
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" className='login-img' onClick={() => console.log(mutation.data)} />
-                <p className='content-info__text'>Добро пожаловать в OpenSkill</p>
+                
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="password-form">
                 <div style={topInfo}>

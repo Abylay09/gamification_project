@@ -43,7 +43,7 @@ function LecturePage() {
                     <h4 className='section-title my-4' >Лекции</h4>
                     <Stack gap={3}>
                         {lesson.lesson.lectures.map(item => {
-                            return <div onClick={() => navigate(`/lecture-info/${lesson.lesson.uid}`)}><LectureItem title={item.title} order={item.order} /></div>
+                            return <LectureItem goToLecture = {() => navigate(`/lecture-info/${lesson.lesson.uid}`)} title={item.title} order={item.order} />
                         })}
                     </Stack>
                 </Col>
@@ -55,8 +55,12 @@ function LecturePage() {
                     <Stack>
                         {/* <TaskItem /> */}
                         {lesson.lesson.tasks.map(item => {
-                            return <TaskItem exp={item.exp} gold={item.gold} order={item.order}
-                                onClick={() => navigate(`/task/${item.uid}`)} />
+                            return <TaskItem hasPlay = {item.hasPlay} exp={item.exp} gold={item.gold} order={item.order}
+                                onClick={() => { 
+                                    if(item.hasPlay) {
+                                        navigate(`/task/${item.uid}`) 
+                                    }  
+                                }} />
                         })}
 
                     </Stack>

@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from 'react'
-import { useForm } from 'react-hook-form'
+import React, { useEffect, useState, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import AuthButton from 'components/buttons/AuthButton';
 import "./RestoreSms.scss"
@@ -7,13 +6,15 @@ import { useMutation } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import { nextStep } from 'redux/features/restoreSlice';
 import { restore } from 'utils/api/restore';
+import Image from "assets/login/bonbon-dialog.png"
 
+const initDigits = ["", "", "", ""]
 function RestoreSms() {
     const [counter, setCounter] = useState(5);
-    const [firstNum, setFirstNum] = useState("");
-    const [secondNum, setSecondNum] = useState("");
-    const [thirdNum, setThirdNum] = useState("");
-    const [fourthNum, setFourthNum] = useState("");
+    const [digits, setDigits] = useState(initDigits);
+    const inputRefs = useRef([]);
+    const navigate = useNavigate();
+    const length = digits.length;
 
     useEffect(() => {
         const timer =
@@ -21,16 +22,9 @@ function RestoreSms() {
         return () => clearInterval(timer);
     }, [counter]);
 
-    const navigate = useNavigate();
-
-    const { register, handleSubmit, watch, formState: { errors }, reset } = useForm();
     const dispatch = useDispatch();
 
     const login = useSelector((state) => state.restore.phone)
-
-    function isEmpty(text) {
-        return text === ""
-    }
 
     const mutation = useMutation(data => {
         return restore.checkCode(data)
@@ -39,7 +33,7 @@ function RestoreSms() {
     const smsMutation = useMutation(login => {
         return restore.sendCode(login)
     }, {
-        cacheTime : 0
+        cacheTime: 0
     })
 
     function sendSms() {
@@ -48,10 +42,10 @@ function RestoreSms() {
     }
 
     const onSubmit = () => {
-        if (isEmpty(firstNum) || isEmpty(secondNum) || isEmpty(thirdNum) || isEmpty(fourthNum)) {
+        if (digits.length < 4) {
             alert("Заполните смс форму")
         } else {
-            mutation.mutate({ login: login, sms: firstNum + secondNum + thirdNum + fourthNum }, {
+            mutation.mutate({ login: login, sms: digits.join("") }, {
                 onSuccess: () => {
                     dispatch(nextStep())
                 },
@@ -62,36 +56,71 @@ function RestoreSms() {
         }
     }
 
+    const handleChange = (index, newValue) => {
+        const oldDigit = digits[index];
+
+        const newDigit = newValue.trim().replace(oldDigit, '');
+        if (newDigit < '0' || newDigit > '9') return;
+
+        const newDigits = [...digits];
+        newDigits[index] = newDigit;
+        setDigits(newDigits);
+        if (index < length - 1) {
+            inputRefs.current[index + 1].focus();
+        } else {
+            inputRefs.current[index].blur();
+        }
+    }
+
+    const handleKeyDown = (index, event) => {
+        if (event.key === 'Backspace') {
+            event.preventDefault();
+            if (digits[index].match(/^[0-9]$/)) {
+                const newDigits = [...digits];
+                newDigits[index] = '';
+                setDigits(newDigits);
+            } else {
+                if (index > 0) inputRefs.current[index - 1].focus();
+            }
+        }
+    }
+
     return (
-        <div style={{
-            margin: "0 -12px", padding: "36px 24px 64px 24px", backgroundColor: "#fff", borderTopLeftRadius: "12px",
-            borderTopRightRadius: "12px"
-        }}>
+        <>
+            <div style={{ paddingBottom: "30%" }}>
+                <img src={Image} alt="" />
+            </div>
 
-            <form className="signin-sms__wrap w-100 mt-4" onSubmit={handleSubmit(onSubmit)} >
-                <p className="sms-title ">Код подтверждения</p>
-                <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
-                <div className='signin-sms__inputs'>
-                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("firstNum", {
-                        onChange: (event) => setFirstNum(event.target.value)
-                    })} />
-                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("secondNum", {
-                        onChange: (event) => setSecondNum(event.target.value)
-                    })} />
-                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("thirdNum", {
-                        onChange: (event) => setThirdNum(event.target.value)
-                    })} />
-                    <input autoComplete="off" className="sms-input" type="text" placeholder='-' maxlength="1" {...register("fourthNum", {
-                        onChange: (event) => setFourthNum(event.target.value)
-                    })} />
-                </div>
-                <AuthButton text="Подтвердить" />
+            <div style={{
+                margin: "0 -12px", padding: "36px 24px 64px 24px", backgroundColor: "#fff", borderTopLeftRadius: "12px",
+                borderTopRightRadius: "12px"
+            }}>
 
-                {counter === 0
-                    ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
-                    : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
-            </form>
-        </div>
+                <form className="signin-sms__wrap w-100 mt-4" onSubmit={onSubmit} >
+                    <p className="sms-title ">Код подтверждения</p>
+                    <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
+                    <div className='signin-sms__inputs' style={{ gap: "15px" }}>
+                        {digits.map((digit, index) => (
+                            <input
+                                key={index}
+                                className="sms-input"
+                                value={digit}
+                                placeholder='-'
+                                onChange={event => handleChange(index, event.target.value)}
+                                onKeyDown={event => handleKeyDown(index, event)}
+                                ref={element => inputRefs.current[index] = element}
+                            />
+                        ))}
+                    </div>
+                    <AuthButton text="Подтвердить" />
+
+                    {counter === 0
+                        ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
+                        : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
+                </form>
+            </div>
+        </>
+
 
     )
 }
