@@ -30,7 +30,7 @@ function LessonPage() {
         navigate(`/lecture/${id}`)
     }
     return (
-        <Layout  >
+        <Layout  style = {{position : "relative"}}>
             <Row>
                 <Col>
                     <LessonHeader title={lessonGroup.lessons_group.title} order={lessonGroup.lessons_group.order}
@@ -40,22 +40,27 @@ function LessonPage() {
             </Row>
             <Row>
                 <Col >
-                    <Stack gap={3}>
+                    <Stack gap={3} >
                         {
                             lessonGroup.lessons_group.lessons?.map(lesson =>
                             (<LessonItem
-                                hasPlay = {lesson.hasPlay}
-                                selectLesson = {() => setUrl(lesson.uid)}
+                                hasPlay={lesson.hasPlay}
+                                selectLesson={() => setUrl(lesson.uid)}
                                 title={lesson.title}
-                                order={lesson.order} />)
+                                order={lesson.order} 
+                                startLesson = {() => navigatePage(lesson.uid)}/>)
                             )
-                        }                      
-                        <StickyButton text={"Начать"} onClick={() => navigatePage(url)}  />
+                        }
+                        {/* <StickyButton text={"Начать"} onClick={() => navigatePage(url)}  /> */}
+
+                        
+                        {/* <FixedButton text={"Начать"} onClick={() => navigatePage(url)} /> */}
                     </Stack>
                 </Col>
             </Row>
             {/* popup с поздравлением */}
             {/* <Graduation show={true} /> */}
+            
         </Layout >
     )
 }

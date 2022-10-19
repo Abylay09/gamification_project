@@ -12,10 +12,10 @@ function RestorePage() {
         <Container fluid className='vh-100 ' style={{ background: "#27272F" }}>
             <Stack className='h-100' >
                 <div className='mt-auto flex-column' style={{ gap: "150px" }}>
-                    {/* {step === 1 && <RestorePhone />}
+                    {step === 1 && <RestorePhone />}
                     {step === 2 && <RestoreSms />}
-                    {step === 3 && <RestorePassword />} */}
-                    <RestorePassword/>
+                    {step === 3 && <RestorePassword />}
+                    {/* <RestorePassword/> */}
                 </div>
             </Stack>
         </Container >

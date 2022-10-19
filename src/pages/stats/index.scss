@@ -10,18 +10,25 @@
     padding: 16px;
     text-align: center;
     border-radius: 16px;
+    min-height: 150px;
+    min-width: 110px;
+
+    align-items: baseline;
     p{
         margin-bottom: 0;
     }
 }
 .second-place{
     border: 1px solid #74A2D6;
+
 }
 .first-place{
     border: 1px solid #FDB30B;
+    order: 1;
 }
 .third-place{
     border: 1px solid #EF86B0;
+    order: 3;
 }
 .rates-title {
     font-weight: 600;

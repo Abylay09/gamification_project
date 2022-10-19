@@ -26,5 +26,15 @@ export const coupons = {
                 'Authorization': `Bearer ${token}`
             }
         }).then(result => result.data)
+    },
+    buyTickets({id, amount}){
+        return axios.post("http://api.openskill.uz/store/buy",{
+            uid : id,
+            amount : amount
+        }, {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        })
     }
 }

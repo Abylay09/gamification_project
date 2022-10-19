@@ -4,11 +4,13 @@ import Layout from 'layout/Layout'
 import { useQuery } from '@tanstack/react-query'
 import ShopItem from './components/ShopItem'
 import { coupons } from 'utils/api/getCoupons'
+import { useNavigate } from 'react-router-dom'
 
 import RightArrow from "assets/common/right-arrow.svg"
 import "./index.scss"
 
 function ShopPage() {
+    const navigate = useNavigate()
     const { data: coupon, isError, isLoading } = useQuery(["getAllCoupons"], () => {
         return coupons.getAllCoupons()
     })
@@ -20,49 +22,39 @@ function ShopPage() {
     else if (isError) {
         return <div>Error</div>
     }
-    console.log(Object.values(coupon.offers));
+
     return (
         <Layout>
             <Stack style={{ marginBottom: '-24px' }}>
                 <h4 className='section-title my-4' >Лавка</h4>
-                <div className='coupon mb-4 d-flex align-items-center justify-content-between' >
+                <div className='coupon mb-4 d-flex align-items-center justify-content-between' onClick={()=> navigate("/ticket")}>
                     <div>
                         <p className='coupon__title mb-0' >Мои купоны</p>
-                        <p className='coupon__number'>У вас нет активных купонов</p>
+                        <p className='coupon__number'>{coupon.my_coupons ? `У вас ${coupon.my_coupons} купонов`: "У вас нет активных купонов"}</p>
                     </div>
                     <img src={RightArrow} alt="" />
                 </div>
             </Stack>
             <Stack style={{ marginBottom: '-24px' }}>
-            <h4 className='section-title my-4' >1 Уровень</h4>
-                {/* <ShopItem data = {coupon}/> */}
                 {
-                    Object.values(coupon.offers).map(item =>
-                        item.map(another =>
-                            <ShopItem merchant_title={another.merchant_title} level = {another.level}
-                                title={another.title} price = {another.price}/>))
+                    Object.keys(coupon.offers).map((item, index) => {
+                        return (
+                            <div>
+                                <h4 className='section-title my-4' >{index + 1} Уровень</h4>
+
+                                {coupon.offers[item].map(another => {
+                                    return (
+                                        <ShopItem merchant_title={another.merchant_title} level={another.level}
+                                            title={another.title} price={another.price}
+                                            openTicket={() => navigate(`/ticket/${another.uid}`)} />
+                                    )
+                                })}
+
+                            </div>
+                        )
+                    })
                 }
-
-
             </Stack>
-
-            {/* <Stack style={{ marginBottom: '24px' }}>
-                <h4 className='section-title my-4' >2 Уровень</h4>
-                <div className='coupon not-available mb-4 d-flex align-items-center justify-content-between' >
-                    <div>
-                        <p className='coupon__title mb-0' >Посещение развлекательного парка</p>
-                        <p className='coupon__number'>Nasledniki в ТЦ Атриум</p>
-                    </div>
-                    <img src={RightArrow} alt="" />
-                </div>
-                <div className='coupon not-available mb-4 d-flex align-items-center justify-content-between' >
-                    <div>
-                        <p className='coupon__title mb-0' >Посещение развлекательного парка</p>
-                        <p className='coupon__number'>Nasledniki в ТЦ Атриум</p>
-                    </div>
-                    <img src={RightArrow} alt="" />
-                </div>
-            </Stack> */}
         </Layout>
     )
 }

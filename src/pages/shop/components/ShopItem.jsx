@@ -27,11 +27,11 @@ const CoinStyle = {
     fontWeight : "bold"
 }
 
-function ShopItem({ merchant_title, title, level, data, price }) {
+function ShopItem({ merchant_title, title, level, data, price, openTicket }) {
     return (
         <>
 
-            <div className='coupon mb-4 d-flex align-items-center justify-content-between' >
+            <div onClick={openTicket} className='coupon mb-4 d-flex align-items-center justify-content-between' >
                 <div>
                     <p className='coupon__title mb-0' >{title}</p>
                     <p className='coupon__number'>{merchant_title}</p>

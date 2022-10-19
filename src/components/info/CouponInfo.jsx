@@ -9,11 +9,10 @@ function CouponInfo() {
                 <img src={Ticket} alt="" />
             </div>
             <div className='coupon-info-title'>
-                Недоступно
+                Здесь будут твои купоны
             </div>
             <div className='coupon-info-text'>
-                “Глава 2: Рациональные числа” откроется после
-                прохождения “Глава 1: Натуральные числа”
+                Покупай купоны на накопленное золото
             </div>
         </div>
 

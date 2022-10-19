@@ -1,21 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Container, Row, Col, Stack } from "react-bootstrap"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Pagination } from "swiper";
 import { useNavigate, useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { useQuery } from '@tanstack/react-query'
+import { coupons } from 'utils/api/getCoupons';
 import BlueLeftArrow from "assets/common/blue-left-arrow.png"
 import Level from 'components/ticket-reqs/Level';
 import Cost from 'components/ticket-reqs/Cost';
 import FixedButton from 'components/buttons/fixed-button/FixedButton';
 import Library from "assets/tickets/library.png"
-import { useQuery } from '@tanstack/react-query'
-import { coupons } from 'utils/api/getCoupons';
+import SuccessBuyModal from 'components/modals/purchase-modal/SuccessBuyModal';
 import 'swiper/css';
 import "swiper/css/pagination";
 import "./Ticket.scss"
+import BuyModal from 'components/modals/purchase-modal/BuyModal';
+
 // import styles from "./Ticket.module.scss"
 function Ticket() {
+    const [show, setShow] = useState(false)
+    const [showSuccess, setShowSuccess] = useState(false)
+
     const navigate = useNavigate();
     const params = useParams()
     const { data: coupon, isError, isLoading } = useQuery(["getCouponinfo"], () => {
@@ -30,7 +36,7 @@ function Ticket() {
         return <div>Error</div>
     }
     return (
-        <Container>
+        <Container style={{ overflowX: "hidden" }}>
             <Row>
                 <Col>
                     <div className='page-header d-flex align-items-center py-4' onClick={() => navigate(-1)}>
@@ -97,9 +103,8 @@ function Ticket() {
                                 </div>
                             </Stack>
 
+                            <FixedButton text={"Купить"} onClick={() => setShow(!show)} />
 
-
-                            <FixedButton text={"Купить"} />
                         </TabPanel>
 
                         <TabPanel className="custom-tab my-3">
@@ -115,52 +120,21 @@ function Ticket() {
                                         )
                                     }))
                                 }
-                                {/* <div className=''>
-                                    <p className="ticket__info__title ">Размер скидки</p>
-                                    <p className="ticket__info__desc">
-                                        При первой покупке 5% <br />
-                                        При второй покупке 10% <br />
-                                        При третьей и последующих покупках 15%
-                                    </p>
-                                </div>
-
-                                <div>
-                                    <p className="ticket__info__title ">Стоимость без скидки</p>
-                                    <p className="ticket__info__desc">
-                                        Стоимость книг: от 40 000 сум до 400 000 сум
-                                    </p>
-                                </div>
-
-                                <div className=''>
-                                    <p className="ticket__info__title ">Срок годности активного купона</p>
-                                    <p className="ticket__info__desc">
-                                        При первой покупке 5% <br />
-                                        При второй покупке 10% <br />
-                                        При третьей и последующих покупках 15%
-                                    </p>
-                                </div>
-                                <div className=''>
-                                    <p className="ticket__info__title ">Условия пользования</p>
-                                    <p className="ticket__info__desc">
-                                        1 приобретенный купон можно использовать только на 1 покупку. Данный купон, могут использовать до 7 чел.
-                                    </p>
-                                </div>
-                                <div className=''>
-                                    <p className="ticket__info__title ">Контактные данные </p>
-                                    <p className="ticket__info__desc">
-                                        Номер телефона: +998 97 409 35 34 <br />
-                                        Instagram: topar.uz <br />
-                                        Сайт: www.topar.uz
-                                    </p>
-                                </div> */}
-                                <FixedButton text={"Купить"} />
+                                <FixedButton text={"Купить"} onClick={() => setShow(!show)} />
 
                             </Stack>
                         </TabPanel>
                     </Tabs>
+                    <BuyModal uid={coupon.offer.uid} cost={coupon.offer.price}
+                        show={show}
+                        close={() => setShow(!show)}
+                        showSuccess={() => setShowSuccess(true)}
+                    />
+                    <SuccessBuyModal success={showSuccess} close={() => setShowSuccess(!setShow)} />
                 </Col>
-
             </Row>
+
+
 
         </Container>
     )

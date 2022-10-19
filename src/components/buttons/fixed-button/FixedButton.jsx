@@ -1,6 +1,8 @@
 import React from 'react'
 
 const buttonStyle = {
+    
+
     backgroundColor: "#2A80FF",
     borderRadius: "12px",
     padding: "15px 0",
@@ -11,6 +13,8 @@ const buttonStyle = {
     right : "12px",
     width : "100%",
     marginTop : "20px"
+
+
     // marginBottom: props.regularMarginBottom,
     // backgroundColor: "#2A80FF",
     // borderRadius: "12px",
