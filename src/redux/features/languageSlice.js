@@ -47,7 +47,7 @@ let language = new LocalizedStrings({
     level: "Level",
     theory: "Theory",
     chapter: "Chapter",
-    pet: "Per",
+    pet: "Pet",
     play: "PLAY",
     indicators: "Indicators",
     indicators_logical_thinking: "Logical thinking",
