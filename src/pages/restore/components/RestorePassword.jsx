@@ -9,8 +9,8 @@ import { setPhone, nextStep, setPassword } from 'redux/features/restoreSlice';
 
 import "./RestorePassword.scss"
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
 import { restore } from 'utils/api/restore';
+import { useNavigate } from 'react-router-dom';
 const topInfo = {
     margin: "0 -12px",
     padding: "36px 24px 64px 24px",
@@ -19,8 +19,9 @@ const topInfo = {
     borderTopRightRadius: "12px"
 }
 function RestorePassword() {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const language = useSelector(state => state.language.language);
     const phone = useSelector((state) => state.restore.phone)
     const passwd = useSelector((state) => state.restore.password)
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -39,11 +40,11 @@ function RestorePassword() {
                     navigate("/lesson")
                 },
                 onError: () => {
-                    alert("Ошибка")
+                    alert(language.error)
                 }
             });
         } else {
-            alert("Пароли не совпадают")
+            alert(language.password_not_equals)
         }
     }
     return (
@@ -53,7 +54,7 @@ function RestorePassword() {
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="phone-form">
                 <div style={topInfo}>
-                    <Form.Label className="form-title mb-3" htmlFor="basic-url">Придумай пароль</Form.Label>
+                    <Form.Label className="form-title mb-3" htmlFor="basic-url">{language.password_create}</Form.Label>
                     <div className='input__wrapper'>
                         <Form.Control
                             className='password-input'
@@ -62,14 +63,14 @@ function RestorePassword() {
                             aria-describedby="passwordHelpBlock"
                             {...register("password")}
                         />
-                        <p className='password-input__wrapper-title'>Пароль</p>
+                        <p className='password-input__wrapper-title'>{language.password}</p>
                     </div>
 
                     <div className="form-validation my-3 p-2 rounded">
-                        <p>Пароль должен содержать не менее:</p>
-                        <span className={`form-validation__rule ${watchPassword.length >= 8 ? "rule--right" : ""}`} >8 символов </span>
-                        <span className={`form-validation__rule ${watchPassword.match(/[0-9]/) ? "rule--right" : ""}`}  >Одной цифры (0-9)</span>
-                        <span className={`form-validation__rule ${watchPassword.match(/[А-ЯA-Z]/) ? "rule--right" : ""}`}  >Одной буквы Верхнего регистра</span>
+                        <p>{language.password_rules}</p>
+                        <span className={`form-validation__rule ${watchPassword.length >= 8 ? "rule--right" : ""}`} >{language.password_8}</span>
+                        <span className={`form-validation__rule ${watchPassword.match(/[0-9]/) ? "rule--right" : ""}`}  >{language.password_digit}</span>
+                        <span className={`form-validation__rule ${watchPassword.match(/[А-ЯA-Z]/) ? "rule--right" : ""}`}  >{language.password_up}</span>
                     </div>
 
                     <div className='input__wrapper'>
@@ -82,8 +83,11 @@ function RestorePassword() {
                                 onChange: (event) => dispatch(setPassword("" + event.target.value))
                             })}
                         />
-                        <p className='password-input__wrapper-title'>Пароль</p>
-                        <AuthButton text={"Продолжить"} />
+                        <p className='password-input__wrapper-title'>{language.password}</p>
+                        <AuthButton text={language.next} />
+                        <div className='get-password' onClick={() => navigate("/login")}>
+                            {language.login}
+                        </div>
                     </div>
                 </div>
             </form>

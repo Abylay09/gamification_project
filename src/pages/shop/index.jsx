@@ -5,11 +5,13 @@ import { useQuery } from '@tanstack/react-query'
 import ShopItem from './components/ShopItem'
 import { coupons } from 'utils/api/getCoupons'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import RightArrow from "assets/common/right-arrow.svg"
 import "./index.scss"
 
 function ShopPage() {
+    const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
     const { data: coupon, isError, isLoading } = useQuery(["getAllCoupons"], () => {
         return coupons.getAllCoupons()
@@ -26,11 +28,11 @@ function ShopPage() {
     return (
         <Layout>
             <Stack style={{ marginBottom: '-24px' }}>
-                <h4 className='section-title my-4' >Лавка</h4>
+                <h4 className='section-title my-4' >{language.shop_title}</h4>
                 <div className='coupon mb-4 d-flex align-items-center justify-content-between' onClick={()=> navigate("/ticket")}>
                     <div>
-                        <p className='coupon__title mb-0' >Мои купоны</p>
-                        <p className='coupon__number'>{coupon.my_coupons ? `У вас ${coupon.my_coupons} купонов`: "У вас нет активных купонов"}</p>
+                        <p className='coupon__title mb-0' >{language.my_coupons}</p>
+                        <p className='coupon__number'>{coupon.my_coupons ? language.you_have + " " + coupon.my_coupons + " " + language.coupons: language.no_coupons}</p>
                     </div>
                     <img src={RightArrow} alt="" />
                 </div>
@@ -40,7 +42,7 @@ function ShopPage() {
                     Object.keys(coupon.offers).map((item, index) => {
                         return (
                             <div>
-                                <h4 className='section-title my-4' >{index + 1} Уровень</h4>
+                                <h4 className='section-title my-4' >{index + 1} {language.level}</h4>
 
                                 {coupon.offers[item].map(another => {
                                     return (

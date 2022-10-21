@@ -12,7 +12,9 @@ import CrossIcon from "assets/modal/cross.svg"
 
 import "./index.scss"
 import { useRef } from 'react'
+import { useSelector } from 'react-redux'
 function TaskPage() {
+    const language = useSelector(state => state.language.language)
     const [inputValue, setInputValue] = useState("")
     const [show, setShow] = useState(false);
     const [notCorrect, setNotCorrect] = useState(false)
@@ -65,8 +67,8 @@ function TaskPage() {
                     <div>
                         <h5 className="condition" >{query.data.condition}</h5>
                         <div className='text-center mt-4'>
-                            <input autoFocus ref={ref} onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder='Ответ' />
-                            {inputValue.length <= 0 ? <p>Введите ответ</p> : ""}
+                            <input autoFocus ref={ref} onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder={language.answer} />
+                            {inputValue.length <= 0 ? <p>{language.your_answer}</p> : ""}
                         </div>
                     </div>
 
@@ -86,33 +88,33 @@ function TaskPage() {
                         } else {
                             console.log(false);
                         }
-                    }}>Проверить</Button>
+                    }}>{language.check}</Button>
                 </Col>
             </Row>
 
             <Modal dialogClassName='custom-modal' contentClassName="custom-content" show={show} onHide={handleClose}>
                 <Modal.Body>
                     <div className='custom-success'>
-                        <span>Молодец!</span>
+                        <span>{language.well_done}!</span>
                         <div className='custom-success__img'><img src={CheckIcon} alt="" /></div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer bsPrefix="custom-footer">
                     <Button className='w-100 py-3 mt-auto' style={{ marginBottom: "64px", backgroundColor: "#19E439" }} onClick={handleClose}>
-                        Продолжить</Button>
+                        {language.next}</Button>
                 </Modal.Footer>
             </Modal>
 
             <Modal dialogClassName='custom-modal' contentClassName="custom-content" show={notCorrect} onHide={handleCloseCorrect}>
                 <Modal.Body>
                     <div className='custom-success'>
-                        <span>Тут должен быть ответ</span>
+                        <span>{language.no_answer}</span>
                         <div className='custom-success__img custom-success__img--not-correct'><img src={CrossIcon} alt="" /></div>
                     </div>
                 </Modal.Body>
                 <Modal.Footer bsPrefix="custom-footer">
                     <Button className='w-100 py-3 mt-auto' style={{ marginBottom: "64px", backgroundColor: "#EB2E72" }} onClick={handleCloseCorrect}>
-                        Продолжить</Button>
+                        {language.next}</Button>
                 </Modal.Footer>
             </Modal>
         </Container>

@@ -1,3 +1,4 @@
+import React from 'react'
 import LessonPage from 'pages/lesson';
 import PetSliderPage from 'pages/pet-selection';
 import RegPage from './pages/registration';
@@ -23,10 +24,15 @@ import Game3 from 'pages/games/thinkingGames/game1';
 import Ticket from 'pages/ticket/components/Ticket';
 import AccountPage from 'pages/account';
 import CardGame from 'pages/games/attentionGames/CardGame';
+import { useSelector, useDispatch } from 'react-redux'
 import MemoryImages from 'pages/games/memoryGames/MemoryImages';
 import Test from 'pages/games/memoryGames/test';
+import { setLanguage } from 'redux/features/languageSlice';
 
 function App() {
+  const dispatch = useDispatch();
+  const language = useSelector(state => state.language.language);
+  const languages = useSelector(state => state.language.languages);
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: {
@@ -34,9 +40,19 @@ function App() {
       }
     }
   })
+  const [, updateState] = React.useState();
+  const forceUpdate = React.useCallback(() => updateState({}), []);
+
+  const changeLanguage = () => {
+      dispatch(setLanguage(languages.find(x => x !== language._language)));
+      forceUpdate()
+  }
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100" >
+                <button className="language-button"onClick={changeLanguage}>
+                {languages.find(x => x !== language._language)}
+                </button>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegPage />} />

@@ -12,7 +12,9 @@ import NumberThree from "assets/stats/number-three.svg"
 import { rating } from 'utils/api/getRating';
 import "./index.scss"
 import IndicatorItem from './components/IndicatorItem';
+import { useSelector } from 'react-redux'
 function StatsPage() {
+    const language = useSelector(state => state.language.language)
     const [toggleState, setToggleState] = useState(1);
     const [styleState, setStyleState] = useState(1)
 
@@ -48,21 +50,21 @@ function StatsPage() {
         <Layout>
             <Row>
                 <Col>
-                    <h3 className='rates-title my-4'>Показатели</h3>
+                    <h3 className='rates-title my-4'>{language.stats_indicatrors}</h3>
                     <div>
-                        <p className='mb-0'>Фильтровать по:</p>
+                        <p className='mb-0'>{language.filter_by}:</p>
                         <div className='filter-list'>
-                            <span className={`filter-list__item ${styleState === 1 ? "active" : ""}`} onClick={() => toggleStyleState(1)}>По классу</span>
-                            <span className={`filter-list__item ${styleState === 2 ? "active" : ""}`} onClick={() => toggleStyleState(2)}>По школе</span>
-                            <span className={`filter-list__item ${styleState === 3 ? "active" : ""}`} onClick={() => toggleStyleState(3)}>По области</span>
+                            <span className={`filter-list__item ${styleState === 1 ? "active" : ""}`} onClick={() => toggleStyleState(1)}>{language.by_class}</span>
+                            <span className={`filter-list__item ${styleState === 2 ? "active" : ""}`} onClick={() => toggleStyleState(2)}>{language.by_school}</span>
+                            {/* <span className={`filter-list__item ${styleState === 3 ? "active" : ""}`} onClick={() => toggleStyleState(3)}>По области</span> */}
                         </div>
                     </div>
                 </Col>
             </Row>
             <Tabs>
                 <TabList>
-                    <Tab>Общий</Tab>
-                    <Tab>Индикаторы</Tab>
+                    <Tab>{language.general}</Tab>
+                    <Tab>{language.indicators}</Tab>
                 </TabList>
 
                 <TabPanel>
@@ -75,7 +77,7 @@ function StatsPage() {
                                             <div className={`rating-top-item  ${topStyles[index]} `}>
                                                 <img className='mb-3' src={nums[index]} alt="" />
                                                 <p style={{ fontSize: "13px", fontWeight: "600" }}>{ratingitem.last_name} {ratingitem.first_name}</p>
-                                                <p style={{ fontSize: "11px" }}>Одноклассник</p>
+                                                <p style={{ fontSize: "11px" }}>{language.classmate}</p>
                                             </div>
                                         )
                                     })

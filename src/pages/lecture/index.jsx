@@ -9,10 +9,12 @@ import { useQuery } from '@tanstack/react-query'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getDataList } from 'utils/api/getDataList'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
 import "./index.scss"
 
 function LecturePage() {
+    const language = useSelector(state => state.language.language)
     // const [uidLink, setLink] = useState("")
     const params = useParams();
     const navigate = useNavigate()
@@ -40,7 +42,7 @@ function LecturePage() {
 
             <Row>
                 <Col >
-                    <h4 className='section-title my-4' >Лекции</h4>
+                    <h4 className='section-title my-4' >{language.lectures}</h4>
                     <Stack gap={3}>
                         {lesson.lesson.lectures.map(item => {
                             return <LectureItem goToLecture = {() => navigate(`/lecture-info/${lesson.lesson.uid}`)} title={item.title} order={item.order} />
@@ -51,7 +53,7 @@ function LecturePage() {
 
             <Row >
                 <Col >
-                    <h4 className='section-title my-4' >Задания</h4>
+                    <h4 className='section-title my-4' >{language.tasks}</h4>
                     <Stack>
                         {/* <TaskItem /> */}
                         {lesson.lesson.tasks.map(item => {

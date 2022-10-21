@@ -11,6 +11,7 @@ import Image from "assets/login/bonbon-dialog.png"
 const initDigits = ["", "", "", ""]
 function RestoreSms() {
     const [counter, setCounter] = useState(5);
+    const language = useSelector(state => state.language.language);
     const [digits, setDigits] = useState(initDigits);
     const inputRefs = useRef([]);
     const navigate = useNavigate();
@@ -38,19 +39,19 @@ function RestoreSms() {
 
     function sendSms() {
         smsMutation.mutate(login)
-        setCounter(5)
+        setCounter(60)
     }
 
     const onSubmit = () => {
         if (digits.length < 4) {
-            alert("Заполните смс форму")
+            alert(language.sms_is_required)
         } else {
             mutation.mutate({ login: login, sms: digits.join("") }, {
                 onSuccess: () => {
                     dispatch(nextStep())
                 },
                 onError: () => {
-                    alert("Вы ввели неправильный смс код")
+                    alert(language.sms_incorrect)
                 }
             })
         }
@@ -97,8 +98,8 @@ function RestoreSms() {
             }}>
 
                 <form className="signin-sms__wrap w-100 mt-4" onSubmit={onSubmit} >
-                    <p className="sms-title ">Код подтверждения</p>
-                    <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
+                    <p className="sms-title ">{language.code}</p>
+                    <p className="sms-subtitle ">{language.on_phone} {login} {language.sms_sended} </p>
                     <div className='signin-sms__inputs' style={{ gap: "15px" }}>
                         {digits.map((digit, index) => (
                             <input
@@ -112,11 +113,14 @@ function RestoreSms() {
                             />
                         ))}
                     </div>
-                    <AuthButton text="Подтвердить" />
+                    <AuthButton text={language.confirm} />
 
                     {counter === 0
-                        ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
-                        : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
+                        ? <p className='repeat-sms' onClick={() => sendSms()}>{language.sms_retry}</p>
+                        : <p className='repeat-sms' >{language.sms_seconds} {counter + " " + language.seconds}</p>}
+                        <div className='get-password py-1 my-0' onClick={() => navigate("/login")}>
+                            {language.login}
+                        </div>
                 </form>
             </div>
         </>

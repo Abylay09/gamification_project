@@ -10,6 +10,7 @@ import "./SmsInput.scss"
 
 const initDigits = ["", "", "", ""]
 export default function SmsInput() {
+    const language = useSelector(state => state.language.language);
     const [digits, setDigits] = useState(initDigits);
     const [counter, setCounter] = useState();
     const inputRefs = useRef([]);
@@ -23,7 +24,7 @@ export default function SmsInput() {
 
 
     useEffect(() => {
-        setCounter(5);
+        setCounter(60);
     }, [])
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -47,13 +48,13 @@ export default function SmsInput() {
 
     function sendSms() {
         smsMutation.mutate({ login: login })
-        setCounter(5)
+        setCounter(60)
     }
 
     const onSubmit = (e) => {
         e.preventDefault()
         if (digits.length < 4) {
-            alert("Заполните смс форму")
+            alert(language.sms_is_required)
         } else {
             mutation.mutate({ login: login, password: password, code: digits.join("") }, {
                 onSuccess: (response) => {
@@ -61,7 +62,7 @@ export default function SmsInput() {
                     navigate("/lesson")
                 },
                 onError: () => {
-                    alert("Вы ввели неправильный смс код")
+                    alert(language.sms_incorrect)
                 }
             })
         }
@@ -111,8 +112,8 @@ export default function SmsInput() {
             }}>
 
                 <form form className="signin-sms__wrap w-100 mt-4" onSubmit={onSubmit} >
-                    <p className="sms-title ">Код подтверждения</p>
-                    <p className="sms-subtitle ">На номер {login} отправлен SMS с кодом подтверждения </p>
+                    <p className="sms-title ">{language.code}</p>
+                    <p className="sms-subtitle ">{language.on_phone} {login} {language.sms_sended} </p>
                     <div className='signin-sms__inputs' style={{ gap: "15px" }}>
                         {digits.map((digit, index) => (
                             <input
@@ -126,11 +127,14 @@ export default function SmsInput() {
                             />
                         ))}
                     </div>
-                    <AuthButton text="Подтвердить" />
+                    <AuthButton text={language.confirm} />
 
                     {counter === 0
-                        ? <p className='repeat-sms' onClick={() => sendSms()}>Отправить смс повторно</p>
-                        : <p className='repeat-sms' >Отправить смс повторно через {counter + " " + "секунд"}</p>}
+                        ? <p className='repeat-sms' onClick={() => sendSms()}>{language.sms_retry}</p>
+                        : <p className='repeat-sms' >{language.sms_seconds} {counter + " " + language.seconds}</p>}
+                        <div className='get-password py-1 my-0' onClick={() => navigate("/login")}>
+                            {language.login}
+                        </div>
                 </form>
             </div>
         </>

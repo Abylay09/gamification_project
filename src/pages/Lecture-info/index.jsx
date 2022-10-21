@@ -8,7 +8,9 @@ import "./index.scss"
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 function LectureInfoPage() {
+    const language = useSelector(state => state.language.language)
     const [show, showMore] = useState(false);
     const params = useParams();
     const navigate = useNavigate()
@@ -58,7 +60,7 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <Stack>
-                        <h4 className='lecture-text-subtitle' >Теория</h4>
+                        <h4 className='lecture-text-subtitle' >{language.theory}</h4>
                         <p className='lecture-text' >
                             {lecture.lesson.lectures[0].content}
                         </p>

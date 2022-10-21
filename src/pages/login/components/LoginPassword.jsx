@@ -18,6 +18,7 @@ const topInfo = {
     borderTopRightRadius: "12px"
 }
 function LoginPassword() {
+    const language = useSelector(state => state.language.language);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -36,7 +37,7 @@ function LoginPassword() {
                 navigate("/lesson")
             },
             onError: () => {
-                alert("Неправильные данные")
+                alert(language.invalid_data)
             }
         });
 
@@ -50,7 +51,7 @@ function LoginPassword() {
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="password-form">
                 <div style={topInfo}>
-                    <Form.Label className="form-title mb-3" htmlFor="basic-url">Введи пароль</Form.Label>
+                    <Form.Label className="form-title mb-3" htmlFor="basic-url">{language.input_password}</Form.Label>
                     <div className='input__wrapper'>
                         <Form.Control
                             className='password-input login-password'
@@ -61,13 +62,13 @@ function LoginPassword() {
                                 onChange: (event) => dispatch(setPassword("" + event.target.value))
                             })}
                         />
-                        <p className='password-input__wrapper-title'>Пароль</p>
-                        <AuthButton text={"Продолжить"} />
+                        <p className='password-input__wrapper-title'>{language.password}</p>
+                        <AuthButton text={language.next} />
                         <div className='get-password' onClick={() => navigate("/registration")}>
-                            Зарегистрироваться
+                            {language.registration}
                         </div>
                         <div className='get-password py-1 mt-0' onClick={() => navigate("/restore")}>
-                            Восстановить пароль
+                            {language.restore}
                         </div>
                     </div>
                 </div>

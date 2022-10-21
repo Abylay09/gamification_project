@@ -16,9 +16,10 @@ import 'swiper/css';
 import "swiper/css/pagination";
 import "./Ticket.scss"
 import BuyModal from 'components/modals/purchase-modal/BuyModal';
-
+import { useSelector } from 'react-redux'
 // import styles from "./Ticket.module.scss"
 function Ticket() {
+    const language = useSelector(state => state.language.language)
     const [show, setShow] = useState(false)
     const [showSuccess, setShowSuccess] = useState(false)
 
@@ -73,8 +74,8 @@ function Ticket() {
                 <Col>
                     <Tabs className="custom-tabs">
                         <TabList>
-                            <Tab>Описание</Tab>
-                            <Tab>Условия</Tab>
+                            <Tab>{language.about}</Tab>
+                            <Tab>{language.terms}</Tab>
                         </TabList>
 
                         <TabPanel className="custom-tab my-3">
@@ -89,21 +90,21 @@ function Ticket() {
                                 </p>
 
                                 <div className=''>
-                                    <p className="ticket__info__title ">Адрес</p>
+                                    <p className="ticket__info__title ">{language.address}</p>
                                     <p className="ticket__info__desc">
                                         {coupon.offer.address}
                                     </p>
                                 </div>
 
                                 <div>
-                                    <p className="ticket__info__title ">График работы</p>
+                                    <p className="ticket__info__title ">{language.grafic}</p>
                                     <p className="ticket__info__desc">
                                         {coupon.offer.grafic}
                                     </p>
                                 </div>
                             </Stack>
 
-                            <FixedButton text={"Купить"} onClick={() => setShow(!show)} />
+                            <FixedButton text={language.buy} onClick={() => setShow(!show)} />
 
                         </TabPanel>
 
@@ -120,7 +121,7 @@ function Ticket() {
                                         )
                                     }))
                                 }
-                                <FixedButton text={"Купить"} onClick={() => setShow(!show)} />
+                                <FixedButton text={language.buy} onClick={() => setShow(!show)} />
 
                             </Stack>
                         </TabPanel>

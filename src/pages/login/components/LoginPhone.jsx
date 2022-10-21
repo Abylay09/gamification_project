@@ -8,22 +8,24 @@ import logo from "assets/login/puzzles.png"
 import "./LoginPhone.scss"
 function LoginPhone() {
     const dispatch = useDispatch();
+    const language = useSelector(state => state.language.language);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = () => {
         dispatch(nextStep());
     }
+
     return (
         <>
             <div style={{ paddingBottom: "30%" }}>
                 <img src={logo} alt="" />
-                <p className='phone-info__text'>Добро пожаловать в OpenSkill</p>
+                <p className='phone-info__text'>{language.welcom}</p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="phone-form">
                 <div style={{
                     margin: "0 -12px", padding: "36px 24px 64px 24px", backgroundColor: "#fff", borderTopLeftRadius: "12px",
                     borderTopRightRadius: "12px"
                 }}>
-                    <Form.Label className="form-title mb-3" htmlFor="basic-url">Введи номер телефона</Form.Label>
+                    <Form.Label className="form-title mb-3" htmlFor="basic-url">{language.input_phone}</Form.Label>
                     <div className='input__wrapper'>
                         <Form.Control
                             className='phone-input'
@@ -35,11 +37,11 @@ function LoginPhone() {
                                 onChange: (event) => dispatch(setPhone("" + event.target.value))
                             })}
                         />
-                        <p className='phone-input__wrapper-title'>Номер телефона</p>
+                        <p className='phone-input__wrapper-title'>{language.phone}</p>
 
-                        {errors?.phone && <p className='error-msg'>Поле обязательна к заполнению</p>}
+                        {errors?.phone && <p className='error-msg'>{language.required_field}</p>}
 
-                        <AuthButton text={"Продолжить"}  />
+                        <AuthButton text={language.next}  />
                     </div>
                 </div>
             </form>

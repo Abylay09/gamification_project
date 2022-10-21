@@ -1,4 +1,5 @@
 import React from 'react'
+import { useSelector } from 'react-redux'
 const styleGold = {
     padding: "4px 8px",
     borderRadius: '8px',
@@ -9,8 +10,9 @@ const styleGold = {
     color: "#FFFFFF"
 }
 function Gold({gold}) {
+  const language = useSelector(state => state.language.language)
   return (
-    <span style={styleGold}>+{gold} Gold</span>
+    <span style={styleGold}>+{gold} {language.gold}</span>
   )
 }
 

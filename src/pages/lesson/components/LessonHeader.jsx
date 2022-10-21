@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom'
 
 function LessonHeader({ title, prev, next, order }) {
     const lesson = useSelector(state => state.lessonGroup);
+    const language = useSelector(state => state.language.language)
     const navigate = useNavigate();
     return (
         <>
@@ -20,7 +21,7 @@ function LessonHeader({ title, prev, next, order }) {
                         : <div></div>
                 }
                 <div className='chapter-top'>
-                    <p className='chapter-subtitle'>Глава {order}</p>
+                    <p className='chapter-subtitle'>{language.chapter} {order}</p>
                     <h4 className='chapter-header'>{title}</h4>
                 </div>
                 {

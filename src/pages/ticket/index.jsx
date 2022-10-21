@@ -9,7 +9,9 @@ import 'react-tabs/style/react-tabs.css';
 import "./index.scss"
 import CouponInfo from 'components/info/CouponInfo';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux'
 function TicketPage() {
+    const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
     const { data: coupon, isError, isLoading } = useQuery(["getMyCoupons"], () => {
         return coupons.getMyCoupons()
@@ -28,20 +30,19 @@ function TicketPage() {
                 <Col>
                     <div className='d-flex py-4'>
                         <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate(-1)} />
-                        <h3 className="lecture-title">Мои купоны</h3>
+                        <h3 className="lecture-title">{language.my_coupons}</h3>
                     </div>
                 </Col>
             </Row>
             <Tabs>
                 <TabList>
-                    <Tab>Активные</Tab>
-                    <Tab>Завершенные</Tab>
+                    <Tab>{language.coupns_activity}</Tab>
+                    <Tab>{language.coupns_ended}</Tab>
                 </TabList>
 
                 <TabPanel>
                     <Stack>
                         {coupon.offers ? coupon.offers.map(item => {
-                            console.log(item.merchant_store_uid);
                             return (
                                 <Card className='coupon-ticket' style={{ marginBottom: "20px" }} onClick={() => navigate(`/ticket/${item.merchant_store_uid}`)} >
                                     <Card.Img style={{ height: "160px" }} variant="top" src={item.images[0]} alt="" />

@@ -10,7 +10,7 @@ const styleHealth = {
 }
 function Health({ hp }) {
     return (
-        <span style={styleHealth}>+{hp} HP</span>
+        <span style={styleHealth}>+{hp} XP</span>
     )
 }
 

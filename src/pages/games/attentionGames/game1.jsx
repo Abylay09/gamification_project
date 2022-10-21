@@ -15,7 +15,7 @@ export default class Game1 extends React.Component {
       value: 1,
       exp: 0,
       strick: 0,
-      time: 60
+      time: 60,
     }
   }
   componentDidMount() {

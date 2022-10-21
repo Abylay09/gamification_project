@@ -4,8 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap'
 import Profile from './components/Profile'
 import BlueLeftArrow from "assets/common/blue-left-arrow.png"
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 function ProfilePage() {
+    const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
     return (
         <Container>
@@ -13,7 +15,7 @@ function ProfilePage() {
                 <Col>
                     <div className='page-header d-flex align-items-center py-4' onClick={() => navigate(-1)}>
                         <img style={{ height: "20px" }} src={BlueLeftArrow} alt="" />
-                        <h3 className="page-title"  >Профиль</h3>
+                        <h3 className="page-title"  >{language.profile}</h3>
                     </div>
                 </Col>
             </Row>
@@ -28,7 +30,7 @@ function ProfilePage() {
 
             <Row>
                 <Col>
-                    <h6 style={{ marginBottom: "-50px" }}>Индикаторы</h6>
+                    <h6 style={{ marginBottom: "-50px" }}>{language.inditaros}</h6>
                     <Indicator />
                 </Col>
             </Row>

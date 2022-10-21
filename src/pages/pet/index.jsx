@@ -6,21 +6,23 @@ import Indicator from './components/Indicator';
 import StickyButton from 'components/buttons/StickyButton';
 import { useNavigate } from 'react-router-dom';
 import "./index.scss"
+import { useSelector } from 'react-redux'
 
 function PetPage() {
+    const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
     return (
         <Layout>
             <Tabs className="custom-tabs">
                 <TabList>
-                    <Tab>Питомец</Tab>
-                    <Tab>Индикаторы</Tab>
+                    <Tab>{language.pet}</Tab>
+                    <Tab>{language.indicators}</Tab>
                 </TabList>
 
                 <TabPanel className="custom-tab">
                     <div className='tab-inner'>
-                        <div className='tab-inner__content'>Питомец</div>
-                        <button  onClick={() => navigate("/quests")} className='tab-inner__btn'>Играть</button>
+                        <div className='tab-inner__content'>{language.pet}</div>
+                        <button  onClick={() => navigate("/quests")} className='tab-inner__btn'>{language.play}</button>
                     </div>
 
                     {/* <StickyButton text={"Играть!"} onClick={() => navigate("/quests")} /> */}

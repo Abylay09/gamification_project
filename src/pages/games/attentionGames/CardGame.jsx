@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { Container, Button } from 'react-bootstrap'
 import GameHeader from '../components/GameHeader'
+import { useSelector } from 'react-redux'
 import { data } from "./cardGameData"
 import axios from 'axios'
 import FixedButton from 'components/buttons/fixed-button/FixedButton'
@@ -9,6 +10,7 @@ import { useNavigate } from 'react-router-dom'
 
 function CardGame() {
     const [time, setTime] = useState(60)
+    const language = useSelector(state => state.language.language);
     const [state, setState] = useState({
         currentQuestion: 0,
         currentColorName: "",
@@ -150,9 +152,9 @@ function CardGame() {
     if (state.finish) {
         return (
             <Container className='text-center d-flex flex-column justify-content-center' style={{ height: "100vh" }}>
-                <h1>Игра окончена</h1>
-                <p>Ваш Счет {state.score}</p>
-                <FixedButton text={"Вернуться в игры"} onClick={() => {
+                <h1>{language.game_end}</h1>
+                <p>{language.game_score} {state.score}</p>
+                <FixedButton text={language.game_back} onClick={() => {
                     sendData()
                     navigate(-1)
                 }} />
@@ -164,23 +166,23 @@ function CardGame() {
             return (
                 // <Container style={{height : "100vh"}} className='d-flex flex-column justify-content-center'>
                 <Container style={{ marginTop: "100px" }}>
-                    <GameHeader title={"Карточки с цветами"} />
+                    <GameHeader title={language.cards_color} />
                     <div className='d-flex justify-content-between align-items-center mb-4'>
-                        <h4>Время: {time === 0 ? setState({
+                        <h4>{language.time}: {time === 0 ? setState({
                             ...state,
                             finish: true
                         }) : time}</h4>
-                        <h5 className='mb-0'>Счет {state.score}</h5>
+                        <h5 className='mb-0'>{language.score} {state.score}</h5>
                     </div>
-                    <h6 className='text-center'>Совпадает ли значение написанного с цветом?</h6>
+                    <h6 className='text-center'>{language.cards_game_title}</h6>
                     <div className='d-flex justify-content-center mt-5' style={{ height: "70px" }}>
                         <div className=' d-flex justify-content-center align-items-center border border-1 rounded px-5' style={{ width: "auto", }}>
                             <span style={{ color: state.currentColorCode }}>{state.currentColorName}</span>
                         </div>
                     </div>
                     <div className='mt-4 d-flex justify-content-center' style={{ gap: "20px" }}>
-                        <Button className='px-5' variant="primary" onClick={() => checkAnswer("yes")}>Да</Button>
-                        <Button className='px-5' variant="danger" onClick={() => checkAnswer("no")}>Нет</Button>
+                        <Button className='px-5' variant="primary" onClick={() => checkAnswer("yes")}>{language.yes}</Button>
+                        <Button className='px-5' variant="danger" onClick={() => checkAnswer("no")}>{language.no}</Button>
                     </div>
                 </Container>
             )
@@ -189,11 +191,11 @@ function CardGame() {
                 <Container style={{ marginTop: "100px" }}>
                     <GameHeader title={"Карточки с цветами"} />
                     <div className='d-flex justify-content-between align-items-center mb-4'>
-                        <h4>Время: {time === 0 ? setState({
+                        <h4>{language.time}: {time === 0 ? setState({
                             ...state,
                             finish: true
                         }) : time}</h4>
-                        <h5>Счет {state.score}</h5>
+                        <h5>{language.score} {state.score}</h5>
                     </div>
 
                     <h6 className='text-center'>Совпадает ли значение первой карточки с цветом второй?</h6>
@@ -208,8 +210,8 @@ function CardGame() {
                         </div>
                     </div>
                     <div className='mt-5 d-flex justify-content-center' style={{ gap: "20px" }}>
-                        <Button className='px-5' variant="primary" onClick={() => compare("yes")}>Да</Button>
-                        <Button className='px-5' variant="danger" onClick={() => compare("no")}>Нет</Button>
+                        <Button className='px-5' variant="primary" onClick={() => compare("yes")}>{language.yes}</Button>
+                        <Button className='px-5' variant="danger" onClick={() => compare("no")}>{language.nno}</Button>
                     </div>
                 </Container>
             )
