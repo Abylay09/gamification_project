@@ -24,6 +24,7 @@ import Ticket from 'pages/ticket/components/Ticket';
 import AccountPage from 'pages/account';
 import CardGame from 'pages/games/attentionGames/CardGame';
 import MemoryImages from 'pages/games/memoryGames/MemoryImages';
+import Test from 'pages/games/memoryGames/test';
 
 function App() {
   const queryClient = new QueryClient({
@@ -49,12 +50,12 @@ function App() {
             </Route>
 
             <Route path="/lecture" >
-              <Route index path="lecture" element={<LecturePage />} />
+              <Route index  element={<LecturePage />} />
               <Route path=":id" element={<LecturePage />} />
             </Route>
 
             <Route path="/lecture-info" >
-              <Route index path="lecture-info" element={<LectureInfoPage />} />
+              <Route index element={<LectureInfoPage />} />
               <Route path=":id" element={<LectureInfoPage />} />
             </Route>
 
@@ -76,12 +77,13 @@ function App() {
             <Route path="/pet" element={<PetPage />} />
             <Route path="/stats" element={<StatsPage />} />
             <Route path="/profile" element={<AccountPage />} />
+            <Route path="choose-pet" element={<PetSliderPage />} />
 
             <Route path="/quests">
               <Route index path="/quests" element={<QuestsPage />} />
               <Route path="attention" element={<Game1 />} />
               <Route path="memory" element={<Game2 />} />
-              <Route path="memory/images" element={<MemoryImages />} />
+              <Route path="images" element={<MemoryImages/>} />
               <Route path="thinking" element={<Game3 />} />
               <Route path="thinking-cards" element={<CardGame />} />
             </Route>

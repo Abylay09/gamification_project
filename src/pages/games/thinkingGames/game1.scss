@@ -1,9 +1,11 @@
 .container-custom-thinking-1 {
-  max-height: 100vh;
-  min-height: 100vh;
+  margin-top: 80px;
+  max-height: 88vh;
+  min-height: 88vh;
   max-width: 100vw;
   min-width: 100vw;
   overflow: hidden;
+  overflow-y: hidden;
   span {
     font-size: 1.5rem;
     &:last-child {

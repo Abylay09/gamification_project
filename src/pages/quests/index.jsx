@@ -42,6 +42,19 @@ function QuestsPage() {
                             </div>
                         </div>
 
+                        <div className={`quest-item  d-flex align-items-center justify-content-center`}
+                            style={{ minWidth: "175px" }}
+                            onClick={() => navigate("/quests/thinking-cards")}
+                        >
+                            <div>
+                                <img style={{ width: "135px", height: "100%" }} src={Rubik} alt="" />
+                            </div>
+                            <div className='quest-item__text flex-grow-0'>
+                                <p className='quest-item__title '>Внимательность</p>
+                                <p className='quest-item__subtitle '>Карточки с цветами</p>
+                            </div>
+                        </div>
+
                         <div className={`quest-item  d-flex align-items-center justify-content-center `}
                             style={{ minWidth: "175px" }}
                             onClick={() => navigate("/quests/memory")}
@@ -56,6 +69,19 @@ function QuestsPage() {
                         </div>
 
                         <div className={`quest-item  d-flex align-items-center justify-content-center `}
+                            style={{ minWidth: "175px" }}
+                            onClick={() => navigate("/quests/images")}
+                        >
+                            <div>
+                                <img style={{ width: "135px", height: "100%" }} src={Ladybug} alt="" />
+                            </div>
+                            <div className='quest-item__text flex-grow-0'>
+                                <p className='quest-item__title '>Память</p>
+                                <p className='quest-item__subtitle '>Запоминание предметов</p>
+                            </div>
+                        </div>
+
+                        <div className={`quest-item  d-flex align-items-center justify-content-center `}
                             style={{ minWidth: "175px"}}
                             onClick={() => navigate("/quests/thinking")}
                         >
@@ -64,7 +90,7 @@ function QuestsPage() {
                             </div>
                             <div className='quest-item__text flex-grow-0'>
                                 <p className='quest-item__title '>Мышление</p>
-                                <p className='quest-item__subtitle '>Найди число</p>
+                                <p className='quest-item__subtitle '>Направление и движение</p>
                             </div>
                         </div>
                     </Stack>

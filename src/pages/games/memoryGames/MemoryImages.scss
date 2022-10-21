@@ -1,0 +1,32 @@
+.memory-btn {
+    background-color: rgb(42, 128, 255);
+    border-radius: 12px;
+    padding: 15px 0px;
+    color: rgb(255, 255, 255);
+    width: 100%;
+    margin-top: 20px;
+    outline: none; 
+    border: none;
+    margin-top: 50px;
+
+
+}
+.finish-block{
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+    text-align: center;
+    width: 100%;
+}
+// .answer-image .selected {
+//     border: 2px solid rgb(42, 128, 255);
+//   }
+
+  .selected {
+    border: 2px solid rgb(42, 128, 255);
+  }
+
+// .answer-image {
+//     border: 2px solid rgb(42, 128, 255);
+//   }

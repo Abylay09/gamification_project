@@ -5,7 +5,8 @@ import "./game1.scss"
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import FixedButton from 'components/buttons/fixed-button/FixedButton'
-
+import GameHeader from '../components/GameHeader';
+import axios from 'axios';
 export default class Game1 extends React.Component {
   constructor(props) {
     super(props)
@@ -32,12 +33,18 @@ export default class Game1 extends React.Component {
     }, 1000)
   }
   sendData() {
+    this.setState({end: true })
+    const token = localStorage.getItem("token");
     let data = {
-      type: "attention",
-      game: 1,
+      type: "memmory",
       value: this.state.exp
     }
-    this.axios.post("href", data)
+    axios.post("http://api.openskill.uz/indicators/add-indicator", data, {
+      headers : {
+        'Authorization': `Bearer ${token}`
+      }
+    });
+
   }
   randA(value) {
     if(this.state.value === value && this.state.strick < 13)
@@ -69,6 +76,7 @@ export default class Game1 extends React.Component {
   render(navigation) {
     return this.state.time > 0 ? (
       <Container className='container-custom-attention-1'>
+        <GameHeader title={"Запоминание порядка"}/>
           <Row>
               <Col xs="6">
                 Баллы: {this.state.exp}
@@ -88,9 +96,9 @@ export default class Game1 extends React.Component {
             </Col>
           </Row>
       </Container>
-    ) : <Container className='container-custom-attention-1'>
-          <Row>
-            <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
+    ) : <Container className='container-custom-attention-1' style={{marginTop : "-80px"}}>
+          <Row style={{height : "100vh"}} className='d-flex flex-column justify-content-center'>
+            <Col xs="12" className="justify-content-center align-items-center d-flex flex-column ">
               <span>Спасибо за игру ваш счёт</span>
               <span>{this.state.exp}</span>
               <Link className="w-100" to="/quests">

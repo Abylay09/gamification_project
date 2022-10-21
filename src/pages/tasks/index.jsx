@@ -11,20 +11,25 @@ import CheckIcon from "assets/modal/check.svg"
 import CrossIcon from "assets/modal/cross.svg"
 
 import "./index.scss"
+import { useRef } from 'react'
 function TaskPage() {
     const [inputValue, setInputValue] = useState("")
     const [show, setShow] = useState(false);
     const [notCorrect, setNotCorrect] = useState(false)
     const navigate = useNavigate();
     const params = useParams()
-
+    const ref = useRef(null)
     const handleClose = () => {
         setShow(false)
         refetch();
+        setTimeout(() => ref.current.focus(), 500)
+
+
     };
     const handleCloseCorrect = () => {
         setNotCorrect(false)
         refetch();
+        setTimeout(() => ref.current.focus(), 500)
     };
 
     const { data: query, status, refetch } = useQuery(["task-info"], () => {
@@ -60,13 +65,14 @@ function TaskPage() {
                     <div>
                         <h5 className="condition" >{query.data.condition}</h5>
                         <div className='text-center mt-4'>
-                            <input onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder='Ответ' />
+                            <input autoFocus ref={ref} onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder='Ответ' />
                             {inputValue.length <= 0 ? <p>Введите ответ</p> : ""}
                         </div>
                     </div>
 
                     <Button className='w-100 py-3 mt-auto' style={{ marginBottom: "64px" }} variant="primary" onClick={() => {
                         if (inputValue.length !== 0) {
+                            ref.current.value = ''
                             mutation.mutate({ uid: query.data.task_uid, answer: inputValue }, {
                                 onSuccess: (data) => {
                                     console.log(data);
@@ -77,7 +83,7 @@ function TaskPage() {
                                     }
                                 }
                             })
-                        }else{
+                        } else {
                             console.log(false);
                         }
                     }}>Проверить</Button>

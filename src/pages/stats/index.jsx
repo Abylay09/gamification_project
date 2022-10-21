@@ -4,7 +4,7 @@ import { Container, Col, Row, Stack } from 'react-bootstrap'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import StatsItem from './components/StatsItem';
-import { useQueries, useQuery } from '@tanstack/react-query';
+import {useQuery } from '@tanstack/react-query';
 import NumberOne from "assets/stats/number-one.svg"
 import NumberTwo from "assets/stats/number-two.svg"
 import NumberThree from "assets/stats/number-three.svg"

@@ -5,8 +5,11 @@ import "./game1.scss"
 import { useNavigate, useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom'
 import FixedButton from 'components/buttons/fixed-button/FixedButton'
+import GameHeader from '../components/GameHeader';
+import axios from 'axios';
 
 export default class Game2 extends React.Component {
+  
   constructor(props) {
     super(props)
     this.state = {
@@ -89,16 +92,22 @@ export default class Game2 extends React.Component {
   }
   sendData() {
     this.setState({end: true })
+    const token = localStorage.getItem("token");
     let data = {
-      type: "memory",
-      game: 1,
+      type: "memmory",
+      // game: 1,
       value: this.state.exp
     }
-    this.axios.post("href", data)
+    axios.post("http://api.openskill.uz/indicators/add-indicator", data, {
+      headers : {
+        'Authorization': `Bearer ${token}`
+      }
+    });
   }
   render() {
     return !this.state.end ? (
       <Container className='container-custom-memory-1'>
+        <GameHeader title={"Запоминание порядка"}/>
         <Row>
             <Col xs="6">
               Баллы: {this.state.exp}
@@ -121,7 +130,7 @@ export default class Game2 extends React.Component {
     ) : <Container className='container-custom-memory-1'>
           <Row>
             <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
-              <span>Спасибо за игру ваш счёт</span>
+              <span>Спасибо за игру. Ваш счёт</span>
               <span>{this.state.exp}</span>
               <Link className="w-100" to="/quests">
                 <FixedButton text={"Вернуться"}/>
