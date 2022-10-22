@@ -7,8 +7,10 @@ import { ReactComponent as IndicatorIcon } from "assets/bottom-menu/indicator-ic
 import { ReactComponent as RoomIcon } from "assets/bottom-menu/room-icon.svg";
 
 import "./BottomMenu.scss"
+import { useSelector } from 'react-redux'
 function BottomMenu() {
     const params = useParams();
+    const language = useSelector(state => state.language.language)
     const location = useLocation();
     // let url = location.pathname.includes("lesson");
     // console.log(window.location.href);
@@ -28,7 +30,7 @@ function BottomMenu() {
                         </div>
                         <span className={`${location.pathname.includes("pet")
                             ? "current-item__title--active"
-                            : ""}`} >Питомец</span>
+                            : ""}`} >{language.pet}</span>
                     </NavLink>
                 </li>
                 <li className='bottom-menu-list__item'>
@@ -40,7 +42,7 @@ function BottomMenu() {
                         </div>
                         <span className={`${location.pathname.includes("shop")
                             ? "current-item__title--active"
-                            : ""}`} >Лавка</span>
+                            : ""}`} >{language.shop_title}</span>
                     </NavLink>
                 </li>
                 <li className='bottom-menu-list__item'>
@@ -53,7 +55,7 @@ function BottomMenu() {
                         </div>
                         <span className={`${location.pathname.includes("lesson")
                             ? "current-item__title--active"
-                            : ""}`} >Домой</span>
+                            : ""}`} >{language.home}</span>
                     </NavLink>
                 </li>
                 <li className='bottom-menu-list__item'>
@@ -65,7 +67,7 @@ function BottomMenu() {
                         </div>
                         <span className={`${location.pathname.includes("stats")
                             ? "current-item__title--active"
-                            : ""}`} >Показатели</span>
+                            : ""}`} >{language.stats_indicatrors}</span>
                     </NavLink>
                 </li>
                 <li className='bottom-menu-list__item'>
@@ -80,7 +82,7 @@ function BottomMenu() {
                         </div>
                         <span className={`${location.pathname.includes("profile")
                             ? "current-item__title--active"
-                            : ""}`} >Комната</span>
+                            : ""}`} >{language.room}</span>
                     </NavLink>
                 </li>
             </ul>

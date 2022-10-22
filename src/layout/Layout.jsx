@@ -9,7 +9,7 @@ import axios from 'axios';
 function Layout({ children }) {
     const token = localStorage.getItem("token");
     const { data: info, status} = useQuery(["personal-info"], async () => {
-        const response = await axios.get("http://195.49.212.191:8779/user/me", {
+        const response = await axios.get("http://api.openskill.uz/user/me", {
             headers: {
                 'Authorization': `Basic ${token}`
             }

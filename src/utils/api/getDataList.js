@@ -4,9 +4,9 @@ const token = localStorage.getItem("token");
 
 export const getDataList = {
     getLessonsGroup(id) {
-        return axios.get("http://195.49.212.191:8779/lessons/lessons-group/", {
+        return axios.get("http://api.openskill.uz/lessons/lessons-group/", {
             params: {
-                uid: id ? id : "11870796-3253-11ed-a261-0242ac120002"
+                uid: id ? id : ""
             },
             headers: {
                 'Authorization': `Bearer ${token}`
@@ -14,9 +14,9 @@ export const getDataList = {
         }).then(result => result.data)
     },
     getLecture(id) {
-        return axios.get("http://195.49.212.191:8779/lessons/lesson/", {
+        return axios.get("http://api.openskill.uz/lessons/lesson/", {
             params: {
-                uid: id || "89ee46c4-842e-4615-abac-ae60086b80d6"
+                uid: id || ""
             },
             headers: {
                 'Authorization': `Basic ${token}`
@@ -25,7 +25,7 @@ export const getDataList = {
     },
 
     getTask(id) {
-        return axios.get("http://195.49.212.191:8779/lessons/task", {
+        return axios.get("http://api.openskill.uz/lessons/task", {
             params: {
                 uid: id
             },

@@ -10,7 +10,6 @@ const useCheckAuth = () => {
 }
 
 function ProtectedRoutes() {
-
     let auth = useCheckAuth()
     return auth ? <Outlet /> : <Navigate to={"/login"} />
 

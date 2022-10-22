@@ -83,7 +83,9 @@ let language = new LocalizedStrings({
     by_school: "By school",
     general: "General",
     classmate: "Classmate",
-    gold: "Gold"
+    gold: "Gold",
+    home: "Home",
+    room: "Room"
  },
  ru: {
     next:"ПРОДОЛЖИТЬ",
@@ -166,7 +168,9 @@ let language = new LocalizedStrings({
     by_school: "По школе",
     general: "Общий",
     classmate: "Одноклассник",
-    gold: "Золота"
+    gold: "Золота",
+    home: "Домой",
+    room: "Комната"
  }
 });
 

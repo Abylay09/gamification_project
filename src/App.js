@@ -10,7 +10,7 @@ import ShopPage from 'pages/shop';
 import TicketPage from 'pages/ticket';
 import StatsPage from 'pages/stats';
 import ProfilePage from 'pages/profile';
-import { Route, Routes } from "react-router-dom"
+import { Route, Routes, Navigate } from "react-router-dom"
 import './App.scss';
 import LoginPage from 'pages/login';
 import ErrorPage from 'pages/error-page';
@@ -54,11 +54,13 @@ function App() {
                 {languages.find(x => x !== language._language)}
                 </button>
         <Routes>
+          <Route path="/" element={<Navigate to={"/lesson"} />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/registration" element={<RegPage />} />
           <Route path="/restore" element={<RestorePage />} />
 
           <Route element={<ProtectedRoutes />}>
+
 
             <Route path='/lesson' >
               <Route index element={<LessonPage />} />

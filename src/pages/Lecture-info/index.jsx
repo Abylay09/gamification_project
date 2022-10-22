@@ -20,7 +20,7 @@ function LectureInfoPage() {
     const token = localStorage.getItem("token");
 
     const { data: lecture, status } = useQuery(["lecture"], async () => {
-        const response = await axios.get("http://195.49.212.191:8779/lessons/lesson/", {
+        const response = await axios.get("http://api.openskill.uz/lessons/lesson/", {
             params: {
                 uid: params.id
             },

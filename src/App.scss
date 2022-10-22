@@ -5,11 +5,12 @@
 }
 .language-button {
     position: fixed;
-    right: 1rem;
-    top: 1rem;
+    right: 0.5rem;
+    top: 0.5rem;
     border: none;
     outline: none;
     background: transparent;
     font-weight: bold;
     filter: invert(50%);
+    z-index: 1;
 }
