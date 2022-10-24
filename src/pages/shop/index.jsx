@@ -13,6 +13,7 @@ import "./index.scss"
 function ShopPage() {
     const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
+    
     const { data: coupon, isError, isLoading } = useQuery(["getAllCoupons"], () => {
         return coupons.getAllCoupons()
     })

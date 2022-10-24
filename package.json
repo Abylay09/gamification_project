@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@types/three": "^0.144.0",
     "sass": "^1.54.9"
   }
 }

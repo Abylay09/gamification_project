@@ -14,8 +14,10 @@ function LessonPage() {
     const params = useParams();
     const navigate = useNavigate();
     const [url, setUrl] = useState("");
-    const { data: lessonGroup, status, isError, isLoading } = useQuery(["LessonGroup", params.id], () => {
+    const { data: lessonGroup,  isError, isLoading } = useQuery(["LessonGroup", params.id], () => {
         return getDataList.getLessonsGroup(params.id)
+    }, {
+        retry: 3
     })
 
     if (isLoading) {
@@ -30,7 +32,7 @@ function LessonPage() {
         navigate(`/lecture/${id}`)
     }
     return (
-        <Layout  style = {{position : "relative"}}>
+        <Layout style={{ position: "relative" }}>
             <Row>
                 <Col>
                     <LessonHeader title={lessonGroup.lessons_group.title} order={lessonGroup.lessons_group.order}
@@ -47,20 +49,20 @@ function LessonPage() {
                                 hasPlay={lesson.hasPlay}
                                 selectLesson={() => setUrl(lesson.uid)}
                                 title={lesson.title}
-                                order={lesson.order} 
-                                startLesson = {() => navigatePage(lesson.uid)}/>)
+                                order={lesson.order}
+                                startLesson={() => navigatePage(lesson.uid)} />)
                             )
                         }
                         {/* <StickyButton text={"Начать"} onClick={() => navigatePage(url)}  /> */}
 
-                        
+
                         {/* <FixedButton text={"Начать"} onClick={() => navigatePage(url)} /> */}
                     </Stack>
                 </Col>
             </Row>
             {/* popup с поздравлением */}
             {/* <Graduation show={true} /> */}
-            
+
         </Layout >
     )
 }

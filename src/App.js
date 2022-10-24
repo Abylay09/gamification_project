@@ -28,6 +28,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import MemoryImages from 'pages/games/memoryGames/MemoryImages';
 import Test from 'pages/games/memoryGames/test';
 import { setLanguage } from 'redux/features/languageSlice';
+import Figures from 'pages/games/thinkingGames/Figures';
 
 function App() {
   const dispatch = useDispatch();
@@ -49,7 +50,7 @@ function App() {
   }
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="App h-100" >
+      <div className="App h-100 " >
                 <button className="language-button"onClick={changeLanguage}>
                 {languages.find(x => x !== language._language)}
                 </button>
@@ -84,24 +85,21 @@ function App() {
               <Route path=":id" element={<Ticket />} />
             </Route>
 
-
-
-            
-
             {/* <Route path="/account" element={<AccountPage />} /> */}
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/pet" element={<PetPage />} />
             <Route path="/stats" element={<StatsPage />} />
             <Route path="/profile" element={<AccountPage />} />
-            <Route path="choose-pet" element={<PetSliderPage />} />
+            <Route path="/choose-pet" element={<PetSliderPage />} />
 
             <Route path="/quests">
               <Route index path="/quests" element={<QuestsPage />} />
               <Route path="attention" element={<Game1 />} />
+              <Route path="attention-cards" element={<CardGame />} />
               <Route path="memory" element={<Game2 />} />
               <Route path="images" element={<MemoryImages/>} />
               <Route path="thinking" element={<Game3 />} />
-              <Route path="thinking-cards" element={<CardGame />} />
+              <Route path="thinking-figure" element={<Figures />} />
             </Route>
           </Route>
 
