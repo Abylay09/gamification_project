@@ -7,7 +7,7 @@ function TaskItem({ exp, gold, order, hasPlay, uid, onClick }) {
     const language = useSelector(state => state.language.language)
     return (
         <div>
-            <div className={`task ${hasPlay ? "" : "not-active"}  mb-4`} onClick={() => onClick()}>
+            <div className={`task ${hasPlay ? "" : "not-active"} ${hasPlay && exp ? "active" : ""}  mb-4`} onClick={() => onClick()}>
                 <p className='task__title mb-0' >{language.level} {order}</p>
                 <p className='task__number'></p>
                 <div className='d-flex justify-content-between' style={{ width : "140px" }}>

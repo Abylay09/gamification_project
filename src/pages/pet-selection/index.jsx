@@ -22,29 +22,36 @@ import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 import "./index.scss"
 import { useMutation } from '@tanstack/react-query';
+import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 
-function PetSliderPage() {
-    const [pet, setPet] = useState("");
+function PetSliderPage(props) {
+    const navigate = useNavigate()
+    const language = useSelector(state => state.language.language);
+    const [pet, setPet] = useState("Taryk");
+    const petsByIndex = ["Taryk", "Rabbit", "Cat", "Tiger", "Wolf", "Sf", "Cougar",]
 
     const mutation = useMutation(petName => PetApi.choosePet(petName))
 
     function savePet() {
         mutation.mutate(pet, {
             onSuccess() {
-                alert("Success")
+                props.selectPet()
             },
             onError() {
                 alert("Error")
             }
         })
     }
-
+    function slideChange(e) {
+        setPet(petsByIndex[e.activeIndex - 1])
+    }
     return (
         <Container>
-            <div style={{ width: "100%", height: "100vh" }}>
-                <h4 className='mt-3'>Выбери питомца</h4>
+            <div style={{ width: "100%", height: "80vh" }}>
+                <h4 className='mt-3'>{language.select_pet}</h4>
                 <Swiper
-                    className='mb-5'
+                    style={{height: "calc(100% - 120px)"}}
                     direction={"horizontal"}
                     slidesPerView={1}
                     mousewheel={true}
@@ -53,14 +60,15 @@ function PetSliderPage() {
                     modules={[Navigation]}
                     allowTouchMove={false}
                     loop={true}
+                    onTransitionEnd={(e) => slideChange(e)}
                 >
-                    <SwiperSlide>
+                    <SwiperSlide id="Taryk">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Taryk")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
                             // e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 50, position: [0, 2, 35] }} >
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -73,12 +81,12 @@ function PetSliderPage() {
                             </Canvas>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide id="Rabbit">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Rabbit")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 70, position: [0, 50, 255] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -90,12 +98,12 @@ function PetSliderPage() {
                             </Canvas>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide id="Cat">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Cat")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 70, position: [0, 50, 255] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -107,12 +115,12 @@ function PetSliderPage() {
                             </Canvas>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide id="Tiger">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Tiger")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 60, position: [0, 50, 255] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -124,12 +132,12 @@ function PetSliderPage() {
                             </Canvas>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide id="Wolf">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Wolf")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 55, position: [0, 50, 255] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -141,12 +149,12 @@ function PetSliderPage() {
                             </Canvas>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide id="Sf">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Sf")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 58, position: [0, 50, 255] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -159,12 +167,12 @@ function PetSliderPage() {
                             </Canvas>
                         </div>
                     </SwiperSlide>
-                    <SwiperSlide>
+                    <SwiperSlide id="Cougar">
                         <div className='pet-slide' onClick={(e) => {
                             setPet("Cougar")
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
-                        }} style={{ height: "450px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                        }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
                             <Canvas camera={{ fov: 58, position: [0, 50, 255] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -178,7 +186,7 @@ function PetSliderPage() {
                         </div>
                     </SwiperSlide>
                 </Swiper>
-                <CommonButton onClick={() => savePet()} text={"Выбрать"} />
+                {pet ? (<CommonButton onClick={() => savePet()} text={language.select} />) : ""}
             </div>
         </Container>
     )

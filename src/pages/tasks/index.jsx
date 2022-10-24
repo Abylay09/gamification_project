@@ -18,6 +18,8 @@ function TaskPage() {
     const [inputValue, setInputValue] = useState("")
     const [show, setShow] = useState(false);
     const [notCorrect, setNotCorrect] = useState(false)
+    const [attempt, setAttempt] = useState(0);
+    const [time, setTime] = useState(0);
     const navigate = useNavigate();
     const params = useParams()
     const ref = useRef(null)
@@ -51,6 +53,11 @@ function TaskPage() {
     else if (status === "error") {
         return < div > Error</ div>
     }
+    let inter = setInterval(() => setTime(time + 1), 1000) 
+    const closeInter = () => {
+        clearInterval(inter)
+        setShow(true)
+    }
     return (
         <Container className='vh-100 min-vh-100 d-flex flex-column'>
             <Row>
@@ -71,15 +78,14 @@ function TaskPage() {
                             {inputValue.length <= 0 ? <p>{language.your_answer}</p> : ""}
                         </div>
                     </div>
-
                     <Button className='w-100 py-3 mt-auto' style={{ marginBottom: "64px" }} variant="primary" onClick={() => {
                         if (inputValue.length !== 0) {
                             ref.current.value = ''
-                            mutation.mutate({ uid: query.data.task_uid, answer: inputValue }, {
+                            mutation.mutate({ uid: query.data.task_uid, answer: inputValue, attempt: setAttempt(attempt + 1), time }, {
                                 onSuccess: (data) => {
                                     console.log(data);
                                     if (data.validate) {
-                                        setShow(true)
+                                        closeInter()
                                     } else {
                                         setNotCorrect(true)
                                     }

@@ -6,7 +6,10 @@ import "./Layout.scss"
 import BottomMenu from 'components/bottom-menu/BottomMenu';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom'
 function Layout({ children }) {
+    const navigate = useNavigate()
     const token = localStorage.getItem("token");
     const { data: info, status} = useQuery(["personal-info"], async () => {
         const response = await axios.get("http://api.openskill.uz/user/me", {
@@ -19,6 +22,10 @@ function Layout({ children }) {
     }, {
         cacheTime: 0
     })
+    const location = useLocation();
+    if(location.pathname !== "/training" && info && info.profile && !info.profile.pet) {
+        navigate("/training")
+    }
 
     // if (status === "loading") {
     //     return <div>Loading</div>

@@ -10,6 +10,7 @@ import ShopPage from 'pages/shop';
 import TicketPage from 'pages/ticket';
 import StatsPage from 'pages/stats';
 import ProfilePage from 'pages/profile';
+import TrainingPage from 'pages/training';
 import { Route, Routes, Navigate } from "react-router-dom"
 import './App.scss';
 import LoginPage from 'pages/login';
@@ -91,6 +92,7 @@ function App() {
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/pet" element={<PetPage />} />
             <Route path="/stats" element={<StatsPage />} />
+            <Route path="/training" element={<TrainingPage />} />
             <Route path="/profile" element={<AccountPage />} />
             <Route path="/choose-pet" element={<PetSliderPage />} />
 

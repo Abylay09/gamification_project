@@ -15,7 +15,7 @@ import "./index.scss"
 
 function LecturePage() {
     const language = useSelector(state => state.language.language)
-    // const [uidLink, setLink] = useState("")
+    const [uidLink, setLink] = useState("")
     const params = useParams();
     const navigate = useNavigate()
     const { data: lesson, status, isSuccess, isLoading, isError } = useQuery(["lesson"], () => {
@@ -28,7 +28,11 @@ function LecturePage() {
     else if (isError) {
         return <div>Error</div>
     }
-
+    if(!uidLink && lesson && lesson.lesson && lesson.lesson.tasks && lesson.lesson.tasks.length) {
+        let find = lesson.lesson.tasks.find(x => x.hasPlay && x.exp)
+        if(find)
+            setLink(find.uid)
+    }
     return (
         <Container className='min-vh-100'>
             <Row>
@@ -67,11 +71,14 @@ function LecturePage() {
 
                     </Stack>
 
-                    {/* <StickyButton text={"Погнали!"} onClick={() => {
-                        console.log(uidLink);
-                        navigate(`/task/${uidLink}`)
+                    {
+                        uidLink ?
+                        <StickyButton text={language.next} onClick={() => {
+                            navigate(`/task/${uidLink}`)
+                        }
+                        } />
+                        : ""
                     }
-                    } /> */}
 
                     {/* <FixedButton text={"Погнали!"} /> */}
                 </Col>
