@@ -1,16 +1,40 @@
-import React from 'react'
+import React, { Suspense, useRef } from 'react'
+import { Canvas } from '@react-three/fiber';
 import Layout from 'layout/Layout'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import Indicator from './components/Indicator';
 import StickyButton from 'components/buttons/StickyButton';
 import { useNavigate } from 'react-router-dom';
-import "./index.scss"
 import { useSelector } from 'react-redux'
+import { Button, Container } from 'react-bootstrap';
+import { OrbitControls, useAnimations } from '@react-three/drei'
+import "./index.scss"
+import Taryk from 'pages/pet-selection/components/Taryk';
+import Cat from 'pages/pet-selection/components/Cat';
+import Cougar from 'pages/pet-selection/components/Cougar';
+import Rabbit from 'pages/pet-selection/components/Rabbit';
+import SF from 'pages/pet-selection/components/SF';
+import Tiger from 'pages/pet-selection/components/Tiger';
+import Wolf from 'pages/pet-selection/components/Wolf';
+
+import { useQuery } from '@tanstack/react-query';
+import { PetApi } from 'utils/api/Pet';
+import CommonButton from 'components/buttons/CommonButton';
 
 function PetPage() {
-    const language = useSelector(state => state.language.language)
+    const language = useSelector(state => state.language.language);
     const navigate = useNavigate()
+    const { data, isLoading, isError } = useQuery(["MyPet"], () => {
+        return PetApi.getPet()
+    })
+    if (isLoading) {
+        return <div>Loading</div>
+    }
+
+    else if (isError) {
+        return <div>Error</div>
+    }
     return (
         <Layout>
             <Tabs className="custom-tabs">
@@ -21,32 +45,142 @@ function PetPage() {
 
                 <TabPanel className="custom-tab">
                     <div className='tab-inner'>
-                        <div className='tab-inner__content'>{language.pet}</div>
-                        <button  onClick={() => navigate("/quests")} className='tab-inner__btn'>{language.play}</button>
-                    </div>
+                        <div className='tab-inner__content'>
+                            <div style={{ height: "380px", width: "300px", margin: "0 auto", borderRadius: "12px" }}>
+                                {(() => {
+                                    switch (data.profile.pet) {
+                                        case 'Cat':
+                                            return <Canvas camera={{ fov: 70, position: [0, 50, 255] }}>
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={3} position={[0, 0, 20]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <Cat />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        case 'Wolf':
+                                            return <Canvas camera={{ fov: 55, position: [0, 50, 255] }}>
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={3} position={[0, 0, 20]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <Wolf />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        case 'Taryk':
+                                            return <Canvas camera={{ fov: 50, position: [0, 2, 35] }} >
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={1} position={[0, 0, -50]} />
+                                                    <directionalLight intensity={3} position={[0, 0, 50]} />
+                                                    <directionalLight intensity={1} position={[0, 20, 50]} />
+                                                    <Taryk />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        case 'Rabbit':
+                                            return <Canvas camera={{ fov: 70, position: [0, 50, 255] }}>
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={2} position={[0, 0, 20]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <Rabbit />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        case 'Tiger':
+                                            return <Canvas camera={{ fov: 60, position: [0, 50, 255] }}>
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={1} position={[0, 0, 20]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <Tiger />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        case 'Sf':
+                                            return <Canvas camera={{ fov: 58, position: [0, 50, 255] }}>
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={3} position={[0, 50, 80]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <directionalLight intensity={1} position={[0, 0, 80]} />
+                                                    <SF />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        case 'Cougar':
+                                            return <Canvas camera={{ fov: 58, position: [0, 50, 255] }}>
+                                                <Suspense fallback={null}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={3} position={[0, 50, 80]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <directionalLight intensity={2} position={[0, 0, 80]} />
+                                                    <Cougar />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                </Suspense>
+                                            </Canvas>
+                                        default:
+                                            return <Button 
+                                            variant="warning" 
+                                            className='w-100 py-3 mt-5' 
+                                            onClick={() => navigate("/choose-pet")}
+                                            style={{color : "#000"}}>Выбрать питомца</Button>
+                                    }
+                                })()}
+                                {/* <Canvas camera={{ fov: 50, position: [0, 2, 35] }} >
+                                    <Suspense fallback={null}>
+                                        <ambientLight />
+                                        <directionalLight intensity={1} position={[0, 0, -50]} />
+                                        <directionalLight intensity={3} position={[0, 0, 50]} />
+                                        <directionalLight intensity={1} position={[0, 20, 50]} />
+                                        <Taryk />
+                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                    </Suspense>
+                                </Canvas> */}
+                            </div>
+                        </div>
 
-                    {/* <StickyButton text={"Играть!"} onClick={() => navigate("/quests")} /> */}
+                        <button onClick={() => navigate("/quests")} className='tab-inner__btn'>{language.play}</button>
+                    </div>
                 </TabPanel>
                 <TabPanel className="custom-tab">
                     <Indicator />
                 </TabPanel>
             </Tabs>
-            {/* <Tabs
-                defaultActiveKey="profile"
-                id="uncontrolled-tab-example"
-                justify = {true}
-                className="mb-3"
-                
-            >
-                <Tab eventKey="home" className='sukaa' title="Питомец" >
-                    Питомец
-                </Tab>
-                <Tab eventKey="profile" className='sukaa' title="Индикаторы">
-                    Индикаторы
-                </Tab>
-            </Tabs> */}
         </Layout>
     )
+
 }
+
+
+// function PetPage() {
+//     const language = useSelector(state => state.language.language);
+//     const navigate = useNavigate()
+//     return (
+//         <Layout>
+//             <Tabs className="custom-tabs">
+//                 <TabList>
+//                     <Tab>{language.pet}</Tab>
+//                     <Tab>{language.indicators}</Tab>
+//                 </TabList>
+
+//                 <TabPanel className="custom-tab">
+//                     <div className='tab-inner'>
+//                         <div className='tab-inner__content'>{language.pet}</div>
+//                         <button onClick={() => navigate("/quests")} className='tab-inner__btn'>{language.play}</button>
+//                     </div>
+
+
+//                 </TabPanel>
+//                 <TabPanel className="custom-tab">
+//                     <Indicator />
+//                 </TabPanel>
+//             </Tabs>
+//         </Layout>
+//     )
+// }
 
 export default PetPage

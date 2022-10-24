@@ -46,7 +46,7 @@ function QuestsPage() {
 
                         <div className={`quest-item  d-flex align-items-center justify-content-center`}
                             style={{ minWidth: "175px" }}
-                            onClick={() => navigate("/quests/thinking-cards")}
+                            onClick={() => navigate("/quests/attention-cards")}
                         >
                             <div>
                                 <img style={{ width: "135px", height: "100%" }} src={Rubik} alt="" />

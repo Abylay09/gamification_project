@@ -52,7 +52,7 @@ function TicketPage() {
                                             {item.address}
                                         </Card.Text>
                                         <Card.Subtitle className='coupon-subtitle'>
-                                            {item.date.slice(0, 19).replace('T', ' ').split(" ")}
+                                            {item.date.slice(0, 19).replace('T', ' ').split("   ")}
                                         </Card.Subtitle>
                                     </Card.Body>
                                     <div className='coupon-circle'>
