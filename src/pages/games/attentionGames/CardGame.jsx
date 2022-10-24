@@ -210,8 +210,8 @@ function CardGame() {
                         </div>
                     </div>
                     <div className='mt-5 d-flex justify-content-center' style={{ gap: "20px" }}>
-                        <Button className='px-5' variant="primary" onClick={() => compare("yes")}>{language.yes}</Button>
-                        <Button className='px-5' variant="danger" onClick={() => compare("no")}>{language.nno}</Button>
+                        <Button className='px-5' variant="primary" onClick={() => compare("yes")}>Да</Button>
+                        <Button className='px-5' variant="danger" onClick={() => compare("no")}>Нет</Button>
                     </div>
                 </Container>
             )

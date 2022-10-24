@@ -16,7 +16,7 @@ import { useSelector } from 'react-redux'
 function StatsPage() {
     const language = useSelector(state => state.language.language)
     const [toggleState, setToggleState] = useState(1);
-    const [styleState, setStyleState] = useState(1)
+    const [styleState, setStyleState] = useState(1);
 
     const { data: ratingList, isError, isLoading } = useQuery(["getRating"], () => {
         return rating.getRating()

@@ -34,7 +34,9 @@ function LoginPassword() {
         mutation.mutate({ login: phone, password: passwd }, {
             onSuccess: (response) => {
                 localStorage.setItem('token', response.data.token)
-                navigate("/lesson")
+                setTimeout(() => {
+                    navigate("/lesson")
+                }, 500)
             },
             onError: () => {
                 alert(language.invalid_data)
@@ -47,7 +49,7 @@ function LoginPassword() {
         <>
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" className='login-img' onClick={() => console.log(mutation.data)} />
-                
+
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="password-form">
                 <div style={topInfo}>

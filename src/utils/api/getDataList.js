@@ -1,9 +1,10 @@
 import axios from "axios"
 
-const token = localStorage.getItem("token");
+
 
 export const getDataList = {
     getLessonsGroup(id) {
+        const token = localStorage.getItem("token");
         return axios.get("http://api.openskill.uz/lessons/lessons-group/", {
             params: {
                 uid: id ? id : ""
@@ -14,6 +15,7 @@ export const getDataList = {
         }).then(result => result.data)
     },
     getLecture(id) {
+        const token = localStorage.getItem("token");
         return axios.get("http://api.openskill.uz/lessons/lesson/", {
             params: {
                 uid: id || ""
@@ -25,6 +27,7 @@ export const getDataList = {
     },
 
     getTask(id) {
+        const token = localStorage.getItem("token");
         return axios.get("http://api.openskill.uz/lessons/task", {
             params: {
                 uid: id
