@@ -5,7 +5,7 @@ let language = new LocalizedStrings({
  en:{
     next:"NEXT",
     login: "Sign in",
-    welcom: "Welcom to OpenSkill",
+    welcom: "Welcome to OpenSkill",
     input_phone: "Enter your phone number",
     phone: "Phone number",
     required_field: "The field is required",
