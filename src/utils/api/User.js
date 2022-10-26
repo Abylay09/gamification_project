@@ -26,6 +26,5 @@ export const User = {
                 'Authorization': `Bearer ${token}`
             }
         }).then(res => res.data)
-
     }
 }

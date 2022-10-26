@@ -1,8 +1,9 @@
 
 import Profile from 'pages/profile/components/Profile'
 import React from 'react'
-import { User } from 'utils/api/User'
-import { useQuery } from '@tanstack/react-query'
+import { User } from 'utils/api/User';
+import { Rating } from 'utils/api/getRating';
+import { useQueries, useQuery } from '@tanstack/react-query'
 import { Container, Row, Col } from 'react-bootstrap'
 import { useNavigate, useParams } from 'react-router-dom'
 import BlueLeftArrow from "assets/common/blue-left-arrow.png"
@@ -11,16 +12,36 @@ import IndicatorGraph from './components/IndicatorGraph'
 function AnotherProfile() {
     const params = useParams()
     const navigate = useNavigate()
-    const { data: userInfo, isLoading, isError } = useQuery(["another-user"], () => {
-        return User.getAnotherUser(params.id)
+    const [AnotherIndicators, MyIndicators] = useQueries({
+        queries: [
+            { queryKey: ['another-user'], queryFn: () => User.getAnotherUser(params.id), staleTime: Infinity },
+            { queryKey: ['me'], queryFn: () => Rating.getMyIndicator(), staleTime: Infinity }
+        ]
     })
-    if (isLoading) {
+
+    if (AnotherIndicators.isLoading) {
         return <div>Loading</div>
     }
-
-    else if (isError) {
+    if (MyIndicators.isLoading) {
+        return <div>Loading</div>
+    }
+    else if (AnotherIndicators.isError) {
         return <div>Error</div>
     }
+    else if (MyIndicators.isError) {
+        return <div>Error</div>
+    }
+    // const { data: userInfo, isLoading, isError } = useQuery(["another-user"], () => {
+    //     return User.getAnotherUser(params.id)
+    // })
+    // if (isLoading) {
+    //     return <div>Loading</div>
+    // }
+
+    // else if (isError) {
+    //     return <div>Error</div>
+    // }
+    console.log(MyIndicators);
     return (
         <Container>
             <Row>
@@ -35,17 +56,19 @@ function AnotherProfile() {
                 <div className='profile-photo'>
                 </div>
                 <div className='profile-name'>
-                    {userInfo.profile.first_name} {userInfo.profile.last_name}
+                    {AnotherIndicators.data.profile.first_name} {AnotherIndicators.data.profile.last_name}
                 </div>
                 <div className='profile-school'>
-                    {userInfo.profile.school} {userInfo.profile.grade}
+                    {AnotherIndicators.data.profile.school} {AnotherIndicators.data.profile.grade}
                 </div>
             </div>
             <Row>
                 <Col>
                     <h5>Индикаторы</h5>
                     <div className=''>
-                        <IndicatorGraph />
+                        <IndicatorGraph  myData = {[MyIndicators.data.indicators.memmory,
+                        MyIndicators.data.indicators.thinkings,
+                        MyIndicators.data.indicators.attention]}/>
                     </div>
 
                 </Col>

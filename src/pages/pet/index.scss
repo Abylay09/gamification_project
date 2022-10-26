@@ -1,5 +1,12 @@
-.custom-tabs{
+.custom-tabs {
     height: 100%;
+}
+
+.indicator-tab.react-tabs__tab-panel--selected {
+    height: calc(100% - 150px) !important;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .custom-tab.react-tabs__tab-panel--selected {
@@ -55,4 +62,3 @@
     outline: none;
     border: none;
 }
-

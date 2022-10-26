@@ -22,55 +22,69 @@ ChartJS.register(
     ChartDataLabels
 );
 const option = {
+    layout: {
+        padding: {
+            left: 0,
+            right: 20,
+            top: 0,
+            bottom: 0,
+        },
+    },
+    maintainAspectRatio: true,
+    plugins: {
+        datalabels: {
+            backgroundColor: function (context) {
+                return context.dataset.borderColor;
+            },
+            color: 'white',
+            font: {
+                weight: 'bold',
+            },
+            formatter: Math.round,
+            padding: 3
+        },
+        legend: {
+            display: true,
+            labels: {
+                font: {
+                    size: 14,
+                    weight : "bold",
+                    family : "Arial"
+                },
+                color: "#000"
+            },
+            position: "bottom"
+        },
+    },
+    scales: {
+        r: {
+            grid: {
+                circular: true,
+            },
+            beginAtZero: true,
+            ticks: {
+                display: false,
+            },
 
-    // maintainAspectRatio: true,
-    // plugins: {
-    //     datalabels: {
-    //         backgroundColor: function (context) {
-    //             return context.dataset.borderColor;
-    //         },
-    //         color: ['white', "white", "white", 'black', "black", "black"],
-    //         font: {
-    //             weight: '400',
-    //         },
-    //         formatter: Math.round,
-    //         padding: 2
-    //     },
-    //     legend: {
-    //         display: false,
-    //         labels: {
-    //             fontColor: "blue",
-    //             size: 18,
-    //         },
-    //     },
-    // },
-    // scales: {
-    //     r: {
-    //         grid: {
-    //             circular: true,
-    //         },
-    //         beginAtZero: true,
-    //         ticks: {
-    //             display: false,
-    //         },
+            pointLabels: {
+                font: {
+                    size: 12,
+                    weight: "500"
+                },
+                padding: 14
+            }
 
-    //         pointLabels: {
-    //             font: {
-    //                 size: 11,
-    //             },
-    //             padding: 14
-    //         }
-
-    //     },
-    // },
+        },
+    },
 }
 
-function IndicatorGraph() {
+function IndicatorGraph(props) {
     const language = useSelector(state => state.language.language)
     const data = {
+        // labels: [language.indicators_memory, language.indicators_thinking, language.indicators_mindfulness,],
         labels: [language.indicators_memory, language.indicators_thinking, language.indicators_mindfulness,],
         datasets: [{
-            label: "",
+            label: "Данные ученика",
             data: [90, 55, 54],
             fill: true,
             backgroundColor: 'rgba(42, 128, 255, 0.23)',
@@ -78,19 +92,20 @@ function IndicatorGraph() {
             pointBackgroundColor: 'rgb(255, 99, 132)',
             pointBorderColor: '#fff',
             pointHoverBackgroundColor: '#fff',
-            pointHoverBorderColor: 'rgb(255, 99, 132)'
+            pointHoverBorderColor: 'rgb(255, 99, 132)',
+
         },
         {
-            label: "",
-            data: [10, 15, 20],
+            label: "Мои данные",
+            backgroundColor: 'rgba(235, 177, 255, 0.23)',
+            data: props.myData,
             fill: true,
-            backgroundColor: 'rgba(235, 177, 255, 1)',
-            // borderColor: 'rgba(42, 128, 255, 1)',
-            pointBackgroundColor: 'red',
+            borderColor: 'rgba(235, 177, 255, 1)',
+            pointBackgroundColor: 'rgba(235, 177, 255, 1)',
             pointBorderColor: 'rgba(235, 177, 255, 1)',
             pointHoverBackgroundColor: '#fff',
             pointHoverBorderColor: 'rgb(255, 99, 132)',
-
+            option
         }
 
         ],
