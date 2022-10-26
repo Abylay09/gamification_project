@@ -53,7 +53,7 @@ function LecturePage() {
 
             <Row >
                 <Col >
-                    <h4 className='section-title my-4' >{language.tasks}</h4>
+                    <h4 className='section-title ' >{language.tasks}</h4>
                     <Stack>
                         {/* <TaskItem /> */}
                         {lesson.lesson.tasks.map(item => {

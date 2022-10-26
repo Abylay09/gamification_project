@@ -85,9 +85,9 @@ function RestorePassword() {
                         />
                         <p className='password-input__wrapper-title'>{language.password}</p>
                         <AuthButton text={language.next} />
-                        <div className='get-password' onClick={() => navigate("/login")}>
+                        {/* <div className='get-password' onClick={() => navigate("/login")}>
                             {language.login}
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </form>

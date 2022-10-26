@@ -1,10 +1,10 @@
 import React from 'react'
 import "./StatsItem.scss"
 import { useSelector } from 'react-redux'
-function StatsItem({ name, lastName, level, queue }) {
+function StatsItem({ name, lastName, level, queue, onClick }) {
   const language = useSelector(state => state.language.language)
   return (
-    <div className='rate-item d-flex justify-content-between align-items-center'>
+    <div onClick={onClick} className='rate-item d-flex justify-content-between align-items-center'>
       <div className='rate-item__info '>
         <span className='rate-item__number'>{queue}</span>
         <p className=''>

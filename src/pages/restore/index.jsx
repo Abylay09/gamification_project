@@ -15,7 +15,6 @@ function RestorePage() {
                     {step === 1 && <RestorePhone />}
                     {step === 2 && <RestoreSms />}
                     {step === 3 && <RestorePassword />}
-                    {/* <RestorePassword/> */}
                 </div>
             </Stack>
         </Container >

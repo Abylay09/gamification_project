@@ -22,10 +22,11 @@ import "swiper/css/scrollbar";
 import "swiper/css/navigation";
 import "./index.scss"
 import { useMutation } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 
 function PetSliderPage() {
     const [pet, setPet] = useState("");
-
+    const navigate = useNavigate();
     const mutation = useMutation(petName => PetApi.choosePet(petName))
 
     function savePet() {
@@ -178,7 +179,10 @@ function PetSliderPage() {
                         </div>
                     </SwiperSlide>
                 </Swiper>
-                <CommonButton onClick={() => savePet()} text={"Выбрать"} />
+                <CommonButton onClick={() => {
+                    savePet()
+                    navigate("/pet")
+                }} text={"Выбрать"} />
             </div>
         </Container>
     )

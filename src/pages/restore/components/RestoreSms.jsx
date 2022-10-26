@@ -9,6 +9,7 @@ import { restore } from 'utils/api/restore';
 import Image from "assets/login/bonbon-dialog.png"
 
 const initDigits = ["", "", "", ""]
+
 function RestoreSms() {
     const [counter, setCounter] = useState(5);
     const language = useSelector(state => state.language.language);
@@ -41,8 +42,8 @@ function RestoreSms() {
         smsMutation.mutate(login)
         setCounter(60)
     }
-
-    const onSubmit = () => {
+    const onSubmit = async (event) => {
+        event.preventDefault();
         if (digits.length < 4) {
             alert(language.sms_is_required)
         } else {
@@ -118,9 +119,9 @@ function RestoreSms() {
                     {counter === 0
                         ? <p className='repeat-sms' onClick={() => sendSms()}>{language.sms_retry}</p>
                         : <p className='repeat-sms' >{language.sms_seconds} {counter + " " + language.seconds}</p>}
-                        <div className='get-password py-1 my-0' onClick={() => navigate("/login")}>
-                            {language.login}
-                        </div>
+                    <div className='get-password py-1 my-0' onClick={() => navigate("/login")}>
+                        {language.login}
+                    </div>
                 </form>
             </div>
         </>
