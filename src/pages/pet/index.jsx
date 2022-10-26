@@ -49,6 +49,7 @@ function PetPage() {
     else if (MyIndicators.isError) {
         return <div>Error</div>
     }
+    console.log(MyIndicators);
     return (
         <Layout>
             <Tabs className="custom-tabs">

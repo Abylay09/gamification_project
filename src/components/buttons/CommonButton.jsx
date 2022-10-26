@@ -8,7 +8,7 @@ const button = {
 
 function CommonButton({ text, onClick }) {
     return (
-        <Button className='w-100' variant="primary" style={button} onClick={onClick}>{text}</Button>
+        <Button  className='w-100' variant="primary" style={button} onClick={onClick}>{text}</Button>
     )
 }
 
