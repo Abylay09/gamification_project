@@ -49,7 +49,7 @@ function StatsPage() {
     console.log(indicators);
     return (
         <Layout>
-            <Row>
+            {/* <Row>
                 <Col>
                     <h3 className='rates-title my-4'>{language.stats_indicatrors}</h3>
                     <div>
@@ -57,11 +57,10 @@ function StatsPage() {
                         <div className='filter-list'>
                             <span className={`filter-list__item ${styleState === 1 ? "active" : ""}`} onClick={() => toggleStyleState(1)}>{language.by_class}</span>
                             <span className={`filter-list__item ${styleState === 2 ? "active" : ""}`} onClick={() => toggleStyleState(2)}>{language.by_school}</span>
-                            {/* <span className={`filter-list__item ${styleState === 3 ? "active" : ""}`} onClick={() => toggleStyleState(3)}>По области</span> */}
                         </div>
                     </div>
                 </Col>
-            </Row>
+            </Row> */}
             <Tabs>
                 <TabList>
                     <Tab>{language.general}</Tab>

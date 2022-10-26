@@ -100,6 +100,18 @@ let language = new LocalizedStrings({
     training_about_5: "By completing tasks, you get not only experience, but also gold coins 💰, which you can use to buy ... Hmmm ... for example, my book about Indian account",
     training_about_6: 'In the "Home" section, you can start studying. Here <br>an explanation from my young student is waiting for you, as well as assignments',
     training_about_7: "Start learning math accumulate as many experience points as possible and take your pet to the top of the OpenSkill Ranking",
+    sound: "Sound",
+    rating: "Rating",
+    class_pos: "place in the class",
+    school_pos: "place in the school",
+    stats: "Stats",
+    last_theme: "last theme",
+    complete_tasks: "completed tasks",
+    complete_indicators: "completed quests",
+    first_name: "First name",
+    last_name: "Last name",
+    change_profile: "CHANGE PROFILE",
+    save: "SAVE"
  },
  ru: {
     next:"ПРОДОЛЖИТЬ",
@@ -199,6 +211,18 @@ let language = new LocalizedStrings({
     training_about_5: "Выполняя задания, ты получаешь не только опыт, но и золотые монеты 💰, на которые можешь купить… Хммм… к примеру, мою книгу об индийском счёте",
     training_about_6: 'В разделе "Домой" ты можешь приступить к изучению. Здесь <br>тебя ждет разъяснения от моего молодого ученика, а также задания',
     training_about_7: "Начни изучать математику, <br>накопи как можно больше очков опыта и выведи своего питомца <br>в лидеры Рейтинга OpenSkill",
+    sound: "Звук",
+    rating: "Рейтинг",
+    class_pos: "место в классе",
+    school_pos: "место в школе",
+    stats: "Статистика",
+    last_theme: "последняя тема",
+    complete_tasks: "выполненных заданий",
+    complete_indicators: "выполненных квестов",
+    first_name: "Имя",
+    last_name: "Фамилия",
+    change_profile: "ИЗМЕНИТЬ ПРОФИЛЬ",
+    save: "СОХРАНИТЬ"
  }
 });
 

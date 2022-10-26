@@ -11,7 +11,7 @@ import TicketPage from 'pages/ticket';
 import StatsPage from 'pages/stats';
 import ProfilePage from 'pages/profile';
 import TrainingPage from 'pages/training';
-import { Route, Routes, Navigate } from "react-router-dom"
+import { Route, Routes, Navigate, useLocation } from "react-router-dom"
 import './App.scss';
 import LoginPage from 'pages/login';
 import ErrorPage from 'pages/error-page';
@@ -35,6 +35,7 @@ import AnotherProfile from 'pages/stats/AnotherProfile';
 
 function App() {
   const dispatch = useDispatch();
+  const location = useLocation();
   const language = useSelector(state => state.language.language);
   const languages = useSelector(state => state.language.languages);
   const queryClient = new QueryClient({
@@ -54,12 +55,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100 " >
-        <div>
+        {["/login", "/registration", "/restore"].includes(location.pathname) ? <div>
           <h1>DEMO / GUEST ACCOUNT CREDENTIALS</h1>
           <h5>LOGIN (NUMBER): 00000000000</h5>
           <h5>PASSWORD: 00000000000</h5>
           <h2>(BOTH ARE ELEVEN ZERO'S)</h2>
-        </div>
+        </div> : ""}
         <button className="language-button" onClick={changeLanguage}>
           {languages.find(x => x !== language._language)}
         </button>

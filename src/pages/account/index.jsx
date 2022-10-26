@@ -7,6 +7,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { User } from 'utils/api/User'
 import Profile from '../profile/components/Profile'
 import MusicNote from "assets/common/musical-note.svg"
+import { useSelector } from 'react-redux'
 import "./index.scss"
 
 function AccountPage() {
@@ -17,6 +18,7 @@ function AccountPage() {
     const queryClient = useQueryClient()
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const language = useSelector(state => state.language.language);
 
     const onSubmit = (event) => {
         event.preventDefault();
@@ -61,7 +63,7 @@ function AccountPage() {
                     <div className='account-sound d-flex justify-content-between align-items-center'>
                         <div className='d-flex  align-items-center' style={{ gap: "8px" }}>
                             <img src={MusicNote} alt="" />
-                            <span>Звук</span>
+                            <span>{language.sound}</span>
                         </div>
                         <Form.Check
                             className='my-switch'
@@ -75,33 +77,43 @@ function AccountPage() {
 
             <Row className='justify-content-center my-4'>
                 <Col>
-                    <p className='account-page__title mb-3'>Рейтинг</p>
+                    <p className='account-page__title mb-3'>{language.rating}</p>
                 </Col>
                 <Row className='' style={{ gap: "16px" }}>
                     <Col className='account-rating p-3'>
-                        <p className='account-rating__title mb-1'>7</p>
-                        <span className='account-rating__text'>место в классе</span>
+                        <p className='account-rating__title mb-1'>{userInfo.profile.class_rating}</p>
+                        <span className='account-rating__text'>{language.class_pos}</span>
                     </Col>
                     <Col className='account-rating p-3'>
-                        <p className='account-rating__title mb-1'>23</p>
-                        <span className='account-rating__text'> место в школе</span>
+                        <p className='account-rating__title mb-1'>{userInfo.profile.school_rating}</p>
+                        <span className='account-rating__text'> {language.school_pos}</span>
                     </Col>
                 </Row>
             </Row>
 
             <Row className='justify-content-center my-4'>
                 <Col>
-                    <p className='account-page__title mb-3'>Статистика</p>
+                    <p className='account-page__title mb-3'>{language.stats}</p>
                 </Col>
                 <Row>
                     <Col xs={12} className="account-rating account-rating--stats p-3 my-3">
-                        <p className='account-rating__title mb-1'>Делимость натуральных чисел</p>
-                        <span className='account-rating__text'>последняя пройденная тема</span>
+                        <p className='account-rating__title mb-1'>{userInfo.profile.lesson}</p>
+                        <span className='account-rating__text'>{language.last_theme}</span>
                     </Col>
                 </Row>
 
                 <Row className='' style={{ gap: "16px" }}>
                     <Col className='account-rating account-rating--stats p-3' >
+                        <p className='account-rating__title mb-1'>{userInfo.profile.tasks}</p>
+                        <span className='account-rating__text'>{language.complete_tasks}</span>
+                    </Col>
+                    <Col className='account-rating account-rating--stats p-3' >
+                        <p className='account-rating__title mb-1'>{userInfo.profile.indicators}</p>
+                        <span className='account-rating__text'>{language.complete_indicators}</span>
+                    </Col>
+                </Row>
+                {/* <Row className='mt-3' style={{ gap: "16px" }}>
+                    <Col className='account-rating account-rating--stats p-3' >
                         <p className='account-rating__title mb-1'>7</p>
                         <span className='account-rating__text'>место в классе</span>
                     </Col>
@@ -109,38 +121,28 @@ function AccountPage() {
                         <p className='account-rating__title mb-1'>23</p>
                         <span className='account-rating__text'> место в школе</span>
                     </Col>
-                </Row>
-                <Row className='mt-3' style={{ gap: "16px" }}>
-                    <Col className='account-rating account-rating--stats p-3' >
-                        <p className='account-rating__title mb-1'>7</p>
-                        <span className='account-rating__text'>место в классе</span>
-                    </Col>
-                    <Col className='account-rating account-rating--stats p-3' >
-                        <p className='account-rating__title mb-1'>23</p>
-                        <span className='account-rating__text'> место в школе</span>
-                    </Col>
-                </Row>
+                </Row> */}
             </Row>
 
             <Modal backdrop="static" centered show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
-                    <Modal.Title>Профиль</Modal.Title>
+                    <Modal.Title>{language.profile}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={onSubmit}>
-                        <p className='mb-0'>Номер телефона</p>
+                        <p className='mb-0'>{language.phone}</p>
                         <input className='w-100 px-2 mb-3' type="text" disabled={true} placeholder={userInfo.profile.phone} />
-                        <p className='mb-0'>Имя</p>
+                        <p className='mb-0'>{language.first_name}</p>
                         <input className='w-100 px-2 mb-3' type="text"
                             onChange={e => setName(e.target.value)}
                             value={name}
                             placeholder={userInfo.profile.first_name} />
-                        <p className='mb-0'>Фамилия</p>
+                        <p className='mb-0'>{language.last_name}</p>
                         <input className='w-100 px-2 mb-3'
                             onChange={e => setSurname(e.target.value)}
                             value={surname}
                             type="text" placeholder={userInfo.profile.last_name} />
-                        <p className='mb-0'>Почта</p>
+                        <p className='mb-0'>E-mail</p>
                         <input className='w-100 px-2 mt-1'
                             onChange={e => setEmail(e.target.value)}
                             value={email}
@@ -151,7 +153,7 @@ function AccountPage() {
                         </Button> */}
                         <div className='text-center pt-3'>
                             <Button variant="primary" className="px-4" type='submit'>
-                                Сохранить
+                                {language.save}
                             </Button>
                         </div>
 

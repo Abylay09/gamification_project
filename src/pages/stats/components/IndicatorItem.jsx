@@ -13,7 +13,7 @@ function IndicatorItem({ name, lastName, value, queue  }) {
                 </p>
             </div>
             <div className='rate-item__level'>
-                {language.score} : {value ? value : 0}
+                {language.game_score} : {value ? value : 0}
             </div>
         </div>
     )

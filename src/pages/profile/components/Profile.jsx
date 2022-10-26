@@ -1,5 +1,6 @@
 import React from 'react'
 import "./Profile.scss"
+import { useSelector } from 'react-redux'
 
 const buttonStyle = {
     backgroundColor: "#2A80FF",
@@ -11,6 +12,7 @@ const buttonStyle = {
 }
 
 function Profile({ name, surname, school, grade, func }) {
+    const language = useSelector(state => state.language.language);
     return (
         <div className='profile'>
             <div className='profile-photo'>
@@ -23,7 +25,7 @@ function Profile({ name, surname, school, grade, func }) {
                 {school} {grade}
             </div>
             
-            <button onClick={func} className='profile-btn' style={buttonStyle}>Изменить профиль</button>
+            <button onClick={func} className='profile-btn' style={buttonStyle}>{language.change_profile}</button>
         </div>
     )
 }
