@@ -27,8 +27,6 @@ function TaskPage() {
         setShow(false)
         refetch();
         setTimeout(() => ref.current.focus(), 500)
-
-
     };
     const handleCloseCorrect = () => {
         setNotCorrect(false)

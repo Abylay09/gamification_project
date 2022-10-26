@@ -9,6 +9,9 @@ import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import CommonButton from 'components/buttons/CommonButton';
+import StickyButton from 'components/buttons/StickyButton';
+import Spinner from 'react-bootstrap/Spinner';
 function LectureInfoPage() {
     const language = useSelector(state => state.language.language)
     const [show, showMore] = useState(false);
@@ -19,7 +22,7 @@ function LectureInfoPage() {
     }
     const token = localStorage.getItem("token");
 
-    const { data: lecture, status } = useQuery(["lecture"], async () => {
+    const { data: lecture, status, isFetching } = useQuery(["lecture", params.id], async () => {
         const response = await axios.get("http://api.openskill.uz/lessons/lesson/", {
             params: {
                 uid: params.id
@@ -32,6 +35,14 @@ function LectureInfoPage() {
         console.log(result);
         return result;
     })
+    if (isFetching) {
+        return <Container className='vh-100 d-flex flex-column justify-content-center align-items-center'>
+            <div className='text-center'>
+                <Spinner animation="border" variant="primary" />
+                <h3>Загрузка...</h3>
+            </div>
+        </Container>
+    }
     if (status === "loading") {
         return <div>Loading</div>
     }
@@ -39,7 +50,7 @@ function LectureInfoPage() {
         return <div>Error</div>
     }
     return (
-        <Container>
+        <Container className='position-relative vh-100'>
             <Row>
                 <Col>
                     <div className='page-header d-flex py-4'>
@@ -64,10 +75,16 @@ function LectureInfoPage() {
                         <p className='lecture-text' >
                             {lecture.lesson.lectures[0].content}
                         </p>
-
                     </Stack>
                 </Col>
             </Row>
+            {
+                lecture.lesson.next ?
+                    <div className='position-absolute start-50 w-100' style={{ padding: "0 24px", bottom: "64px", transform: "translateX(-50%)" }}>
+                        <CommonButton text={"Следующий урок"} onClick={() => navigate(`/lecture-info/${lecture.lesson.next}`)} />
+                    </div> : ""
+            }
+
 
             {/* {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)} */}
             {/* <p style={{ color: "#2A80FF", fontSize: "13px" }} onClick={() => showMore(!show)}>Показать еще</p> */}
