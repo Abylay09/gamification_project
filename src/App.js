@@ -30,6 +30,8 @@ import MemoryImages from 'pages/games/memoryGames/MemoryImages';
 import Test from 'pages/games/memoryGames/test';
 import { setLanguage } from 'redux/features/languageSlice';
 import Figures from 'pages/games/thinkingGames/Figures';
+import AnotherProfile from 'pages/stats/AnotherProfile';
+
 
 function App() {
   const dispatch = useDispatch();
@@ -46,15 +48,15 @@ function App() {
   const forceUpdate = React.useCallback(() => updateState({}), []);
 
   const changeLanguage = () => {
-      dispatch(setLanguage(languages.find(x => x !== language._language)));
-      forceUpdate()
+    dispatch(setLanguage(languages.find(x => x !== language._language)));
+    forceUpdate()
   }
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100 " >
-                <button className="language-button"onClick={changeLanguage}>
-                {languages.find(x => x !== language._language)}
-                </button>
+        <button className="language-button" onClick={changeLanguage}>
+          {languages.find(x => x !== language._language)}
+        </button>
         <Routes>
           <Route path="/" element={<Navigate to={"/lesson"} />} />
           <Route path="/login" element={<LoginPage />} />
@@ -70,7 +72,7 @@ function App() {
             </Route>
 
             <Route path="/lecture" >
-              <Route index  element={<LecturePage />} />
+              <Route index element={<LecturePage />} />
               <Route path=":id" element={<LecturePage />} />
             </Route>
 
@@ -91,8 +93,13 @@ function App() {
             {/* <Route path="/account" element={<AccountPage />} /> */}
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/pet" element={<PetPage />} />
-            <Route path="/stats" element={<StatsPage />} />
             <Route path="/training" element={<TrainingPage />} />
+            {/* <Route path="/stats" element={<StatsPage />} /> */}
+            <Route path="/stats">
+              <Route index path="/stats" element={<StatsPage />} />
+              <Route path=":id" element={<AnotherProfile />} />
+            </Route>
+
             <Route path="/profile" element={<AccountPage />} />
             <Route path="/choose-pet" element={<PetSliderPage />} />
 
@@ -101,7 +108,7 @@ function App() {
               <Route path="attention" element={<Game1 />} />
               <Route path="attention-cards" element={<CardGame />} />
               <Route path="memory" element={<Game2 />} />
-              <Route path="images" element={<MemoryImages/>} />
+              <Route path="images" element={<MemoryImages />} />
               <Route path="thinking" element={<Game3 />} />
               <Route path="thinking-figure" element={<Figures />} />
             </Route>

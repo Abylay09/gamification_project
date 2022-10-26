@@ -1,17 +1,29 @@
 import React from 'react'
 import "./Profile.scss"
-function Profile() {
+
+const buttonStyle = {
+    backgroundColor: "#2A80FF",
+    borderRadius: "12px",
+    padding: "10px 10px",
+    color: "#fff",
+    marginTop: '20px',
+    border : "none"
+}
+
+function Profile({ name, surname, school, grade, func }) {
     return (
         <div className='profile'>
             <div className='profile-photo'>
-                
+
             </div>
             <div className='profile-name'>
-                Анна Беляш
+                {surname} {name}
             </div>
             <div className='profile-school'>
-                СОШ №45, 6 “Б”
+                {school} {grade}
             </div>
+            
+            <button onClick={func} className='profile-btn' style={buttonStyle}>Изменить профиль</button>
         </div>
     )
 }

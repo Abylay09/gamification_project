@@ -4,7 +4,7 @@ import { Container, Col, Row, Stack } from 'react-bootstrap'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
 import StatsItem from './components/StatsItem';
-import {useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import NumberOne from "assets/stats/number-one.svg"
 import NumberTwo from "assets/stats/number-two.svg"
 import NumberThree from "assets/stats/number-three.svg"
@@ -13,11 +13,12 @@ import { rating } from 'utils/api/getRating';
 import "./index.scss"
 import IndicatorItem from './components/IndicatorItem';
 import { useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom';
 function StatsPage() {
     const language = useSelector(state => state.language.language)
     const [toggleState, setToggleState] = useState(1);
     const [styleState, setStyleState] = useState(1);
-
+    const navigate = useNavigate();
     const { data: ratingList, isError, isLoading } = useQuery(["getRating"], () => {
         return rating.getRating()
     })
@@ -89,10 +90,11 @@ function StatsPage() {
                     <Stack gap={3} className="my-3">
                         {
                             ratingList.users?.map((ratingitem, index) => <StatsItem
+                                onClick={() => navigate(`/stats/${ratingitem.uid}`)}
                                 lastName={ratingitem.last_name}
                                 name={ratingitem.first_name}
                                 level={ratingitem.level}
-                                queue = {index + 1}
+                                queue={index + 1}
                             />)
                         }
                     </Stack>
@@ -106,8 +108,8 @@ function StatsPage() {
                                     : indicators.data.users?.map((ratingitem, index) => <IndicatorItem
                                         lastName={ratingitem.last_name}
                                         name={ratingitem.first_name}
-                                        value = {ratingitem.value}
-                                        queue = {index + 1}
+                                        value={ratingitem.value}
+                                        queue={index + 1}
                                     />)
                         }
                     </Stack>
