@@ -9,7 +9,7 @@ import NumberOne from "assets/stats/number-one.svg"
 import NumberTwo from "assets/stats/number-two.svg"
 import NumberThree from "assets/stats/number-three.svg"
 
-import { rating } from 'utils/api/getRating';
+import { Rating } from 'utils/api/getRating';
 import "./index.scss"
 import IndicatorItem from './components/IndicatorItem';
 import { useSelector } from 'react-redux'
@@ -20,10 +20,10 @@ function StatsPage() {
     const [styleState, setStyleState] = useState(1);
     const navigate = useNavigate();
     const { data: ratingList, isError, isLoading } = useQuery(["getRating"], () => {
-        return rating.getRating()
+        return Rating.getRating()
     })
     const indicators = useQuery(["getIndicatorsRating"], () => {
-        return rating.getIndicatorsRating()
+        return Rating.getIndicatorsRating()
     })
     // const { data: indicatorsList, isError : indicatorError,  isLoading : indicatorLoading } = useQuery(["getIndicatorsRating"], () => {
     //     return rating.getIndicatorsRating()

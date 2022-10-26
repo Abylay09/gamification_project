@@ -23,7 +23,7 @@ ChartJS.register(
 );
 const option = {
 
-    maintainAspectRatio : true,
+    maintainAspectRatio: true,
     plugins: {
         datalabels: {
             backgroundColor: function (context) {
@@ -53,10 +53,10 @@ const option = {
             ticks: {
                 display: false,
             },
-
             pointLabels: {
                 font: {
-                    size: 11,
+                    size: 12,
+                    weight: "500"
                 },
                 padding: 14
             }
@@ -65,13 +65,14 @@ const option = {
     },
 }
 
-function Indicator() {
+function Indicator(props) {
     const language = useSelector(state => state.language.language)
     const data = {
-        labels: [language.indicators_logical_thinking, language.indicators_creativity, language.indicators_thinking, language.indicators_memory, language.indicators_mindfulness, ],
+        // labels: [language.indicators_logical_thinking, language.indicators_creativity, language.indicators_thinking, language.indicators_memory, language.indicators_mindfulness, ],
+        labels: [language.indicators_memory, language.indicators_thinking, language.indicators_mindfulness,],
         datasets: [{
             label: "",
-            data: [65, 59, 90, 55, 54],
+            data: props.myData,
             fill: true,
             backgroundColor: 'rgba(42, 128, 255, 0.23)',
             borderColor: 'rgba(42, 128, 255, 1)',
@@ -81,7 +82,7 @@ function Indicator() {
             pointHoverBorderColor: 'rgb(255, 99, 132)'
         }],
     };
-    return <Radar data={data} options={option} width = {"100%"} height = {"350px"} style = {{overflowX : "hidden"}}/>;
+    return <Radar data={data} options={option} width={"100%"} height={"350px"} style={{ overflowX: "hidden" }} />;
 }
 
 
