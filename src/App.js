@@ -54,6 +54,12 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100 " >
+        <div>
+          <h1>DEMO / GUEST ACCOUNT CREDENTIALS</h1>
+          <h5>LOGIN (NUMBER): 00000000000</h5>
+          <h5>PASSWORD: 00000000000</h5>
+          <h2>(BOTH ARE ELEVEN ZERO'S)</h2>
+        </div>
         <button className="language-button" onClick={changeLanguage}>
           {languages.find(x => x !== language._language)}
         </button>
