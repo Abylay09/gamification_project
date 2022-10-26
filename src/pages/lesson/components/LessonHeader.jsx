@@ -33,7 +33,7 @@ function LessonHeader({ title, prev, next, order }) {
                 }
             </div>
             <div className='d-flex justify-content-center my-4'>
-                <HealthGold gold={500} hp={25} />
+                {/* <HealthGold gold={500} hp={25} /> */}
             </div>
 
         </>

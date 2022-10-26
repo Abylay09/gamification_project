@@ -15,7 +15,7 @@ import { useRef } from 'react'
 import { useSelector } from 'react-redux'
 function TaskPage() {
     const language = useSelector(state => state.language.language)
-    const [inputValue, setInputValue] = useState("")
+    const [inputValue, setInputValue] = useState([])
     const [show, setShow] = useState(false);
     const [notCorrect, setNotCorrect] = useState(false)
     const [attempt, setAttempt] = useState(0);
@@ -23,25 +23,27 @@ function TaskPage() {
     const navigate = useNavigate();
     const params = useParams()
     const ref = useRef(null)
+    const itemEls = useRef(new Array())
     const handleClose = () => {
         setShow(false)
         refetch();
-        setTimeout(() => ref.current.focus(), 500)
+        // setTimeout(() => ref.current.focus(), 500)
 
 
     };
     const handleCloseCorrect = () => {
         setNotCorrect(false)
         refetch();
-        setTimeout(() => ref.current.focus(), 500)
+        // setTimeout(() => ref.current.focus(), 500)
     };
 
     const { data: query, status, refetch } = useQuery(["task-info"], () => {
         return getDataList.getTask(params.id)
     }, {
         cacheTime: 0,
-
     })
+    if(!inputValue.length && query && query.data.type !== 'test')
+        setInputValue(new Array(query.data.answers_length).fill())
 
     const mutation = useMutation(answer => {
         return postDataList.checkTask(answer)
@@ -57,10 +59,27 @@ function TaskPage() {
     const closeInter = () => {
         clearInterval(inter)
         setShow(true)
+        if(query.data.type !== 'test')
+            setInputValue(new Array(query.data.answers_length).fill())
+        else setInputValue([])
+    }
+    const updateValue = (value, index) => {
+        let newValue = JSON.parse(JSON.stringify(inputValue))
+        newValue[index] = value
+        setInputValue(newValue)
+    }
+    const updateValueTest = (value, index) => {
+        let newValue = JSON.parse(JSON.stringify(inputValue))
+        let findIndex = newValue.findIndex(x => x === value + "_" + index)
+        if(!!~findIndex)
+            newValue.splice(findIndex, 1)
+        else newValue.push(value + "_" + index)
+        console.log(newValue)
+        setInputValue(newValue)
     }
     return (
         <Container className='vh-100 min-vh-100 d-flex flex-column'>
-            <Row>
+            <Row className="row-sticky">
                 <Col>
                     <div className='d-flex py-4'>
                         <img onClick={() => navigate(-1)} style={{ height: "20px" }} src={PurpleCross} alt="" />
@@ -74,20 +93,38 @@ function TaskPage() {
                     <div>
                         <h5 className="condition" >{query.data.condition}</h5>
                         <div className='text-center mt-4'>
-                            <input autoFocus ref={ref} onChange={e => setInputValue(e.target.value)} className='condition-input' type="text" placeholder={language.answer} />
-                            {inputValue.length <= 0 ? <p>{language.your_answer}</p> : ""}
+                            {
+                                query.data.type === "test"
+                                ? query.data.answers.map((x, i) => 
+                                    ( <div key={x + "_" + i} onClick={() => updateValueTest(x, i)} className={`answer ${inputValue.find((y) => y === x + "_" + i) ? "active" : ""}`}>
+                                        {x}
+                                    </div> )
+                                )
+                                : new Array(query.data.answers_length).fill().map((x, i) =>
+                                    (
+                                        <input autoFocus 
+                                        key={x + "_" + i}
+                                        ref={(e) => itemEls.current[i] = e}
+                                        // ref={ref} 
+                                        onChange={e => updateValue(e.target.value, i)} value={x} className='condition-input' type="text" placeholder={language.answer} />
+                                    )
+                                )
+                            }
+                            {/* {inputValue.length <= 0 ? <p>{language.your_answer}</p> : ""} */}
                         </div>
                     </div>
-                    <Button className='w-100 py-3 mt-auto' style={{ marginBottom: "64px" }} variant="primary" onClick={() => {
+                    <Button className='w-100 py-3 mt-auto btn-sticky' disabled={inputValue.some(x => !x) || inputValue.length !== query.data.answers_length} variant="primary" onClick={() => {
                         if (inputValue.length !== 0) {
-                            ref.current.value = ''
-                            mutation.mutate({ uid: query.data.task_uid, answer: inputValue, attempt: setAttempt(attempt + 1), time }, {
+                            if(itemEls && itemEls.current && itemEls.current.length){
+                                itemEls.current.forEach(x => x.value = '')
+                            }
+                            mutation.mutate({ uid: query.data.task_uid, answer: inputValue.map(x => (x + "").split("_")[0]), attempt: setAttempt(attempt + 1), time }, {
                                 onSuccess: (data) => {
-                                    console.log(data);
                                     if (data.validate) {
                                         closeInter()
                                     } else {
                                         setNotCorrect(true)
+                                        setInputValue(new Array(query.data.answers_length).fill())
                                     }
                                 }
                             })

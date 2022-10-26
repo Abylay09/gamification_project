@@ -15,12 +15,12 @@ const progressStyle = {
 }
 
 function LessonItem({uid,title,order,selectLesson, hasPlay, startLesson}) {
-    const progress =80;
+    const progress = hasPlay ? 80 : 0;
     return (
         <div onClick = {hasPlay ? startLesson : ""} className={`lesson-item ${hasPlay ? "" : "not-active"} d-flex justify-content-between align-items-center p-3`} >
             <div>
                 <p className='lesson-item__title'>{title}</p>
-                <HealthGold gold={150} hp={20} />
+                <HealthGold gold={150} hp={100} />
             </div>
 
             <div className='chapter-item__progress'>
