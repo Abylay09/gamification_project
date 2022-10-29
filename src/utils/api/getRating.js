@@ -7,7 +7,9 @@ export const Rating = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        }).then(result => result.data)
+            // }).then(result => result.data)
+        })
+
     },
     getIndicatorsRating() {
         const token = localStorage.getItem("token");
@@ -15,7 +17,9 @@ export const Rating = {
             headers: {
                 'Authorization': `Bearer ${token}`
             }
-        }).then(result => result.data)
+            // }).then(result => result.data)
+        })
+
     },
     getMyIndicator() {
         const token = localStorage.getItem("token");
@@ -24,5 +28,17 @@ export const Rating = {
                 'Authorization': `Bearer ${token}`
             }
         }).then(result => result.data)
+    },
+    getRatingBy(condition) {
+        const token = localStorage.getItem("token");
+        return axios.get("http://api.openskill.uz/user/rating", {
+            params: {
+                by: condition
+            },
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+            // }).then(result => result.data)
+        })
     }
 }

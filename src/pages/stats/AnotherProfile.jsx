@@ -66,7 +66,7 @@ function AnotherProfile() {
                 <Col>
                     <h5>Индикаторы</h5>
                     <div className=''>
-                        <IndicatorGraph  myData = {[MyIndicators.data.indicators.memmory,
+                        <IndicatorGraph surname = {AnotherIndicators.data.profile.last_name} name =  {AnotherIndicators.data.profile.first_name} myData = {[MyIndicators.data.indicators.memmory,
                         MyIndicators.data.indicators.thinkings,
                         MyIndicators.data.indicators.attention]}/>
                     </div>

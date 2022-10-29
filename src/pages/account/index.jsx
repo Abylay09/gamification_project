@@ -9,6 +9,7 @@ import Profile from '../profile/components/Profile'
 import MusicNote from "assets/common/musical-note.svg"
 import { useSelector } from 'react-redux'
 import "./index.scss"
+import Loading from 'components/loading/Loading';
 
 function AccountPage() {
     const [show, setShow] = useState(false);
@@ -36,15 +37,17 @@ function AccountPage() {
             }
         })
     }
+
     const mutation = useMutation((info) => {
         return User.changeUserInfo(info)
     })
-    const { data: userInfo, isError, isLoading } = useQuery(["personal-info"], () => {
+    const { data: userInfo, isError, isLoading, isFetching } = useQuery(["personal-info"], () => {
         return User.getMyInfo()
     })
 
+    
     if (isLoading) {
-        return <div>Loading</div>
+        return <Loading/>
     }
 
     else if (isError) {

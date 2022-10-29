@@ -55,12 +55,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100 " >
-        {["/login", "/registration", "/restore"].includes(location.pathname) ? <div>
-          <h1>DEMO / GUEST ACCOUNT CREDENTIALS</h1>
-          <h5>LOGIN (NUMBER): 00000000000</h5>
-          <h5>PASSWORD: 00000000000</h5>
-          <h2>(BOTH ARE ELEVEN ZERO'S)</h2>
-        </div> : ""}
         <button className="language-button" onClick={changeLanguage}>
           {languages.find(x => x !== language._language)}
         </button>
@@ -96,12 +90,9 @@ function App() {
               <Route index path="/ticket" element={<TicketPage />} />
               <Route path=":id" element={<Ticket />} />
             </Route>
-
-            {/* <Route path="/account" element={<AccountPage />} /> */}
             <Route path="/shop" element={<ShopPage />} />
             <Route path="/pet" element={<PetPage />} />
             <Route path="/training" element={<TrainingPage />} />
-            {/* <Route path="/stats" element={<StatsPage />} /> */}
             <Route path="/stats">
               <Route index path="/stats" element={<StatsPage />} />
               <Route path=":id" element={<AnotherProfile />} />
@@ -123,50 +114,6 @@ function App() {
 
           <Route path="*" element={<ErrorPage />} />
         </Routes>
-        {/* <Routes>
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/registration" element={<RegPage />} />
-          <Route path="/restore" element={<RestorePage />} />
-
-          <Route path='/' element={<ProtectedRoutes />}>
-            <Route index path='lesson' element={<LessonPage />} />
-            <Route path='lesson/:id' element={<LessonPage />} />
-
-            <Route path="lecture" >
-              <Route index path="lecture" element={<LecturePage />} />
-              <Route path=":id" element={<LecturePage />} />
-            </Route>
-
-            <Route path="lecture-info" >
-              <Route index path="lecture-info" element={<LectureInfoPage />} />
-              <Route path=":id" element={<LectureInfoPage />} />
-            </Route>
-
-            <Route path="/pet" element={<PetPage />} />
-
-            <Route path="/shop" element={<ShopPage />} />
-            <Route path="ticket" >
-              <Route index path="ticket" element={<TicketPage />} />
-              <Route path=":id" element={<Ticket />} />
-            </Route>
-
-
-            <Route path="stats" element={<StatsPage />} />
-            <Route path="profile" element={<ProfilePage />} />
-            <Route path="choose-pet" element={<PetSliderPage />} />
-
-            <Route path="/quests">
-              <Route index path="/quests" element={<QuestsPage />} />
-              <Route path="attention" element={<Game1 />} />
-              <Route path="memory" element={<Game2 />} />
-              <Route path="thinking" element={<Game3 />} />
-            </Route>
-            <Route path="/task/:id" element={<TaskPage />} />
-
-
-          </Route>
-          <Route path="*" element={<ErrorPage />} />
-        </Routes> */}
       </div>
     </QueryClientProvider>
 

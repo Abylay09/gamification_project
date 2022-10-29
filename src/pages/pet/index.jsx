@@ -24,6 +24,7 @@ import { useQuery, useQueries } from '@tanstack/react-query';
 import { PetApi } from 'utils/api/Pet';
 import { Rating } from 'utils/api/getRating';
 import CommonButton from 'components/buttons/CommonButton';
+import Loading from 'components/loading/Loading';
 
 function PetPage() {
     const language = useSelector(state => state.language.language);
@@ -37,6 +38,9 @@ function PetPage() {
     // const { data, isLoading, isError } = useQuery(["MyPet"], () => {
     //     return PetApi.getPet()
     // })
+    if(MyPet.isFetching){
+        return <Loading/>
+    }
     if (MyPet.isLoading) {
         return <div>Loading</div>
     }

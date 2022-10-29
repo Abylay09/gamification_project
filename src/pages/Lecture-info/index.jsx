@@ -12,6 +12,7 @@ import { useSelector } from 'react-redux'
 import CommonButton from 'components/buttons/CommonButton';
 import StickyButton from 'components/buttons/StickyButton';
 import Spinner from 'react-bootstrap/Spinner';
+import Loading from 'components/loading/Loading';
 function LectureInfoPage() {
     const language = useSelector(state => state.language.language)
     const [show, showMore] = useState(false);
@@ -36,12 +37,7 @@ function LectureInfoPage() {
         return result;
     })
     if (isFetching) {
-        return <Container className='vh-100 d-flex flex-column justify-content-center align-items-center'>
-            <div className='text-center'>
-                <Spinner animation="border" variant="primary" />
-                <h3>Загрузка...</h3>
-            </div>
-        </Container>
+        return <Loading/>
     }
     if (status === "loading") {
         return <div>Loading</div>

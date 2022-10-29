@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { useQuery } from '@tanstack/react-query'
 import { coupons } from 'utils/api/getCoupons';
+import { User } from 'utils/api/User';
 import BlueLeftArrow from "assets/common/blue-left-arrow.png"
 import Level from 'components/ticket-reqs/Level';
 import Cost from 'components/ticket-reqs/Cost';
@@ -27,6 +28,10 @@ function Ticket() {
     const params = useParams()
     const { data: coupon, isError, isLoading } = useQuery(["getCouponinfo"], () => {
         return coupons.getInfo(params.id)
+    })
+
+    const myInfo = useQuery(["MyInfo"], () => {
+        return User.getMyInfo();
     })
 
     if (isLoading) {
@@ -115,18 +120,20 @@ function Ticket() {
                                         return (
                                             <div>
                                                 <p className="ticket__info__title ">{item.title}</p>
-                                                {item.conditionals.map(condition => <p className="ticket__info__desc"> {condition}</p>)}
-
+                                                {item.conditionals.map(condition => {
+                                                    return (
+                                                        <p className="ticket__info__desc">{condition}</p>
+                                                    )
+                                                })}
                                             </div>
                                         )
                                     }))
                                 }
                                 <FixedButton text={language.buy} onClick={() => setShow(!show)} />
-
                             </Stack>
                         </TabPanel>
                     </Tabs>
-                    <BuyModal uid={coupon.offer.uid} cost={coupon.offer.price}
+                    <BuyModal myMoney = {myInfo.data?.profile?.gold} uid={coupon.offer.uid} cost={coupon.offer.price}
                         show={show}
                         close={() => setShow(!show)}
                         showSuccess={() => setShowSuccess(true)}

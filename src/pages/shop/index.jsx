@@ -9,15 +9,18 @@ import { useSelector } from 'react-redux'
 
 import RightArrow from "assets/common/right-arrow.svg"
 import "./index.scss"
+import Loading from 'components/loading/Loading'
 
-function ShopPage() {
+function ShopPage() { 
     const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
-    
-    const { data: coupon, isError, isLoading } = useQuery(["getAllCoupons"], () => {
+
+    const { data: coupon, isError, isLoading, isFetching } = useQuery(["getAllCoupons"], () => {
         return coupons.getAllCoupons()
     })
-
+    if (isFetching) {
+        return <Loading />
+    }
     if (isLoading) {
         return <div>Loading</div>
     }
@@ -30,10 +33,10 @@ function ShopPage() {
         <Layout>
             <Stack style={{ marginBottom: '-24px' }}>
                 <h4 className='section-title my-4' >{language.shop_title}</h4>
-                <div className='coupon mb-4 d-flex align-items-center justify-content-between' onClick={()=> navigate("/ticket")}>
+                <div className='coupon mb-4 d-flex align-items-center justify-content-between' onClick={() => navigate("/ticket")}>
                     <div>
                         <p className='coupon__title mb-0' >{language.my_coupons}</p>
-                        <p className='coupon__number'>{coupon.my_coupons ? language.you_have + " " + coupon.my_coupons + " " + language.coupons: language.no_coupons}</p>
+                        <p className='coupon__number'>{coupon.my_coupons ? language.you_have + " " + coupon.my_coupons + " " + language.coupons : language.no_coupons}</p>
                     </div>
                     <img src={RightArrow} alt="" />
                 </div>

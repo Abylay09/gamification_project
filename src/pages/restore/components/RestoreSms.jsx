@@ -11,7 +11,7 @@ import Image from "assets/login/bonbon-dialog.png"
 const initDigits = ["", "", "", ""]
 
 function RestoreSms() {
-    const [counter, setCounter] = useState(5);
+    const [counter, setCounter] = useState(60);
     const language = useSelector(state => state.language.language);
     const [digits, setDigits] = useState(initDigits);
     const inputRefs = useRef([]);

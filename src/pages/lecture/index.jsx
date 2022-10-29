@@ -12,25 +12,28 @@ import { useState } from 'react'
 import { useSelector } from 'react-redux'
 
 import "./index.scss"
+import Loading from 'components/loading/Loading'
 
 function LecturePage() {
     const language = useSelector(state => state.language.language)
     const [uidLink, setLink] = useState("")
     const params = useParams();
     const navigate = useNavigate()
-    const { data: lesson, status, isSuccess, isLoading, isError } = useQuery(["lesson"], () => {
+    const { data: lesson, isSuccess, isLoading, isError, isFetching } = useQuery(["lesson"], () => {
         return getDataList.getLecture(params.id)
     })
-
+    if (isFetching) {
+        return <Loading />
+    }
     if (isLoading) {
         return <div>Loading</div>
     }
     else if (isError) {
         return <div>Error</div>
     }
-    if(!uidLink && lesson && lesson.lesson && lesson.lesson.tasks && lesson.lesson.tasks.length) {
+    if (!uidLink && lesson && lesson.lesson && lesson.lesson.tasks && lesson.lesson.tasks.length) {
         let find = lesson.lesson.tasks.find(x => x.hasPlay && x.exp)
-        if(find)
+        if (find)
             setLink(find.uid)
     }
     return (
@@ -49,7 +52,7 @@ function LecturePage() {
                     <h4 className='section-title my-4' >{language.lectures}</h4>
                     <Stack gap={3}>
                         {lesson.lesson.lectures.map(item => {
-                            return <LectureItem goToLecture = {() => navigate(`/lecture-info/${lesson.lesson.uid}`)} title={item.title} order={item.order} />
+                            return <LectureItem goToLecture={() => navigate(`/lecture-info/${lesson.lesson.uid}`)} title={item.title} order={item.order} />
                         })}
                     </Stack>
                 </Col>
@@ -58,14 +61,14 @@ function LecturePage() {
             <Row >
                 <Col >
                     <h4 className='section-title ' >{language.tasks}</h4>
-                    <Stack>
+                    <Stack className='mb-5'>
                         {/* <TaskItem /> */}
                         {lesson.lesson.tasks.map(item => {
-                            return <TaskItem hasPlay = {item.hasPlay} exp={item.exp} gold={item.gold} order={item.order}
-                                onClick={() => { 
-                                    if(item.hasPlay) {
-                                        navigate(`/task/${item.uid}`) 
-                                    }  
+                            return <TaskItem hasPlay={item.hasPlay} exp={item.exp} gold={item.gold} order={item.order}
+                                onClick={() => {
+                                    if (item.hasPlay) {
+                                        navigate(`/task/${item.uid}`)
+                                    }
                                 }} />
                         })}
 
@@ -73,11 +76,11 @@ function LecturePage() {
 
                     {
                         uidLink ?
-                        <StickyButton text={language.next} onClick={() => {
-                            navigate(`/task/${uidLink}`)
-                        }
-                        } />
-                        : ""
+                            <FixedButton text={language.next} onClick={() => {
+                                navigate(`/task/${uidLink}`)
+                            }
+                            } />
+                            : ""
                     }
 
                     {/* <FixedButton text={"Погнали!"} /> */}

@@ -10,16 +10,19 @@ import LessonHeader from './components/LessonHeader'
 import { useQuery } from '@tanstack/react-query'
 import StickyButton from 'components/buttons/StickyButton'
 import { getDataList } from 'utils/api/getDataList'
+import Loading from 'components/loading/Loading'
 function LessonPage() {
     const params = useParams();
     const navigate = useNavigate();
     const [url, setUrl] = useState("");
-    const { data: lessonGroup,  isError, isLoading } = useQuery(["LessonGroup", params.id], () => {
+    const { data: lessonGroup,  isError, isLoading, isFetching } = useQuery(["LessonGroup", params.id], () => {
         return getDataList.getLessonsGroup(params.id)
     }, {
         retry: 3
     })
-
+    if(isFetching){
+        return <Loading/>
+    }
     if (isLoading) {
         return <div>Loading</div>
     }
