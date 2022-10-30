@@ -13,7 +13,12 @@ function PhoneInput() {
     const onSubmit = () => {
         dispatch(nextStep());
     }
-    
+
+    function scroll() {
+        const input = document.querySelector(".phone-input")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
         <>
             <div style={{ paddingBottom: "30%" }}>
@@ -30,6 +35,7 @@ function PhoneInput() {
                         <Form.Control
                             className='phone-input'
                             type="number"
+                            onFocus={() => scroll()}
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
                             {...register("phone", {

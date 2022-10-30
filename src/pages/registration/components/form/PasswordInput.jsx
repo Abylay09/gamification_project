@@ -30,11 +30,11 @@ function PasswordInput() {
 
     const onSubmit = () => {
         if (watchPassword === watchPasswordProve) {
-            mutation.mutate({login : phone, password : passwd},{
-                onSuccess : () => {
+            mutation.mutate({ login: phone, password: passwd }, {
+                onSuccess: () => {
                     dispatch(nextStep());
                 },
-                onError : () => {
+                onError: () => {
                     alert("Ошибка. Возможно были введены неправильные данные")
                 }
             });
@@ -42,9 +42,19 @@ function PasswordInput() {
             alert("Пароли не совпадают")
         }
     }
+
+    function scroll1() {
+        const input = document.querySelector(".password-input")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scroll2() {
+        const input = document.querySelector(".password-input--second")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
     return (
         <>
-            <div style={{ paddingBottom: "30%", marginTop : "24px" }}>
+            <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>
             </div>
@@ -55,6 +65,7 @@ function PasswordInput() {
                         <Form.Control
                             className='password-input'
                             type="password"
+                            onFocus={() => scroll1()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password")}
@@ -73,6 +84,7 @@ function PasswordInput() {
                         <Form.Control
                             className='password-input password-input--second'
                             type="password"
+                            onFocus={() => scroll2()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("passwordProve", {
@@ -80,7 +92,7 @@ function PasswordInput() {
                             })}
                         />
                         <p className='password-input__wrapper-title'>Пароль</p>
-                        <AuthButton text={"Продолжить"}  />
+                        <AuthButton text={"Продолжить"} />
                     </div>
                 </div>
             </form>

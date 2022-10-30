@@ -98,7 +98,7 @@ function TaskPage() {
 
     return (
         <Container className='vh-100 min-vh-100 d-flex flex-column'>
-            <Row className="row-sticky">
+            <Row className="row-sticky mt-3">
                 <Col>
                     <div className='d-flex py-4 align-items-center'>
                         <img onClick={() => navigate(-1)} style={{ height: "20px" }} src={PurpleCross} alt="" />
@@ -110,9 +110,9 @@ function TaskPage() {
 
             <Row className='flex-grow-1'>
                 <Col className='d-flex flex-column'>
-                    <div>
-                        <h5 className="condition" >{query.data.condition}</h5>
-                        <div className='text-center mt-4'>
+                    <div >
+                        <h5 className="condition text-center mb-2" >{query.data.condition}</h5>
+                        <div className='text-center' >
                             {
                                 query.data.type === "test"
                                     ? query.data.answers.map((x, i) =>

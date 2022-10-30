@@ -1,0 +1,21 @@
+.bg {
+    position: relative;
+    overflow: hidden;
+    margin: 0 -12px;
+    // background: url("../../assets/common/homebg.jpg") no-repeat center center;
+}
+
+.bg::after {
+    content: ' ';
+    display: block;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 100vw; //icon width
+    z-index: -2; //makes it act sort of like a background
+    background: url("../../assets/common/world.png") no-repeat;
+    background-size: cover;
+    filter: blur(0.5px)   opacity(75%)  grayscale(50%);;
+    // opacity:0.4;
+
+}

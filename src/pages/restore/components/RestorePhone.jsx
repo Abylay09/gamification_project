@@ -33,6 +33,11 @@ function RestorePhone() {
         })
     }
 
+    function scroll() {
+        const input = document.querySelector(".phone-input")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
         <>
             <div style={{ paddingBottom: "30%" }}>
@@ -49,6 +54,7 @@ function RestorePhone() {
                         <Form.Control
                             className='phone-input'
                             type="number"
+                            onFocus={() => scroll()}
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
                             {...register("phone", {

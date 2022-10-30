@@ -49,8 +49,8 @@ export default function StatsPage() {
         getIndicatorsRating()
     }, [])
 
-    if (!rating) return <Loading/>
-    if (!indicators) return <Loading/>
+    if (!rating) return <Loading />
+    if (!indicators) return <Loading />
 
     return (
         <Layout>
@@ -96,30 +96,40 @@ export default function StatsPage() {
                             </Stack>
                         </Col>
                     </Row>
-                    <Stack gap={3} className="my-3">
-                        {
-                            rating.map((ratingitem, index) => <StatsItem
-                                onClick={() => navigate(`/stats/${ratingitem.uid}`)}
-                                lastName={ratingitem.last_name}
-                                name={ratingitem.first_name}
-                                level={ratingitem.level}
-                                queue={index + 1}
-                            />)
-                        }
-                    </Stack>
+                    <Row>
+                        <Col>
+                            <Stack gap={3} className="my-3">
+                                {
+                                    rating.map((ratingitem, index) => <StatsItem
+                                        onClick={() => navigate(`/stats/${ratingitem.uid}`)}
+                                        lastName={ratingitem.last_name}
+                                        name={ratingitem.first_name}
+                                        level={ratingitem.level}
+                                        queue={index + 1}
+                                    />)
+                                }
+                            </Stack>
+                        </Col>
+                    </Row>
+
                 </TabPanel>
 
                 <TabPanel >
-                    <Stack gap={3} className="my-3">
-                        {
-                            indicators.map((ratingitem, index) => <IndicatorItem
-                                lastName={ratingitem.last_name}
-                                name={ratingitem.first_name}
-                                value={ratingitem.value}
-                                queue={index + 1}
-                            />)
-                        }
-                    </Stack>
+                    <Row>
+                        <Col>
+                            <Stack gap={3} className="my-3">
+                                {
+                                    indicators.map((ratingitem, index) => <IndicatorItem
+                                        lastName={ratingitem.last_name}
+                                        name={ratingitem.first_name}
+                                        value={ratingitem.value}
+                                        queue={index + 1}
+                                    />)
+                                }
+                            </Stack>
+                        </Col>
+                    </Row>
+
                 </TabPanel>
             </Tabs>
 

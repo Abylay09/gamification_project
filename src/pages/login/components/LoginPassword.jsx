@@ -42,7 +42,11 @@ function LoginPassword() {
                 alert(language.invalid_data)
             }
         });
+    }
 
+    function scroll() {
+        const input = document.querySelector(".password-input")
+        input.scrollIntoView({ behavior: 'smooth' });
     }
 
     return (
@@ -58,6 +62,7 @@ function LoginPassword() {
                         <Form.Control
                             className='password-input login-password'
                             type="password"
+                            onFocus={() => scroll()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password", {

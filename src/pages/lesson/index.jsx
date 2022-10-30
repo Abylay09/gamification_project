@@ -11,17 +11,19 @@ import { useQuery } from '@tanstack/react-query'
 import StickyButton from 'components/buttons/StickyButton'
 import { getDataList } from 'utils/api/getDataList'
 import Loading from 'components/loading/Loading'
+import "./index.scss"
+import homebg from "assets/common/homebg.jpg"
 function LessonPage() {
     const params = useParams();
     const navigate = useNavigate();
     const [url, setUrl] = useState("");
-    const { data: lessonGroup,  isError, isLoading, isFetching } = useQuery(["LessonGroup", params.id], () => {
+    const { data: lessonGroup, isError, isLoading, isFetching } = useQuery(["LessonGroup", params.id], () => {
         return getDataList.getLessonsGroup(params.id)
     }, {
         retry: 3
     })
-    if(isFetching){
-        return <Loading/>
+    if (isFetching) {
+        return <Loading />
     }
     if (isLoading) {
         return <div>Loading</div>
@@ -36,36 +38,38 @@ function LessonPage() {
     }
     return (
         <Layout style={{ position: "relative" }}>
-            <Row>
-                <Col>
-                    <LessonHeader title={lessonGroup.lessons_group.title} order={lessonGroup.lessons_group.order}
-                        prev={lessonGroup.lessons_group.prev} next={lessonGroup.lessons_group.next}
-                    />
-                </Col>
-            </Row>
-            <Row>
-                <Col >
-                    <Stack gap={3} >
-                        {
-                            lessonGroup.lessons_group.lessons?.map(lesson =>
-                            (<LessonItem
-                                hasPlay={lesson.hasPlay}
-                                selectLesson={() => setUrl(lesson.uid)}
-                                title={lesson.title}
-                                order={lesson.order}
-                                startLesson={() => navigatePage(lesson.uid)} />)
-                            )
-                        }
-                        {/* <StickyButton text={"Начать"} onClick={() => navigatePage(url)}  /> */}
+            {/* <div className='bg h-100' style={{ backgroundImage:`url(${homebg})`,backgroundRepeat:"no-repeat"}}> */}
+            {/* <div className='bg h-100' > */}
+            <div className=' h-100' >
+                <Row>
+                    <Col>
+                        <LessonHeader title={lessonGroup.lessons_group.title} order={lessonGroup.lessons_group.order}
+                            prev={lessonGroup.lessons_group.prev} next={lessonGroup.lessons_group.next}
+                        />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col >
+                        <Stack gap={3} >
+                            {
+                                lessonGroup.lessons_group.lessons?.map(lesson =>
+                                (<LessonItem
+                                    hasPlay={lesson.hasPlay}
+                                    selectLesson={() => setUrl(lesson.uid)}
+                                    title={lesson.title}
+                                    order={lesson.order}
+                                    startLesson={() => navigatePage(lesson.uid)} />)
+                                )
+                            }
+                        </Stack>
+                    </Col>
+                </Row>
+            </div>
 
 
-                        {/* <FixedButton text={"Начать"} onClick={() => navigatePage(url)} /> */}
-                    </Stack>
-                </Col>
-            </Row>
+
             {/* popup с поздравлением */}
             {/* <Graduation show={true} /> */}
-
         </Layout >
     )
 }

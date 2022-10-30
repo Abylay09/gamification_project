@@ -87,6 +87,11 @@ function RestoreSms() {
         }
     }
 
+    function scroll() {
+        const input = document.querySelector(".sms-input")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
+
     return (
         <>
             <div style={{ paddingBottom: "30%" }}>
@@ -106,6 +111,7 @@ function RestoreSms() {
                             <input
                                 key={index}
                                 className="sms-input"
+                                onFocus={() => scroll()}
                                 value={digit}
                                 placeholder='-'
                                 onChange={event => handleChange(index, event.target.value)}

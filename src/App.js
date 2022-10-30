@@ -55,9 +55,9 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <div className="App h-100 " >
-        <button className="language-button" onClick={changeLanguage}>
+        {/* <button className="language-button" onClick={changeLanguage}>
           {languages.find(x => x !== language._language)}
-        </button>
+        </button> */}
         <Routes>
           <Route path="/" element={<Navigate to={"/lesson"} />} />
           <Route path="/login" element={<LoginPage />} />

@@ -47,6 +47,16 @@ function RestorePassword() {
             alert(language.password_not_equals)
         }
     }
+
+    function scroll1() {
+        const input = document.querySelector(".password-input")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function scroll2() {
+        const input = document.querySelector(".password-input--second")
+        input.scrollIntoView({ behavior: 'smooth' });
+    }
     return (
         <>
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
@@ -59,6 +69,7 @@ function RestorePassword() {
                         <Form.Control
                             className='password-input'
                             type="password"
+                            onFocus={() => scroll1()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password")}
@@ -78,6 +89,7 @@ function RestorePassword() {
                             className='password-input password-input--second'
                             type="password"
                             placeholder="•••••"
+                            onFocus={() => scroll2()}
                             aria-describedby="passwordHelpBlock"
                             {...register("passwordProve", {
                                 onChange: (event) => dispatch(setPassword("" + event.target.value))

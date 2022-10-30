@@ -14,6 +14,7 @@ import StickyButton from 'components/buttons/StickyButton';
 import Spinner from 'react-bootstrap/Spinner';
 import Loading from 'components/loading/Loading';
 function LectureInfoPage() {
+    let linkTask = "";
     const language = useSelector(state => state.language.language)
     const [show, showMore] = useState(false);
     const params = useParams();
@@ -33,11 +34,11 @@ function LectureInfoPage() {
             }
         })
         const result = await response.data;
-        console.log(result);
         return result;
-    })
+    },)
+
     if (isFetching) {
-        return <Loading/>
+        return <Loading />
     }
     if (status === "loading") {
         return <div>Loading</div>
@@ -45,6 +46,15 @@ function LectureInfoPage() {
     else if (status === "error") {
         return <div>Error</div>
     }
+
+
+    linkTask =
+        lecture.lesson.tasks.findLast(x => {
+            if (x.hasPlay) {
+                return x.uid
+            }
+        })
+
     return (
         <Container className='position-relative vh-100'>
             <Row>
@@ -75,11 +85,16 @@ function LectureInfoPage() {
                 </Col>
             </Row>
             {
+                <div className='position-absolute start-50 w-100' style={{ padding: "0 24px", bottom: "64px", transform: "translateX(-50%)" }}>
+                    <CommonButton text={"Приступить к заданиям"} onClick={() => navigate(`/task/${linkTask.uid}`)} />
+                </div>
+            }
+            {/* {
                 lecture.lesson.next ?
                     <div className='position-absolute start-50 w-100' style={{ padding: "0 24px", bottom: "64px", transform: "translateX(-50%)" }}>
-                        <CommonButton text={"Следующий урок"} onClick={() => navigate(`/lecture-info/${lecture.lesson.next}`)} />
+                        <CommonButton text={"Приступить к заданиям"} onClick={() => navigate(`/ lecture - info / ${ lecture.lesson.next } `)} />
                     </div> : ""
-            }
+            } */}
 
 
             {/* {show ? lecture.lesson.lectures[0].content : lecture.lesson.lectures[0].content.substring(0, lecture.lesson.lectures[0].content.length / 3)} */}

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useRef, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
@@ -6,12 +6,18 @@ import { setPhone, nextStep } from 'redux/features/signInSlice';
 import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/puzzles.png"
 import "./LoginPhone.scss"
+
 function LoginPhone() {
     const dispatch = useDispatch();
     const language = useSelector(state => state.language.language);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = () => {
         dispatch(nextStep());
+    }
+
+    function scroll() {
+        const input = document.querySelector(".phone-input")
+        input.scrollIntoView({ behavior: 'smooth' });
     }
 
     return (
@@ -29,6 +35,7 @@ function LoginPhone() {
                     <div className='input__wrapper'>
                         <Form.Control
                             className='phone-input'
+                            onFocus={() => scroll()}
                             type="number"
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
@@ -41,7 +48,7 @@ function LoginPhone() {
 
                         {errors?.phone && <p className='error-msg'>{language.required_field}</p>}
 
-                        <AuthButton text={language.next}  />
+                        <AuthButton text={language.next} />
                     </div>
                 </div>
             </form>
