@@ -114,7 +114,7 @@ let language = new LocalizedStrings({
     save: "SAVE"
  },
  ru: {
-    next:"ПРОДОЛЖИТЬ",
+    next:"Продолжить",
     login: "Войти",
     welcom: "Добро пожаловать в OpenSkill",
     input_phone: "Введи номер телефона",
@@ -159,7 +159,7 @@ let language = new LocalizedStrings({
     theory: "Теория",
     chapter: "Глава",
     pet: "Питомец",
-    play: "ИГРАТЬ",
+    play: "Играть",
     indicators: "Индикаторы",
     indicators_logical_thinking: "Логическое мышление",
     indicators_creativity: "Креативность",
@@ -182,7 +182,7 @@ let language = new LocalizedStrings({
     terms: "Условия",
     address: "Адрес",
     grafic: "График работы",
-    buy: "КУПИТЬ",
+    buy: "Купить",
     your_answer: "Введите ответ",
     answer: "Ответ",
     check: "Проверить",
@@ -198,9 +198,9 @@ let language = new LocalizedStrings({
     home: "Домой",
     room: "Комната",
     select_pet: "Выбери питомца",
-    select: "ВЫБРАТЬ",
+    select: "Выбрать",
     select_button_pet: "ВЫБРАТЬ ПИТОМЦА",
-    understood: "ПОНЯЛ",
+    understood: "Понял",
     training_title_1: "Привет, странник 👋",
     training_title_3: "У меня есть для тебя подарок 🎁",
     training_title_4: "Питомец выбран!",
@@ -221,8 +221,8 @@ let language = new LocalizedStrings({
     complete_indicators: "выполненных квестов",
     first_name: "Имя",
     last_name: "Фамилия",
-    change_profile: "ИЗМЕНИТЬ ПРОФИЛЬ",
-    save: "СОХРАНИТЬ"
+    change_profile: "Изменить профиль",
+    save: "Сохранить"
  }
 });
 

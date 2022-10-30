@@ -173,7 +173,8 @@ function TaskPage() {
             <Modal dialogClassName='custom-modal' contentClassName="custom-content" show={notCorrect} onHide={handleCloseCorrect}>
                 <Modal.Body>
                     <div className='custom-success'>
-                        <span>{language.no_answer}</span>
+                        {/* <span>{language.no_answer}</span> */}
+                        <span>Неправильный ответ</span>
                         <div className='custom-success__img custom-success__img--not-correct'><img src={CrossIcon} alt="" /></div>
                     </div>
                 </Modal.Body>
