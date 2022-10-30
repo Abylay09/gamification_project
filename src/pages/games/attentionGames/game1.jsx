@@ -17,6 +17,8 @@ export default class Game1 extends React.Component {
       exp: 0,
       strick: 0,
       time: 60,
+      error: [],
+      success: []
     }
   }
   componentDidMount() {
@@ -47,11 +49,21 @@ export default class Game1 extends React.Component {
     });
 
   }
-  randA(value) {
+  randA(value, i, j) {
+    if(this.state.value === value) {
+      this.setState({ success: [i, j] })
+      setTimeout(() => {
+        this.setState({ success: [] })
+      }, 600)
+    }
     if (this.state.value === value && this.state.strick < 13)
-      this.setState({ strick: this.state.strick + 1 })
-    else if (this.state.value !== value)
-      this.setState({ strick: 0 })
+      this.setState({ strick: this.state.strick + 1, success: [i, j] })
+    else if (this.state.value !== value) {
+      this.setState({ strick: 0, error: [i, j] })
+      setTimeout(() => {
+        this.setState({ error: [] })
+      }, 600)
+    }
     let ceil = Math.floor(this.state.strick / 3)
     this.setState({ exp: this.state.exp + (this.state.value === value ? (ceil + 1) : 0) })
     let arr = [], ceil1 = 0, ceil2 = 0
@@ -91,8 +103,16 @@ export default class Game1 extends React.Component {
         </Row>
         <Row>
           <Col>
-            <div className="grid">
-              {this.state.arr.map(x => (<ul>{x.map(y => (<li onClick={() => this.randA(y)}>{y}</li>))}</ul>))}
+            <div className={'grid' + (this.state.error.length ? ' error' : '')}>
+              {this.state.arr.map((x, i) => (<ul>{x.map((y, j) => (
+                <li
+                className={this.state.error.length && this.state.error[0] === i && this.state.error[1] === j ? 'error' 
+                : this.state.success.length && this.state.success[0] === i && this.state.success[1] === j ? 'success' : ''}
+                onClick={() => this.randA(y, i, j)}
+              >
+                {y}
+              </li>
+              ))}</ul>))}
             </div>
           </Col>
         </Row>
