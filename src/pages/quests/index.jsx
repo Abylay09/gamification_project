@@ -19,7 +19,7 @@ function QuestsPage() {
 
             <Row>
                 <Col>
-                    <div className='d-flex align-items-center py-4' onClick={() => navigate(-1)}>
+                    <div className='d-flex align-items-center py-4' onClick={() => navigate("/lesson")}>
                         <img style={{ height: "20px" }} src={BlueLeftArrow} alt="" />
                         <h3 className="page-title" >{language.quests}</h3>
                     </div>

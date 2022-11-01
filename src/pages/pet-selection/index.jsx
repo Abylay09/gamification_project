@@ -1,10 +1,9 @@
 import React, { Suspense, useRef, useState } from 'react'
-import { Canvas, useFrame, } from '@react-three/fiber'
-import { OrbitControls } from '@react-three/drei'
+import { Canvas,} from '@react-three/fiber'
+import { Environment, OrbitControls, useEnvironment } from '@react-three/drei'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation } from "swiper";
 import { Container } from 'react-bootstrap';
-
 import { PetApi } from 'utils/api/Pet';
 // models
 import Rabbit from './components/Rabbit';
@@ -25,6 +24,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 
+
 function PetSliderPage(props) {
     const navigate = useNavigate()
     const language = useSelector(state => state.language.language);
@@ -32,7 +32,6 @@ function PetSliderPage(props) {
     const petsByIndex = ["Taryk", "Rabbit", "Cat", "Tiger", "Wolf", "Sf", "Cougar",]
 
     const mutation = useMutation(petName => PetApi.choosePet(petName))
-
     function savePet() {
         mutation.mutate(pet, {
             onSuccess() {
@@ -51,7 +50,7 @@ function PetSliderPage(props) {
             <div style={{ width: "100%", height: "80vh" }}>
                 <h4 className='mt-3'>{language.select_pet}</h4>
                 <Swiper
-                    style={{height: "calc(100% - 120px)"}}
+                    style={{ height: "calc(100% - 120px)" }}
                     direction={"horizontal"}
                     slidesPerView={1}
                     mousewheel={true}
