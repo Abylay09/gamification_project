@@ -7,6 +7,10 @@ import FixedButton from 'components/buttons/fixed-button/FixedButton'
 import GameHeader from 'pages/games/components/GameHeader';
 import axios from 'axios';
 import SubmarineIcon from "assets/games/thinking/submarine-svgrepo-com.svg"
+import TransportIcon from "assets/games/thinking/loader-transport-svgrepo-com.svg"
+import ShipIcon from "assets/games/thinking/ship-svgrepo-com.svg"
+import TruckIcon from "assets/games/thinking/truck-svgrepo-com.svg"
+import AirplaneIcon from "assets/games/thinking/airplane-svgrepo-com.svg"
 
 let positionX = 0, positionY = 0, doc = document.getElementsByTagName("html")[0]
 export default class Game3 extends React.Component {
@@ -18,7 +22,7 @@ export default class Game3 extends React.Component {
       directions: ["left", "up", "right", "down"],
       question: 1,
       answer: null,
-      colors: ["#EF5755", "#567BFF", "#FFD056", "#25A749", "#622300"],
+      colors: [SubmarineIcon, TransportIcon, ShipIcon, TruckIcon, AirplaneIcon],
       active_color: null,
       time: 60,
       back_time: 60,
@@ -121,7 +125,7 @@ export default class Game3 extends React.Component {
     }
   }
   getColor(index) {
-    return { color: this.state.colors[index] }
+    return this.state.colors[index]
   }
   randCoordinats(index, direction, timer, parent_index) {
     let top = Math.random() * doc.clientHeight,
@@ -137,14 +141,15 @@ export default class Game3 extends React.Component {
         left = parseInt(document.getElementById("arrow-" + this.state.colors[index] + "-" + parent_index).style.left.replace("px", "")) + (direction === "left" ? -100 : 100)
       }
     }
-    if (top < 24) {
+    console.log(doc.clientHeight)
+    if (top < 0) {
       transition = "all 0s"
       top = doc.clientHeight + 48
       left = Math.random() * doc.clientWidth
     }
     else if (top > doc.clientHeight + 124) {
       transition = "all 0s"
-      top = -48
+      top = 10
       left = Math.random() * doc.clientWidth
     }
     if (left < -124) {
@@ -171,7 +176,7 @@ export default class Game3 extends React.Component {
 
       <Container className='container-custom-thinking-1' onTouchMove={e => this.touchMove(e)} onTouchStart={e => this.touchStart(e)}>
         <GameHeader title={"Направление и движение"} />
-        <Row>
+        <Row className="game-stats">
           <Col xs="4">
             Баллы: {this.state.exp}
           </Col>
@@ -182,16 +187,21 @@ export default class Game3 extends React.Component {
             Уровень: {this.state.step}
           </Col>
           <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
-            <span>Куда {this.state.question ? "Движутся" : "Смотрят"}</span> <span style={this.getColor(this.state.active_color)}>
-              <img src={SubmarineIcon} />
-            </span>
+            <div className={"task-title" + (this.state.question ? " active" : "")}>
+              <span>Куда Движутся</span>
+              <img src={this.getColor(this.state.active_color)} height="32" />
+            </div>
+              <div className={"task-title" + (!this.state.question ? " active" : "")}>
+                <span>Куда Смотрят</span>
+                  <img src={this.getColor(this.state.active_color)} height="32" />
+              </div>
           </Col>
         </Row>
         <Row>
           {new Array(20).fill(1).map((y, j) =>
             this.state.direction_move.map((x, i) =>
               <div style={this.randCoordinats(i, x, this.state.timer, j)} id={"arrow-" + this.state.colors[i] + "-" + j} className={"arrow direction-" + this.state.direction_obs[i]}> {
-                <img src={SubmarineIcon} />
+                <img src={this.state.colors[i]} />
               } </div>
             )
           )

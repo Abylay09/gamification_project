@@ -6,6 +6,18 @@
   min-width: 100vw;
   overflow: hidden;
   overflow-y: hidden;
+  &:after{
+    content: "";
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://media.tenor.com/6ZUs587t-_YAAAAC/blue-heart-black.gif');
+    background-size: cover;
+    z-index: -1;
+    // opacity: 0.5;
+  }
   span {
     font-size: 1.5rem;
     &:last-child {
@@ -31,7 +43,7 @@
   }
   .direction- {
     &left {
-      transform: rotate(180deg)
+      transform: scale(-1, 1)
     }
     &up {
       transform: rotate(270deg)
@@ -41,6 +53,32 @@
     }
     &down {
       transform: rotate(90deg)
+    }
+  }
+}
+.game-stats {
+  color: white;
+  z-index: 10;
+  position: relative;
+}
+.task-title {
+  background-color: #c7c7c7;
+  color: grey;
+  border-bottom: 1px solid grey;
+  padding: 0.5rem 1rem;
+  width: 300px;
+  text-align: center;
+  opacity: 0.25;
+  & img {
+    opacity: 0;
+    margin-left: 4px;
+  }
+  &.active {
+    opacity: 0.9;
+    background: #2A80FF;
+    color: white;
+    & img {
+      opacity: 1;
     }
   }
 }
