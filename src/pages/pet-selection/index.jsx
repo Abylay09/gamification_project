@@ -42,7 +42,7 @@ function PetSliderPage(props) {
     function savePet() {
         mutation.mutate(pet, {
             onSuccess() {
-                props.selectPet()
+                // props.selectPet()
                 alert("Питомец успешно добавлен")
             },
             onError() {
