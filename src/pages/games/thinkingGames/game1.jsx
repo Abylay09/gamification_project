@@ -22,7 +22,7 @@ export default class Game3 extends React.Component {
       directions: ["left", "up", "right", "down"],
       question: 1,
       answer: null,
-      colors: [SubmarineIcon, TransportIcon, ShipIcon, TruckIcon, AirplaneIcon],
+      colors: [SubmarineIcon, ShipIcon, TruckIcon, AirplaneIcon, TransportIcon],
       active_color: null,
       time: 60,
       back_time: 60,
