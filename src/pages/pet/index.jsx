@@ -8,7 +8,7 @@ import StickyButton from 'components/buttons/StickyButton';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
 import { Button, Container } from 'react-bootstrap';
-import { OrbitControls } from '@react-three/drei'
+import { Environment, OrbitControls } from '@react-three/drei'
 
 //models
 import Taryk from 'pages/pet-selection/components/Taryk';

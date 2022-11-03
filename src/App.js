@@ -65,8 +65,6 @@ function App() {
           <Route path="/restore" element={<RestorePage />} />
 
           <Route element={<ProtectedRoutes />}>
-
-
             <Route path='/lesson' >
               <Route index element={<LessonPage />} />
               <Route path=':id' element={<LessonPage />} />
