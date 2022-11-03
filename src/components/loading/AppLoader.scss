@@ -1,12 +1,14 @@
 .app-loader {
-    background: linear-gradient(300deg, deepskyblue, darkviolet, blue);
-    background-size: 180% 180%;
-    animation: gradient-animation 3s ease infinite;
+    // background: linear-gradient(300deg, deepskyblue, darkviolet, blue);
+    // background-size: 180% 180%;
+    // animation: gradient-animation 3s ease infinite;
+    background-image: url("../../assets/common/loader-bg.png") ;
+    background-size: cover;
 }
 
 .app-loader__title {
     font-size: 48px;
-    color: #fff;
+    color: #000;
 }
 
 .text-focus-in {

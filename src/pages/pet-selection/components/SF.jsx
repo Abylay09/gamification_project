@@ -2,9 +2,9 @@ import React, { useRef } from 'react'
 import { useGLTF } from '@react-three/drei'
 
 function SF(props) {
-    const { nodes, materials } = useGLTF('/SFDraco.gltf')
+    const { nodes, materials } = useGLTF('/models/SFDraco.gltf')
     return (
-      <group {...props} dispose={null} scale = {0.012} position={[0, -80, 0]}>
+      <group {...props} dispose={null} scale = {0.0015} position={[0, -7, 0]}>
         <mesh geometry={nodes.Plane_001.geometry} material={materials.Skin} />
         <mesh geometry={nodes.Plane_006.geometry} material={materials.Skin} />
         <mesh geometry={nodes.Plane_007.geometry} material={materials.Skin} />

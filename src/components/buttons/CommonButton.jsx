@@ -6,9 +6,9 @@ const button = {
     borderRadius: "12px"
 }
 
-function CommonButton({ text, onClick }) {
+function CommonButton({ text, onClick, color }) {
     return (
-        <Button  className='w-100' variant="primary" style={button} onClick={onClick}>{text}</Button>
+        <Button className='w-100' variant={color} style={button} onClick={onClick}>{text}</Button>
     )
 }
 
