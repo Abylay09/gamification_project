@@ -11,6 +11,7 @@ import axios from 'axios'
 import CheckIcon from "assets/modal/check.svg"
 import CrossIcon from "assets/modal/cross.svg"
 
+import DOMPurify from 'dompurify'
 import "./index.scss"
 import { useRef } from 'react'
 import { useSelector } from 'react-redux'
@@ -98,7 +99,7 @@ function TaskPage() {
 
     return (
         <Container className='vh-100 min-vh-100 d-flex flex-column'>
-            <Row className="row-sticky mt-3">
+            <Row className="row-sticky">
                 <Col>
                     <div className='d-flex py-4 align-items-center'>
                         <img onClick={() => navigate(-1)} style={{ height: "20px" }} src={PurpleCross} alt="" />
@@ -110,8 +111,8 @@ function TaskPage() {
 
             <Row className='flex-grow-1'>
                 <Col className='d-flex flex-column'>
-                    <div >
-                        <h5 className="condition text-center mb-2" >{query.data.condition}</h5>
+                    <div className="special-div" >
+                        <h5 className="condition text-center mb-2"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(query.data.condition)}}></h5>
                         <div className='text-center' >
                             {
                                 query.data.type === "test"
