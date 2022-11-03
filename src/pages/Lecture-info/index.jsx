@@ -69,7 +69,10 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <div className='react-player-container mt-4'>
-                        <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url="http://openskill.uz/static_assets/21ec1001-6e14-4dbf-a20d-12bbd0fbf9be.mp4" />
+                        {lecture.lesson.lectures[0].video ? 
+                            <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url={lecture.lesson.lectures[0].video} />
+                            : ''
+                        }
                     </div>
                 </Col>
             </Row>

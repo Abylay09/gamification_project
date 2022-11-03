@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import FixedButton from 'components/buttons/fixed-button/FixedButton'
 import GameHeader from 'pages/games/components/GameHeader';
 import axios from 'axios';
+import SubmarineIcon from "assets/games/thinking/submarine-svgrepo-com.svg"
 
 let positionX = 0, positionY = 0, doc = document.getElementsByTagName("html")[0]
 export default class Game3 extends React.Component {
@@ -181,13 +182,17 @@ export default class Game3 extends React.Component {
             Уровень: {this.state.step}
           </Col>
           <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
-            <span>Куда {this.state.question ? "Движутся" : "Смотрят"}</span> <span style={this.getColor(this.state.active_color)}>стрелочки</span>
+            <span>Куда {this.state.question ? "Движутся" : "Смотрят"}</span> <span style={this.getColor(this.state.active_color)}>
+              <img src={SubmarineIcon} />
+            </span>
           </Col>
         </Row>
         <Row>
           {new Array(20).fill(1).map((y, j) =>
             this.state.direction_move.map((x, i) =>
-              <div style={this.randCoordinats(i, x, this.state.timer, j)} id={"arrow-" + this.state.colors[i] + "-" + j} className={"arrow direction-" + this.state.direction_obs[i]}> {"<-"} </div>
+              <div style={this.randCoordinats(i, x, this.state.timer, j)} id={"arrow-" + this.state.colors[i] + "-" + j} className={"arrow direction-" + this.state.direction_obs[i]}> {
+                <img src={SubmarineIcon} />
+              } </div>
             )
           )
           }
