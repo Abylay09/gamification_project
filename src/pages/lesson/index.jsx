@@ -40,7 +40,7 @@ function LessonPage() {
         <Layout style={{ position: "relative" }}>
             {/* <div className='bg h-100' style={{ backgroundImage:`url(${homebg})`,backgroundRepeat:"no-repeat"}}> */}
             {/* <div className='bg h-100' > */}
-            <div className=' h-100' >
+            <div className='bg h-100 pt-4' >
                 <Row>
                     <Col>
                         <LessonHeader title={lessonGroup.lessons_group.title} order={lessonGroup.lessons_group.order}
