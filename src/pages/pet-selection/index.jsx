@@ -46,7 +46,7 @@ function PetSliderPage(props) {
                 alert("Питомец успешно добавлен")
             },
             onError() {
-                alert("Error")
+                alert("Ошибка добавления")
             }
         })
     }

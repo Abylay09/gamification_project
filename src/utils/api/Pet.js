@@ -1,7 +1,5 @@
 import axios from "axios";
 
-
-
 export const PetApi = {
     choosePet(petName) {
         const token = localStorage.getItem("token")

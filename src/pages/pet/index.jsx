@@ -1,4 +1,5 @@
-import React, { Suspense, useRef } from 'react'
+import React, { Component, Suspense, useRef } from 'react'
+
 import { Canvas } from '@react-three/fiber';
 import Layout from 'layout/Layout'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
@@ -33,16 +34,32 @@ import Tropics from 'pages/pet-selection/environment/Tropics';
 import SkyIsland from 'pages/pet-selection/environment/SkyIsland';
 import Jungle from 'pages/pet-selection/environment/Jungle';
 import Valley from 'pages/pet-selection/environment/Valley';
+import { useEffect } from 'react';
+import { useState } from 'react';
 
 function PetPage() {
     const language = useSelector(state => state.language.language);
     const navigate = useNavigate()
+    const [loaded, setLoaded] = useState(false)
     const [MyPet, MyIndicators] = useQueries({
         queries: [
             { queryKey: ['MyPet'], queryFn: () => PetApi.getPet(), staleTime: Infinity },
             { queryKey: ['MyIndicator'], queryFn: () => Rating.getMyIndicator(), staleTime: Infinity }
         ]
     })
+
+
+    useEffect(() => {
+        setTimeout(() => {
+            const tab_content = document.querySelector(".tab-inner__content");
+            const my_pet = document.querySelector(".my-pet");
+            console.log(tab_content.offsetHeight);
+            console.log(tab_content.offsetWidth);
+            my_pet.style.width = tab_content.offsetWidth + "px";
+            my_pet.style.height = tab_content.offsetHeight + "px";
+            console.log("shoot");
+        }, 1000)
+    }, [])
 
     // const { data, isLoading, isError } = useQuery(["MyPet"], () => {
     //     return PetApi.getPet()
@@ -62,7 +79,7 @@ function PetPage() {
     else if (MyIndicators.isError) {
         return <div>Error</div>
     }
-    console.log(MyPet.data.profile);
+
     return (
         <Layout>
             <Tabs className="custom-tabs">
@@ -73,8 +90,9 @@ function PetPage() {
 
                 <TabPanel className="custom-tab">
                     <div className='tab-inner'>
-                        <div className='tab-inner__content pt-2 pb-3'>
-                            <div style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
+                        <div className='tab-inner__content pt-2 pb-3' >
+                            <div className='my-pet' >
+                                {/* <div className='my-pet' style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}> */}
                                 {(() => {
                                     switch (MyPet.data.profile.pet) {
                                         case 'Cat':

@@ -8,7 +8,7 @@ import logo from "assets/login/puzzles.png"
 import "./LoginPhone.scss"
 
 
-function LoginPhone() {
+function LoginPhone({ parent }) {
     const ref = useRef();
     const dispatch = useDispatch();
     const language = useSelector(state => state.language.language);
@@ -16,14 +16,26 @@ function LoginPhone() {
     const onSubmit = () => {
         dispatch(nextStep());
     }
-   
 
-    function scrollToInput(){
-        const input = document.querySelector(".phone-input")
+
+    function scrollToInput() {
+
+        // const windowInnerHeight = document.documentElement.clientHeight / 4
+        // const bb = document.getElementsByTagName("BODY")[0];
+        // // const y = input.getBoundingClientRect().top + window.scrollY;
+        // const y = input.getBoundingClientRect();
+        // console.log(y);
+        // console.log(windowInnerHeight);
+        const input = document.querySelector(".phone-input");
+        const wrapper = document.querySelector(".phone-form");
         const y = input.getBoundingClientRect().top + window.scrollY;
-        console.log(input.offsetTop);
+        if (wrapper.style.marginBottom != "50%") {
+            wrapper.style.marginBottom = "50%"
+        } else {
+            wrapper.style.marginBottom = "0"
+        }
         window.scrollTo({
-            top  : y
+            top: y
         });
     }
     // useEffect(() => {
@@ -38,9 +50,9 @@ function LoginPhone() {
     }
 
     return (
-        <>
+        <div>
             <div style={{ paddingBottom: "30%" }}>
-                <img src={logo} alt="" />
+                <img src={logo} alt="" onClick={() => scrollToInput()} />
                 <p className='phone-info__text'>{language.welcom}</p>
             </div>
             <form onSubmit={handleSubmit(onSubmit)} className="phone-form">
@@ -53,14 +65,38 @@ function LoginPhone() {
                         <Form.Control
                             className='phone-input'
                             ref={ref}
-                            onClick={() => scrollToInput()}
-                            // onFocus={() => scroll()}
+                            onFocus={() => {
+                                const wrapper = document.querySelector(".phone-form");
+
+                                // document.body.style.height = document.body.offsetHeight / 4 + "px"
+                                wrapper.style.marginBottom = document.body.offsetHeight / 4 + "px"
+                                setTimeout(() => {
+                                    const input = document.querySelector(".phone-input")
+                                    const y = input.getBoundingClientRect().top + window.scrollY;
+                                    window.scrollTo({
+                                        top: y,
+                                        behavior: "smooth"
+                                    });
+                                }, 100)
+
+                            }}
+
+                            // onClick={() => scrollToInput()}
                             type="number"
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
                             {...register("phone", {
                                 required: true,
-                                onChange: (event) => dispatch(setPhone("" + event.target.value))
+                                onChange: (event) => dispatch(setPhone("" + event.target.value)),
+                                onBlur: () => {
+                                    const input = document.querySelector(".phone-input");
+                                    const y = input.getBoundingClientRect().top + window.scrollY;
+                                    const wrapper = document.querySelector(".phone-form");
+                                    wrapper.style.marginBottom = 0
+                                    window.scrollTo({
+                                        top: y
+                                    });
+                                }
                             })}
                         />
                         <p className='phone-input__wrapper-title'>{language.phone}</p>
@@ -71,7 +107,7 @@ function LoginPhone() {
                     </div>
                 </div>
             </form>
-        </>
+        </div>
     )
 }
 
