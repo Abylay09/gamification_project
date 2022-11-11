@@ -6,17 +6,22 @@ import { setPhone, nextStep } from 'redux/features/signUpSlice';
 import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/puzzles.png"
 import "./PhoneInput.scss"
+import { useRef } from 'react';
 function PhoneInput() {
     const dispatch = useDispatch();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-
+    const ref = useRef()
     const onSubmit = () => {
         dispatch(nextStep());
     }
 
-    function scroll() {
+    function scrollToInput() {
         const input = document.querySelector(".phone-input")
-        input.scrollIntoView({ behavior: 'smooth' });
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y,
+
+        });
     }
 
     return (
@@ -34,8 +39,9 @@ function PhoneInput() {
                     <div className='input__wrapper'>
                         <Form.Control
                             className='phone-input'
+                            ref = {ref}
                             type="number"
-                            onFocus={() => scroll()}
+                            onFocus={() => scrollToInput()}
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
                             {...register("phone", {

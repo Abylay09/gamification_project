@@ -7,7 +7,7 @@ function GameHeader({ children, title }) {
     const navigate = useNavigate()
     return (
             <div className='game-header d-flex px-3 pt-4' >
-                <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate(-1)} />
+                <img style={{ height: "20px" }} src={PurpleCross} alt="" onClick={() => navigate("/quests")} />
                 <h3 className="lecture-title">{title}</h3>
             </div>
     )

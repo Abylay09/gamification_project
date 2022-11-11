@@ -104,6 +104,7 @@ function App() {
               <Route path="attention" element={<Game1 />} />
               <Route path="attention-cards" element={<CardGame />} />
               <Route path="memory" element={<Game2 />} />
+              {/* <Route path="images" element={<MemoryImages />} /> */}
               <Route path="images" element={<MemoryImages />} />
               <Route path="thinking" element={<Game3 />} />
               <Route path="thinking-figure" element={<Figures />} />

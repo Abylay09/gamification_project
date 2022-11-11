@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei'
 import Rabbit from '../components/Rabbit'
 
 function Valley(props) {
-    const { nodes, materials } = useGLTF('/models/rooms/mountain_valley.glb')
+    const { nodes, materials } = useGLTF('models/rooms/mountain_valley.glb')
     return (
         <group>
             <Rabbit/>

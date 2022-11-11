@@ -48,14 +48,20 @@ function RestorePassword() {
         }
     }
 
-    function scroll1() {
+    function scrollToInput1() {
         const input = document.querySelector(".password-input")
-        input.scrollIntoView({ behavior: 'smooth' });
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y
+        });
     }
 
-    function scroll2() {
+    function scrollToInput2() {
         const input = document.querySelector(".password-input--second")
-        input.scrollIntoView({ behavior: 'smooth' });
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y
+        });
     }
     return (
         <>
@@ -69,7 +75,7 @@ function RestorePassword() {
                         <Form.Control
                             className='password-input'
                             type="password"
-                            onFocus={() => scroll1()}
+                            onClick={() => scrollToInput1()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password")}
@@ -89,7 +95,7 @@ function RestorePassword() {
                             className='password-input password-input--second'
                             type="password"
                             placeholder="•••••"
-                            onFocus={() => scroll2()}
+                            onClick={() => scrollToInput2()}
                             aria-describedby="passwordHelpBlock"
                             {...register("passwordProve", {
                                 onChange: (event) => dispatch(setPassword("" + event.target.value))

@@ -51,6 +51,8 @@ export default function SmsInput() {
         setCounter(60)
     }
 
+    
+
     const onSubmit = (e) => {
         e.preventDefault()
         if (digits.length < 4) {
@@ -98,11 +100,13 @@ export default function SmsInput() {
         }
     }
 
-    function scroll() {
-        const input = document.querySelector(".sms-input")
-        input.scrollIntoView({ behavior: 'smooth' });
+    function scrollToInput() {
+        const input = document.querySelector(".signin-sms__inputs")
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y
+        });
     }
-
     return (
         <>
             <div style={{ paddingBottom: "30%" }}>
@@ -122,7 +126,7 @@ export default function SmsInput() {
                                 key={index}
                                 className="sms-input"
                                 value={digit}
-                                onFocus={() => scroll()}
+                                onClick={() => scrollToInput()}
                                 placeholder='-'
                                 onChange={event => handleChange(index, event.target.value)}
                                 onKeyDown={event => handleKeyDown(index, event)}

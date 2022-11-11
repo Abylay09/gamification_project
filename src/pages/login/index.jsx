@@ -4,6 +4,7 @@ import { Container, Stack } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import LoginPassword from './components/LoginPassword'
 import LoginPhone from './components/LoginPhone'
+
 function LoginPage() {
     const step = useSelector((state) => state.signIn.step);
     const [isLoading, setLoading] = useState(true)

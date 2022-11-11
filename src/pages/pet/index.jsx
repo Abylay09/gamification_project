@@ -43,6 +43,7 @@ function PetPage() {
             { queryKey: ['MyIndicator'], queryFn: () => Rating.getMyIndicator(), staleTime: Infinity }
         ]
     })
+
     // const { data, isLoading, isError } = useQuery(["MyPet"], () => {
     //     return PetApi.getPet()
     // })
@@ -77,20 +78,23 @@ function PetPage() {
                                 {(() => {
                                     switch (MyPet.data.profile.pet) {
                                         case 'Cat':
-                                            return <Canvas camera={{ fov: 70, position: [0, 30, 45] }}>
-                                                <color attach="background" args={["#D3D3D3"]} />
-                                                <Suspense fallback={null}>
-                                                    <ambientLight />
-                                                    <directionalLight intensity={0.5} position={[0, 0, 50]} />
-                                                    <directionalLight intensity={0.4} position={[0, 0, 20]} />
-                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
-                                                    {/* <Cat /> */}
-                                                    <CatRoom />
-                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
-                                                </Suspense>
-                                            </Canvas>
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 70, position: [0, 30, 45] }}
+                                                    style={{ width: "100%", height: "100%" }}>
+                                                    <color attach="background" args={["#D3D3D3"]} />
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight />
+                                                        <directionalLight intensity={0.5} position={[0, 0, 50]} />
+                                                        <directionalLight intensity={0.4} position={[0, 0, 20]} />
+                                                        <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                        {/* <Cat /> */}
+                                                        <CatRoom />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                            </div>
                                         case 'Wolf':
-                                            return <Canvas camera={{ fov: 55, position: [0, 50, 90] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 55, position: [0, 50, 90] }}>
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={3} position={[0, 0, 20]} />
@@ -99,8 +103,9 @@ function PetPage() {
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
                                             </Canvas>
+                                            </div>
                                         case 'Taryk':
-                                            return <Canvas camera={{ fov: 60, position: [0, 55, 115] }} >
+                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 60, position: [0, 55, 115] }} >
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={1} position={[0, 0, -50]} />
@@ -110,8 +115,9 @@ function PetPage() {
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
                                             </Canvas>
+                                            </div>
                                         case 'Rabbit':
-                                            return <Canvas camera={{ fov: 55, position: [0, 10, 25] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 55, position: [0, 10, 25] }}>
                                                 <color attach="background" args={["#D3D3D3"]} />
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
@@ -122,8 +128,9 @@ function PetPage() {
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
                                             </Canvas>
+                                            </div>
                                         case 'Tiger':
-                                            return <Canvas camera={{ fov: 60, position: [0, 20, 120] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 60, position: [0, 20, 120] }}>
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={1} position={[0, 0, 20]} />
@@ -132,8 +139,9 @@ function PetPage() {
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
                                             </Canvas>
+                                            </div>
                                         case 'Sf':
-                                            return <Canvas camera={{ fov: 58, position: [0, 10, 35] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 58, position: [0, 10, 35] }}>
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={3} position={[0, 50, 80]} />
@@ -143,8 +151,9 @@ function PetPage() {
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
                                             </Canvas>
+                                            </div>
                                         case 'Cougar':
-                                            return <Canvas camera={{ fov: 55, position: [0, 15, 40] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 55, position: [0, 15, 40] }} >
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={3} position={[0, 50, 80]} />
@@ -154,6 +163,7 @@ function PetPage() {
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
                                             </Canvas>
+                                            </div>
                                         default:
                                             return <Button
                                                 variant="warning"
