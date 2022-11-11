@@ -10,6 +10,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios'
 import CheckIcon from "assets/modal/check.svg"
 import CrossIcon from "assets/modal/cross.svg"
+import al_horesmi from "assets/common/al_horesmi.png"
 
 import DOMPurify from 'dompurify'
 import "./index.scss"
@@ -112,7 +113,13 @@ function TaskPage() {
             <Row className='flex-grow-1'>
                 <Col className='d-flex flex-column'>
                     <div className="special-div" >
-                        <h5 className="condition text-center mb-2"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(query.data.condition)}}></h5>
+                        <div className="condition">
+                            <h5 className="text-center mb-2"  dangerouslySetInnerHTML={{__html: DOMPurify.sanitize(query.data.condition)}}></h5>
+                            <div className="condition-img">
+                                <img src={al_horesmi} alt="" />
+                            </div>
+                        </div>
+
                         <div className='text-center' >
                             {
                                 query.data.type === "test"

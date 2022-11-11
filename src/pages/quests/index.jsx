@@ -68,7 +68,7 @@ function QuestsPage() {
                             </div>
                             <div className='quest-item__text flex-grow-0'>
                                 <p className='quest-item__title '>{language.indicators_memory}</p>
-                                <p className='quest-item__subtitle '>{language.find_digit}</p>
+                                <p className='quest-item__subtitle '>{language.order_memorization}</p>
                             </div>
                         </div>
 

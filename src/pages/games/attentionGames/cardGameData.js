@@ -11,8 +11,8 @@ export const data = [
     },
     {
         id: 2,
-        color: "#000000",
-        colorName: "Черный"
+        color: "#FFC0CB",
+        colorName: "Розовый"
     },
     {
         id: 3,
