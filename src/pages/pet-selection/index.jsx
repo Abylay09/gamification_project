@@ -59,8 +59,8 @@ function PetSliderPage(props) {
             <div style={{ width: "100%", height: "80vh" }}>
                 <h4 className='mt-3'>{language.select_pet}</h4>
                 <Swiper
-                    className='mb-5 mt-5'
-                    style={{ height: "calc(100% - 120px)" }}
+                    className='mb-5'
+                    style={{ height: "calc(100% - 120px - 3rem)" }}
                     direction={"horizontal"}
                     slidesPerView={1}
                     mousewheel={true}
