@@ -116,7 +116,7 @@ export default class Game2 extends React.Component {
               Ход: {this.state.step}
             </Col>
             <Col xs="12" className="justify-content-center align-items-center d-flex flex-column py-4">
-              <span>Найдите число</span> <span>{this.state.value}</span>
+              <span>Запомните порядок</span> <span>{this.state.value}</span>
             </Col>
         </Row>
           <Row>

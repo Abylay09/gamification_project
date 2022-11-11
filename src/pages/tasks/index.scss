@@ -1,14 +1,90 @@
 .condition {
-    font-weight: 700;
-    font-size: 15px;
-    line-height: 22px;
-    color: #000000;
     position: sticky;
-    top: 68px;
-    background-color: white;
-    margin-bottom: 0;
-    padding-bottom: 1rem;
+    top: 0;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    & h5 {
+        margin-bottom: 0;
+        font-weight: 700;
+        font-size: 15px;
+        line-height: 22px;
+        transform: translateY(50%);
+        background-color: #A1D7A3;
+        border-radius: 4px;
+        padding: 2rem 1rem;
+        max-width: 80vw;
+        min-width: 80vw;
+        margin-left: 10vw;
+        color: #27272F;
+        z-index: 2;
+        animation: swingYMes 6s linear infinite;
+    }
+    &-img {
+        z-index: 1;
+        position: relative;
+        &:before{
+            content: "";
+            width: 0;
+            height: 0;
+            border-top: 20px solid #A1D7A3;
+            border-right: 10px solid transparent;
+            border-left: 10px solid transparent;
+            position: absolute;
+            left: 54%;
+            top: 45px;
+            animation: swingY 6s linear infinite;
+        }
+        height: 180px;
+        & img {
+            height: 180px;
+        }
+    }
 }
+
+@keyframes swingYMes {
+    15% {
+      transform: translateY(calc(50% + 6px));
+    }
+    30% {
+      transform: translateY(calc(50% - 6px));
+    }
+    40% {
+      transform: translateY(calc(50% + 6px));
+    }
+    50% {
+      transform: translateY( calc(50% - 6px));
+    }
+    65% {
+      transform: translateY(calc(50% + 6px));
+    }
+    100% {
+      transform: translateY(50%);
+    }
+}
+@keyframes swingY {
+    15% {
+      transform: translateY(6px);
+    }
+    30% {
+      transform: translateY(-6px);
+    }
+    40% {
+      transform: translateY(6px);
+    }
+    50% {
+      transform: translateY(-6px);
+    }
+    65% {
+      transform: translateY(6px);
+    }
+    100% {
+      transform: translateY(0);
+    }
+}
+  
 .row-sticky {
     position: sticky;
     top: 0;
@@ -102,5 +178,5 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    justify-content: center;
+    justify-content: flex-start;
 }
