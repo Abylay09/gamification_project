@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useRef} from 'react'
 import { useForm } from 'react-hook-form'
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
@@ -22,7 +22,7 @@ function LoginPassword() {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const dispatch = useDispatch();
     const navigate = useNavigate();
-
+    const ref = useRef();
     const phone = useSelector((state) => state.signIn.phone)
     const passwd = useSelector((state) => state.signIn.password)
 
@@ -44,9 +44,13 @@ function LoginPassword() {
         });
     }
 
-    function scroll() {
-        const input = document.querySelector(".password-input")
-        input.scrollIntoView({ behavior: 'smooth' });
+    function scrollToInput() {
+        const input = document.querySelector(".login-password")
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        console.log(input.offsetTop);
+        window.scrollTo({
+            top: y
+        });
     }
 
     return (
@@ -62,7 +66,8 @@ function LoginPassword() {
                         <Form.Control
                             className='password-input login-password'
                             type="password"
-                            onFocus={() => scroll()}
+                            ref={ref}
+                            onClick={() => scrollToInput()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password", {

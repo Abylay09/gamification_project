@@ -6,6 +6,7 @@ import ColorCardImg from "assets/quests/color-cards.svg"
 import RememberOrderimg from "assets/quests/remember-order.svg"
 import RememberItemsImg from "assets/quests/remember-items.svg"
 import DirectionImg from "assets/quests/direction.svg"
+import figuresImg from "assets/quests/figures_properties.svg"
 
 import BlueLeftArrow from "assets/common/blue-left-arrow.png"
 import "./index.scss"
@@ -16,7 +17,6 @@ function QuestsPage() {
     const navigate = useNavigate()
     return (
         <Container className='' style={{ minHeight: "100vh" }}>
-
             <Row>
                 <Col>
                     <div className='d-flex align-items-center py-4' onClick={() => navigate("/lesson")}>
@@ -86,7 +86,7 @@ function QuestsPage() {
                         </div>
 
                         <div className={`quest-item  d-flex align-items-center justify-content-center `}
-                            style={{ minWidth: "175px"}}
+                            style={{ minWidth: "175px" }}
                             onClick={() => navigate("/quests/thinking")}
                         >
                             <div className='py-2' style={{ width: "100%", height: "100%" }}>
@@ -95,6 +95,19 @@ function QuestsPage() {
                             <div className='quest-item__text flex-grow-0'>
                                 <p className='quest-item__title '>{language.indicators_thinking}</p>
                                 <p className='quest-item__subtitle '>{language.direction_and_move}</p>
+                            </div>
+                        </div>
+
+                        <div className={`quest-item  d-flex align-items-center justify-content-center `}
+                            style={{ minWidth: "175px" }}
+                            onClick={() => navigate("/quests/thinking-figure")}
+                        >
+                            <div className='py-2' style={{ width: "100%", height: "100%" }}>
+                                <img style={{ width: "100%", height: "100%" }} src={figuresImg} alt="" />
+                            </div>
+                            <div className='quest-item__text flex-grow-0'>
+                                <p className='quest-item__title '>Мышление</p>
+                                <p className='quest-item__subtitle '>Отличительные свойства</p>
                             </div>
                         </div>
                     </Stack>

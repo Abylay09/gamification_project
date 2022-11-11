@@ -7,13 +7,30 @@ import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/puzzles.png"
 import "./LoginPhone.scss"
 
+
 function LoginPhone() {
+    const ref = useRef();
     const dispatch = useDispatch();
     const language = useSelector(state => state.language.language);
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = () => {
         dispatch(nextStep());
     }
+   
+
+    function scrollToInput(){
+        const input = document.querySelector(".phone-input")
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        console.log(input.offsetTop);
+        window.scrollTo({
+            top  : y
+        });
+    }
+    // useEffect(() => {
+    //     const executeScroll = () => scrollToRef(ref);
+    //     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
+    // }, [])
+
 
     function scroll() {
         const input = document.querySelector(".phone-input")
@@ -35,7 +52,9 @@ function LoginPhone() {
                     <div className='input__wrapper'>
                         <Form.Control
                             className='phone-input'
-                            onFocus={() => scroll()}
+                            ref={ref}
+                            onClick={() => scrollToInput()}
+                            // onFocus={() => scroll()}
                             type="number"
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"

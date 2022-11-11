@@ -3,7 +3,7 @@ import { useGLTF } from '@react-three/drei';
 import Taryk from '../components/Taryk';
 
 function AbandonedRoom(props) {
-  const { nodes, materials } = useGLTF('/abandoned_room.glb')
+  const { nodes, materials } = useGLTF('abandoned_room.glb')
   return (
     <group>
       <Taryk />

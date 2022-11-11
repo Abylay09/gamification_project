@@ -43,15 +43,22 @@ function PasswordInput() {
         }
     }
 
-    function scroll1() {
+    function scrollToInput1() {
         const input = document.querySelector(".password-input")
-        input.scrollIntoView({ behavior: 'smooth' });
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y
+        });
     }
 
-    function scroll2() {
+    function scrollToInput2() {
         const input = document.querySelector(".password-input--second")
-        input.scrollIntoView({ behavior: 'smooth' });
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y
+        });
     }
+
     return (
         <>
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
@@ -65,7 +72,7 @@ function PasswordInput() {
                         <Form.Control
                             className='password-input'
                             type="password"
-                            onFocus={() => scroll1()}
+                            onClick={() => scrollToInput1()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password")}
@@ -84,7 +91,7 @@ function PasswordInput() {
                         <Form.Control
                             className='password-input password-input--second'
                             type="password"
-                            onFocus={() => scroll2()}
+                            onClick={() => scrollToInput2()}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("passwordProve", {

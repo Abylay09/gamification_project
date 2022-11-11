@@ -87,9 +87,12 @@ function RestoreSms() {
         }
     }
 
-    function scroll() {
-        const input = document.querySelector(".sms-input")
-        input.scrollIntoView({ behavior: 'smooth' });
+    function scrollToInput() {
+        const input = document.querySelector(".signin-sms__inputs")
+        const y = input.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({
+            top: y
+        });
     }
 
     return (
@@ -111,7 +114,7 @@ function RestoreSms() {
                             <input
                                 key={index}
                                 className="sms-input"
-                                onFocus={() => scroll()}
+                                onClick={() => scrollToInput()}
                                 value={digit}
                                 placeholder='-'
                                 onChange={event => handleChange(index, event.target.value)}
