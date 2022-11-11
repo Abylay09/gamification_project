@@ -4,7 +4,6 @@ import { Container, Stack } from 'react-bootstrap'
 import { useSelector } from 'react-redux'
 import RestorePassword from './components/RestorePassword';
 import RestoreSms from './components/RestoreSms';
-
 function RestorePage() {
     const step = useSelector((state) => state.restore.step);
 

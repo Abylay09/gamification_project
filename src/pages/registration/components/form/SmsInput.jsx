@@ -7,6 +7,7 @@ import AuthButton from 'components/buttons/AuthButton';
 import { registration } from 'utils/api/registration';
 import Image from "assets/login/bonbon-dialog.png"
 import "./SmsInput.scss"
+import { inputHelper } from 'utils/InputHelper';
 
 const initDigits = ["", "", "", ""]
 export default function SmsInput() {
@@ -126,7 +127,8 @@ export default function SmsInput() {
                                 key={index}
                                 className="sms-input"
                                 value={digit}
-                                onClick={() => scrollToInput()}
+                                onFocus={() => inputHelper.upInput(".signin-sms__wrap", ".sms-input", 3)}
+                                onBlur = {() => inputHelper.downInput(".signin-sms__wrap", ".sms-input")}
                                 placeholder='-'
                                 onChange={event => handleChange(index, event.target.value)}
                                 onKeyDown={event => handleKeyDown(index, event)}

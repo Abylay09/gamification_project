@@ -10,7 +10,7 @@ import MusicNote from "assets/common/musical-note.svg"
 import { useSelector } from 'react-redux'
 import "./index.scss"
 import Loading from 'components/loading/Loading';
-
+import { inputHelper } from 'utils/InputHelper';
 function AccountPage() {
     const [show, setShow] = useState(false);
     const [name, setName] = useState("");
@@ -127,16 +127,16 @@ function AccountPage() {
                 </Row> */}
             </Row>
 
-            <Modal backdrop="static" centered show={show} onHide={handleClose}>
+            <Modal  backdrop="static" centered show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>{language.profile}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={onSubmit} className = "px-1">
+                    <form onSubmit={onSubmit} className = "px-1 ">
                         <p className='mb-1'>{language.phone}</p>
                         <input className='w-100 px-2 mb-3' type="text" disabled={true} placeholder={userInfo.profile.phone} />
                         <p className='mb-1  mt-1'>{language.first_name}</p>
-                        <input className='w-100 px-2 mb-3' type="text"
+                        <input className='w-100 px-2 mb-3 qw' type="text"
                             onChange={e => setName(e.target.value)}
                             value={name}
                             placeholder={userInfo.profile.first_name} />

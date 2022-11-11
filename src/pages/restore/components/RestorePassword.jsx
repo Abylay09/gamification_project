@@ -4,7 +4,7 @@ import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
 import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/bubble.png"
-
+import { inputHelper } from 'utils/InputHelper';
 import { setPhone, nextStep, setPassword } from 'redux/features/restoreSlice';
 
 import "./RestorePassword.scss"
@@ -68,17 +68,19 @@ function RestorePassword() {
             <div style={{ paddingBottom: "30%", marginTop: "24px" }}>
                 <img src={logo} alt="" />
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="phone-form">
+            <form onSubmit={handleSubmit(onSubmit)} className="password-form">
                 <div style={topInfo}>
                     <Form.Label className="form-title mb-3" htmlFor="basic-url">{language.password_create}</Form.Label>
                     <div className='input__wrapper'>
                         <Form.Control
                             className='password-input'
                             type="password"
-                            onClick={() => scrollToInput1()}
+                            onFocus={() => inputHelper.upInput(".password-form", ".password-input--second")}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
-                            {...register("password")}
+                            {...register("password", {
+                                onBlur: () => inputHelper.downInput(".password-form", ".password-input")
+                            })}
                         />
                         <p className='password-input__wrapper-title'>{language.password}</p>
                     </div>
@@ -95,10 +97,11 @@ function RestorePassword() {
                             className='password-input password-input--second'
                             type="password"
                             placeholder="•••••"
-                            onClick={() => scrollToInput2()}
+                            onFocus={() => inputHelper.upInput(".password-form", ".password-input--second", 3)}
                             aria-describedby="passwordHelpBlock"
                             {...register("passwordProve", {
-                                onChange: (event) => dispatch(setPassword("" + event.target.value))
+                                onChange: (event) => dispatch(setPassword("" + event.target.value)),
+                                onBlur: () => inputHelper.downInput(".password-form", ".password-input--second")
                             })}
                         />
                         <p className='password-input__wrapper-title'>{language.password}</p>

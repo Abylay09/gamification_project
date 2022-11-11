@@ -1,4 +1,4 @@
-import React, {useRef} from 'react'
+import React, { useRef } from 'react'
 import { useForm } from 'react-hook-form'
 import { Form } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux'
@@ -8,7 +8,7 @@ import { setPassword } from 'redux/features/signInSlice';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
 import { login } from 'utils/api/Login';
-
+import { inputHelper } from 'utils/InputHelper';
 import "./LoginPassword.scss"
 const topInfo = {
     margin: "0 -12px",
@@ -67,11 +67,13 @@ function LoginPassword() {
                             className='password-input login-password'
                             type="password"
                             ref={ref}
-                            onClick={() => scrollToInput()}
+                            onFocus={() => inputHelper.upInput(".password-form", ".login-password")}
+
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("password", {
-                                onChange: (event) => dispatch(setPassword("" + event.target.value))
+                                onChange: (event) => dispatch(setPassword("" + event.target.value)),
+                                onBlur: () => inputHelper.downInput(".password-form", ".login-password")
                             })}
                         />
                         <p className='password-input__wrapper-title'>{language.password}</p>

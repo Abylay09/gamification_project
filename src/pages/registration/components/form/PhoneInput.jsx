@@ -7,6 +7,8 @@ import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/puzzles.png"
 import "./PhoneInput.scss"
 import { useRef } from 'react';
+import { inputHelper } from 'utils/InputHelper';
+
 function PhoneInput() {
     const dispatch = useDispatch();
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
@@ -39,14 +41,17 @@ function PhoneInput() {
                     <div className='input__wrapper'>
                         <Form.Control
                             className='phone-input'
-                            ref = {ref}
+                            ref={ref}
                             type="number"
-                            onFocus={() => scrollToInput()}
+                            onFocus={() => inputHelper.upInput(".phone-form", ".phone-input")}
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
                             {...register("phone", {
                                 required: true,
-                                onChange: (event) => dispatch(setPhone("" + event.target.value))
+                                onChange: (event) => dispatch(setPhone("" + event.target.value)),
+                                onBlur: () => {
+                                    inputHelper.downInput(".phone-form", ".phone-input")
+                                }
                             })}
                         />
                         <p className='phone-input__wrapper-title'>Номер телефона</p>

@@ -8,7 +8,7 @@ import { nextStep, setPassword } from 'redux/features/signUpSlice';
 import { registration } from 'utils/api/registration';
 import logo from "assets/login/bubble.png"
 import "./PasswordInput.scss"
-
+import { inputHelper } from 'utils/InputHelper';
 const topInfo = {
     margin: "0 -12px",
     padding: "36px 24px 64px 24px",
@@ -65,17 +65,20 @@ function PasswordInput() {
                 <img src={logo} alt="" />
                 <p className='content-info__text'>Добро пожаловать в OpenSkill</p>
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="phone-form">
+            <form onSubmit={handleSubmit(onSubmit)} className="password-form">
                 <div style={topInfo}>
                     <Form.Label className="form-title mb-3" htmlFor="basic-url">Придумай пароль</Form.Label>
                     <div className='input__wrapper'>
                         <Form.Control
                             className='password-input'
                             type="password"
-                            onClick={() => scrollToInput1()}
+                            onFocus={() => inputHelper.upInput(".password-form", ".password-input")}
+
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
-                            {...register("password")}
+                            {...register("password", {
+                                onBlur : () => inputHelper.downInput(".password-form", ".password-input")
+                            })}
                         />
                         <p className='password-input__wrapper-title'>Пароль</p>
                     </div>
@@ -91,11 +94,12 @@ function PasswordInput() {
                         <Form.Control
                             className='password-input password-input--second'
                             type="password"
-                            onClick={() => scrollToInput2()}
+                            onFocus={() => inputHelper.upInput(".password-form", ".password-input--second", 3)}
                             placeholder="•••••"
                             aria-describedby="passwordHelpBlock"
                             {...register("passwordProve", {
-                                onChange: (event) => dispatch(setPassword("" + event.target.value))
+                                onChange: (event) => dispatch(setPassword("" + event.target.value)),
+                                onBlur : () => inputHelper.downInput(".password-form", ".password-input--second")
                             })}
                         />
                         <p className='password-input__wrapper-title'>Пароль</p>

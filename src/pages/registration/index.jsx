@@ -17,7 +17,6 @@ function RegPage() {
                     {step === 1 && <PhoneInput />}
                     {step === 2 && <PasswordInput />}
                     {step === 3 && <SmsInput />}
-                    {/* <PasswordInput /> */}
                 </div>
             </Stack>
         </Container >

@@ -57,8 +57,7 @@ function PetPage() {
             console.log(tab_content.offsetWidth);
             my_pet.style.width = tab_content.offsetWidth + "px";
             my_pet.style.height = tab_content.offsetHeight + "px";
-            console.log("shoot");
-        }, 1000)
+        }, 600)
     }, [])
 
     // const { data, isLoading, isError } = useQuery(["MyPet"], () => {
@@ -87,7 +86,6 @@ function PetPage() {
                     <Tab>{language.pet}</Tab>
                     <Tab>{language.indicators}</Tab>
                 </TabList>
-
                 <TabPanel className="custom-tab">
                     <div className='tab-inner'>
                         <div className='tab-inner__content pt-2 pb-3' >
@@ -96,7 +94,7 @@ function PetPage() {
                                 {(() => {
                                     switch (MyPet.data.profile.pet) {
                                         case 'Cat':
-                                            return <div style={{ height: "100%", width: "100%" }}>
+                                            return <div style={{ width: "100%", height: "100%" }}>
                                                 <Canvas camera={{ fov: 70, position: [0, 30, 45] }}
                                                     style={{ width: "100%", height: "100%" }}>
                                                     <color attach="background" args={["#D3D3D3"]} />
@@ -196,6 +194,8 @@ function PetPage() {
                         <button onClick={() => navigate("/quests")} className='tab-inner__btn'>{language.play}</button>
                     </div>
                 </TabPanel>
+
+
                 <TabPanel className="custom-tab indicator-tab">
                     <Indicator myData={[MyIndicators.data.indicators.memmory,
                     MyIndicators.data.indicators.thinkings,

@@ -43,11 +43,11 @@ function PetSliderPage(props) {
         mutation.mutate(pet, {
             onSuccess() {
                 props.selectPet()
-                // alert("Питомец успешно добавлен")
+                alert("Питомец успешно добавлен")
             },
-            onError() {
-                alert("Ошибка добавления")
-            }
+            // onError() {
+            //     alert("Ошибка добавления")
+            // }
         })
     }
     function slideChange(e) {

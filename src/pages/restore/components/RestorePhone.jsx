@@ -8,8 +8,8 @@ import logo from "assets/login/puzzles.png"
 import { useNavigate } from 'react-router-dom';
 import "./RestorePhone.scss"
 import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { restore } from 'utils/api/restore';
+import { inputHelper } from 'utils/InputHelper';
 
 function RestorePhone() {
     const dispatch = useDispatch();
@@ -59,12 +59,15 @@ function RestorePhone() {
                         <Form.Control
                             className='phone-input'
                             type="number"
-                            onClick={() => scrollToInput()}
+                            onFocus={() => inputHelper.upInput(".phone-form", ".phone-input")}
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
                             {...register("phone", {
                                 required: true,
-                                onChange: (event) => dispatch(setPhone("" + event.target.value))
+                                onChange: (event) => dispatch(setPhone("" + event.target.value)),
+                                onBlur: () => {
+                                    inputHelper.downInput(".phone-form", ".phone-input")
+                                }
                             })}
                         />
                         <p className='phone-input__wrapper-title'>{language.phone}</p>

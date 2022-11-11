@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { nextStep } from 'redux/features/restoreSlice';
 import { restore } from 'utils/api/restore';
 import Image from "assets/login/bonbon-dialog.png"
-
+import { inputHelper } from 'utils/InputHelper';
 const initDigits = ["", "", "", ""]
 
 function RestoreSms() {
@@ -114,7 +114,8 @@ function RestoreSms() {
                             <input
                                 key={index}
                                 className="sms-input"
-                                onClick={() => scrollToInput()}
+                                onFocus={() => inputHelper.upInput(".signin-sms__wrap", ".sms-input", 3)}
+                                onBlur={() => inputHelper.downInput(".signin-sms__wrap", ".sms-input")}
                                 value={digit}
                                 placeholder='-'
                                 onChange={event => handleChange(index, event.target.value)}

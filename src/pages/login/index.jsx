@@ -9,7 +9,6 @@ import LoginPhone from './components/LoginPhone'
 function LoginPage() {
     const step = useSelector((state) => state.signIn.step);
     const [isLoading, setLoading] = useState(true)
-    const ref = useRef();
     useEffect(() => {
         let timer = setTimeout(() => {
             setLoading(false)
@@ -22,28 +21,14 @@ function LoginPage() {
 
 
     return isLoading ? < AppLoader />
-        : <Container fluid className='vh-100' ref={ref} style={{ background: "#27272F" }}>
+        : <Container fluid className='vh-100' style={{ background: "#27272F" }}>
             <Stack className='h-100' >
                 <div className='mt-auto flex-column' style={{ gap: "150px" }}>
-                    {step === 1 && <LoginPhone parent = {ref}/>}
+                    {step === 1 && <LoginPhone />}
                     {step === 2 && <LoginPassword />}
                 </div>
             </Stack >
         </Container >
-
-
-
-
-    // return (
-    // <Container fluid className='vh-100 ' style={{ background: "#27272F" }}>
-    //     <Stack className='h-100' >
-    //         <div className='mt-auto flex-column' style={{ gap: "150px" }}>
-    //             {step === 1 && <LoginPhone />}
-    //             {step === 2 && <LoginPassword />}
-    //         </div>
-    //     </Stack >
-    // </Container >
-    // )
 }
 
 export default LoginPage

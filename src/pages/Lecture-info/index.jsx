@@ -35,7 +35,9 @@ function LectureInfoPage() {
         })
         const result = await response.data;
         return result;
-    },)
+    }, {
+        refetchOnWindowFocus : false
+    })
 
     if (isFetching) {
         return <Loading />
@@ -69,7 +71,7 @@ function LectureInfoPage() {
             <Row>
                 <Col>
                     <div className='react-player-container mt-4'>
-                        {lecture.lesson.lectures[0].video ? 
+                        {lecture.lesson.lectures[0].video ?
                             <ReactPlayer className="react-player" width={'100%'} height={'100%'} controls={true} url={lecture.lesson.lectures[0].video} />
                             : ''
                         }
@@ -81,16 +83,19 @@ function LectureInfoPage() {
                 <Col>
                     <Stack>
                         <h4 className='lecture-text-subtitle' >{language.theory}</h4>
-                        <p className='lecture-text' >
+                        <p className='lecture-text' style={{ marginBottom: "50px" }}>
                             {lecture.lesson.lectures[0].content}
                         </p>
                     </Stack>
                 </Col>
             </Row>
             {
-                <div className='position-absolute start-50 w-100' style={{ padding: "0 24px", bottom: "64px", transform: "translateX(-50%)" }}>
+                <div className='getTaskWrapper'>
                     <CommonButton text={"Приступить к заданиям"} onClick={() => navigate(`/task/${linkTask.uid}`)} />
                 </div>
+                // <div className='position-absolute start-50 w-100' style={{ padding: "0 24px", bottom: "64px", transform: "translateX(-50%)" }}>
+                //     <CommonButton text={"Приступить к заданиям"} onClick={() => navigate(`/task/${linkTask.uid}`)} />
+                // </div>
             }
             {/* {
                 lecture.lesson.next ?

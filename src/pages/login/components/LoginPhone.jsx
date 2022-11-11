@@ -6,7 +6,7 @@ import { setPhone, nextStep } from 'redux/features/signInSlice';
 import AuthButton from 'components/buttons/AuthButton';
 import logo from "assets/login/puzzles.png"
 import "./LoginPhone.scss"
-
+import { inputHelper } from 'utils/InputHelper';
 
 function LoginPhone({ parent }) {
     const ref = useRef();
@@ -38,11 +38,6 @@ function LoginPhone({ parent }) {
             top: y
         });
     }
-    // useEffect(() => {
-    //     const executeScroll = () => scrollToRef(ref);
-    //     const scrollToRef = (ref) => window.scrollTo(0, ref.current.offsetTop);
-    // }, [])
-
 
     function scroll() {
         const input = document.querySelector(".phone-input")
@@ -65,23 +60,7 @@ function LoginPhone({ parent }) {
                         <Form.Control
                             className='phone-input'
                             ref={ref}
-                            onFocus={() => {
-                                const wrapper = document.querySelector(".phone-form");
-
-                                // document.body.style.height = document.body.offsetHeight / 4 + "px"
-                                wrapper.style.marginBottom = document.body.offsetHeight / 4 + "px"
-                                setTimeout(() => {
-                                    const input = document.querySelector(".phone-input")
-                                    const y = input.getBoundingClientRect().top + window.scrollY;
-                                    window.scrollTo({
-                                        top: y,
-                                        behavior: "smooth"
-                                    });
-                                }, 100)
-
-                            }}
-
-                            // onClick={() => scrollToInput()}
+                            onFocus={() => inputHelper.upInput(".phone-form", ".phone-input")}
                             type="number"
                             placeholder="998-"
                             aria-describedby="passwordHelpBlock"
@@ -89,13 +68,7 @@ function LoginPhone({ parent }) {
                                 required: true,
                                 onChange: (event) => dispatch(setPhone("" + event.target.value)),
                                 onBlur: () => {
-                                    const input = document.querySelector(".phone-input");
-                                    const y = input.getBoundingClientRect().top + window.scrollY;
-                                    const wrapper = document.querySelector(".phone-form");
-                                    wrapper.style.marginBottom = 0
-                                    window.scrollTo({
-                                        top: y
-                                    });
+                                    inputHelper.downInput(".phone-form", ".phone-input")
                                 }
                             })}
                         />
