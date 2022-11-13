@@ -10,6 +10,7 @@ import "./index.scss"
 import CouponInfo from 'components/info/CouponInfo';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux'
+import QRCode from "react-qr-code";
 function TicketPage() {
     const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
@@ -54,6 +55,17 @@ function TicketPage() {
                                         <Card.Subtitle className='coupon-subtitle'>
                                             {item.date.slice(0, 19).replace('T', ' ').split("   ")}
                                         </Card.Subtitle>
+                                        { item.merchant_type === "openskill_qr"?
+                                            (
+                                                <div style={{dispay: "flex", justifyContent: "center", alignItems: "center", padding: "1rem 0"}}>
+                                                    <QRCode 
+                                                        value={item.uid}
+                                                        style={{ height: "auto" }}
+                                                    />
+                                                </div>
+                                            )
+                                            : ""
+                                        }
                                     </Card.Body>
                                     <div className='coupon-circle'>
                                         {
