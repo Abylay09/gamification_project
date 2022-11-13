@@ -133,23 +133,23 @@ function AccountPage() {
                 </Modal.Header>
                 <Modal.Body>
                     <form onSubmit={onSubmit} className = "px-1 ">
-                        <p className='mb-1'>{language.phone}</p>
-                        <input className='w-100 px-2 mb-3' type="text" disabled={true} placeholder={userInfo.profile.phone} />
-                        <p className='mb-1  mt-1'>{language.first_name}</p>
+                        {/* <p className='mb-1'>{language.phone}</p>
+                        <input className='w-100 px-2 mb-3' type="text" disabled={true} placeholder={userInfo.profile.phone} /> */}
+                        <p className='mb-1  mt-2'>{language.first_name}</p>
                         <input className='w-100 px-2 mb-3 qw' type="text"
                             onChange={e => setName(e.target.value)}
                             value={name}
                             placeholder={userInfo.profile.first_name} />
-                        <p className='mb-1  mt-1'>{language.last_name}</p>
+                        <p className='mb-1  mt-2'>{language.last_name}</p>
                         <input className='w-100 px-2 mb-3'
                             onChange={e => setSurname(e.target.value)}
                             value={surname}
                             type="text" placeholder={userInfo.profile.last_name} />
-                        <p className='mb-1 mt-1'>E-mail</p>
+                        {/* <p className='mb-1 mt-1'>E-mail</p>
                         <input className='w-100 px-2 mt-1'
                             onChange={e => setEmail(e.target.value)}
                             value={email}
-                            type="text" placeholder={userInfo.profile.email} />
+                            type="text" placeholder={userInfo.profile.email} /> */}
 
                         {/* <Button variant="secondary" onClick={handleClose}>
                             Закрыть

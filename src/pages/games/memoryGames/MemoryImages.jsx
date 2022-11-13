@@ -34,16 +34,16 @@ export default function MemoryImages() {
 
   }, [])
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(prev => prev - 1)
-    }, 1000)
-    if (time == 0) {
-      setFinish(true)
-      sendData()
-    }
-    return () => clearInterval(timer)
-  }, [time])
+  // useEffect(() => {
+  //   const timer = setInterval(() => {
+  //     setTime(prev => prev - 1)
+  //   }, 1000)
+  //   if (time == 0) {
+  //     setFinish(true)
+  //     sendData()
+  //   }
+  //   return () => clearInterval(timer)
+  // }, [time])
 
   useEffect(() => {
     generateVariants();
@@ -51,13 +51,12 @@ export default function MemoryImages() {
       document.querySelector(".memory-images").classList.add("memory-images--close")
       document.querySelector(".memory-variants").classList.remove("memory-variants--close")
     }, 3500);
-
-
   }, [images])
 
   function generateImages() {
     if (leverRef.current === 7) {
       setFinish(true)
+      sendData()
     }
     document.querySelector(".memory-images").classList.remove("memory-images--close")
     let data = dataImages.map(item => ({
@@ -73,27 +72,32 @@ export default function MemoryImages() {
   }
 
   function generateVariants() {
-    document.querySelector(".memory-variants").classList.add("memory-variants--close")
-    let imageVariants = []
-    console.log(images);
-    let data = dataImages.map(item => ({
-      url: item.url,
-      id: item.id,
-    }))
+    if (leverRef.current !== 7) {
+      document.querySelector(".memory-variants").classList.add("memory-variants--close")
+      let imageVariants = []
+      console.log(images);
+      let data = dataImages.map(item => ({
+        url: item.url,
+        id: item.id,
+      }))
 
-    for (let i = 0; i < data.length; i++) {
-      if (answer.includes(data[i].id)) {
-        continue
-      } else {
-        imageVariants.push({
-          url: data[i].url,
-          id: data[i].id
-        })
+      for (let i = 0; i < data.length; i++) {
+        if (answer.includes(data[i].id)) {
+          continue
+        } else {
+          imageVariants.push({
+            url: data[i].url,
+            id: data[i].id
+          })
+        }
+
       }
-
+      let final = shuffleArray(shuffleArray(imageVariants).slice(0, leverRef.current).concat(images))
+      setVariants(final)
+    } else {
+      return
     }
-    let final = shuffleArray(shuffleArray(imageVariants).slice(0, leverRef.current).concat(images))
-    setVariants(final)
+
   }
 
   function shuffleArray(array) {

@@ -27,9 +27,9 @@ function QuestsPage() {
             </Row>
 
 
-            <QuestsMenu />
+            {/* <QuestsMenu /> */}
 
-            <Row>
+            <Row className='mt-5'>
                 <Col>
                     <Stack direction="horizontal" gap={3} className="quest-items flex-wrap justify-content-between">
 

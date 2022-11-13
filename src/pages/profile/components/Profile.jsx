@@ -26,9 +26,10 @@ function Profile({ name, surname, school, grade, func }) {
     
     return (
         <div className='profile'>
-            <div className='profile-photo'>
+            <input className='mt-3' type="file" />
+            {/* <div className='profile-photo'>
 
-            </div>
+            </div> */}
             <div className='profile-name'>
                 {surname} {name}
             </div>
