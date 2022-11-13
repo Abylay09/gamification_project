@@ -19,6 +19,14 @@ export const coupons = {
             }
         }).then(result => result.data)
     },
+    getMyFinishedCoupons(){
+        const token = localStorage.getItem("token")
+        return axios.get("http://api.openskill.uz/store/my?status=false", {
+            headers: {
+                'Authorization': `Bearer ${token}`
+            }
+        }).then(result => result.data)
+    },
     getInfo(id){
         const token = localStorage.getItem("token")
         return axios.get("http://api.openskill.uz/store/offer", {

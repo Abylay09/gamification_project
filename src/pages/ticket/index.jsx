@@ -3,7 +3,7 @@ import { Container, Row, Col, Stack } from 'react-bootstrap'
 import Card from 'react-bootstrap/Card';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import PurpleCross from "assets/common/purple-cross.png"
-import { useQuery } from '@tanstack/react-query'
+import { useQueries, useQuery } from '@tanstack/react-query'
 import { coupons } from 'utils/api/getCoupons';
 import 'react-tabs/style/react-tabs.css';
 import "./index.scss"
@@ -14,17 +14,42 @@ import QRCode from "react-qr-code";
 function TicketPage() {
     const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
-    const { data: coupon, isError, isLoading } = useQuery(["getMyCoupons"], () => {
-        return coupons.getMyCoupons()
-    })
+    const [myCoupons, myFinishedCoupons] = useQueries({
+        queries: [
+            { queryKey: ['getMyCoupons'], queryFn: () => coupons.getMyCoupons(), staleTime: Infinity },
+            { queryKey: ['getMyFinishedCoupons'], queryFn: () => coupons.getMyFinishedCoupons(), staleTime: Infinity }
+        ]
+    },)
+    // const { data: coupon, isError, isLoading } = useQuery(["getMyCoupons"], () => {
+    //     return coupons.getMyCoupons()
+    // })
 
-    if (isLoading) {
+    // if (isLoading) {
+    //     return <div>Loading</div>
+    // }
+
+
+    // else if (isError) {
+    //     return <div>Error</div>
+    // }
+
+    // if (myCoupons.isFetching) {
+    //     return <Loading />
+    // }
+    if (myCoupons.isLoading) {
         return <div>Loading</div>
     }
-
-    else if (isError) {
+    if (myFinishedCoupons.isLoading) {
+        return <div>Loading</div>
+    }
+    else if (myCoupons.isError) {
         return <div>Error</div>
     }
+    else if (myFinishedCoupons.isError) {
+        return <div>Error</div>
+    }
+
+
     return (
         <Container>
             <Row>
@@ -43,7 +68,7 @@ function TicketPage() {
 
                 <TabPanel>
                     <Stack>
-                        {coupon.offers ? coupon.offers.map(item => {
+                        {myCoupons.data.offers ? myCoupons.data.offers.map(item => {
                             return (
                                 <Card className='coupon-ticket' style={{ marginBottom: "20px" }} onClick={() => navigate(`/ticket/${item.merchant_store_uid}`)} >
                                     <Card.Img style={{ height: "160px" }} variant="top" src={item.images[0]} alt="" />
@@ -55,10 +80,10 @@ function TicketPage() {
                                         <Card.Subtitle className='coupon-subtitle'>
                                             {item.date.slice(0, 19).replace('T', ' ').split("   ")}
                                         </Card.Subtitle>
-                                        { item.merchant_type === "openskill_qr"?
+                                        {item.merchant_type === "openskill_qr" ?
                                             (
-                                                <div style={{dispay: "flex", justifyContent: "center", alignItems: "center", padding: "1rem 0"}}>
-                                                    <QRCode 
+                                                <div style={{ dispay: "flex", justifyContent: "center", alignItems: "center", padding: "1rem 0" }}>
+                                                    <QRCode
                                                         value={item.uid}
                                                         style={{ height: "auto" }}
                                                     />
@@ -78,7 +103,39 @@ function TicketPage() {
                     </Stack>
                 </TabPanel>
                 <TabPanel style={{ position: "relative" }}>
-                    <CouponInfo />
+                    {myFinishedCoupons.data.offers ? myFinishedCoupons.data.offers.map(item => {
+                        return (
+                            <Card className='coupon-ticket' style={{ marginBottom: "20px" }} onClick={() => navigate(`/ticket/${item.merchant_store_uid}`)} >
+                                <Card.Img style={{ height: "160px" }} variant="top" src={item.images[0]} alt="" />
+                                <Card.Body className='coupon-body'>
+                                    <Card.Title className='coupon-title'>{item.title}</Card.Title>
+                                    <Card.Text className='coupon-text'>
+                                        {item.address}
+                                    </Card.Text>
+                                    <Card.Subtitle className='coupon-subtitle'>
+                                        {item.date.slice(0, 19).replace('T', ' ').split("   ")}
+                                    </Card.Subtitle>
+                                    {item.merchant_type === "openskill_qr" ?
+                                        (
+                                            <div style={{ dispay: "flex", justifyContent: "center", alignItems: "center", padding: "1rem 0" }}>
+                                                <QRCode
+                                                    value={item.uid}
+                                                    style={{ height: "auto" }}
+                                                />
+                                            </div>
+                                        )
+                                        : ""
+                                    }
+                                </Card.Body>
+                                <div className='coupon-circle'>
+                                    {
+                                        new Array(13).fill("").map((item) => <span className='coupon-circle__item'></span>)
+                                    }
+                                </div>
+                            </Card>
+                        )
+                    }) : <CouponInfo />}
+                    {/* <CouponInfo /> */}
                 </TabPanel>
             </Tabs>
 
