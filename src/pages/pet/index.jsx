@@ -43,14 +43,16 @@ function PetPage() {
     const [loaded, setLoaded] = useState(false)
     const [MyPet, MyIndicators] = useQueries({
         queries: [
-            { queryKey: ['MyPet'], queryFn: () => PetApi.getPet(), staleTime: Infinity },
+            {
+                queryKey: ['MyPet'], queryFn: () => PetApi.getPet(), staleTime: Infinity,
+                onSuccess: () => setLoaded(true),
+            },
             { queryKey: ['MyIndicator'], queryFn: () => Rating.getMyIndicator(), staleTime: Infinity }
         ]
-    })
+    },)
 
 
     useEffect(() => {
-
         setTimeout(() => {
             const tab_content = document.querySelector(".tab-inner__content");
             const my_pet = document.querySelector(".my-pet");
@@ -58,8 +60,9 @@ function PetPage() {
             console.log(tab_content.offsetWidth);
             my_pet.style.width = tab_content.offsetWidth + "px";
             my_pet.style.height = tab_content.offsetHeight + "px";
+            console.log("worked");
         }, 600)
-    }, [])
+    }, [loaded])
 
     // const { data, isLoading, isError } = useQuery(["MyPet"], () => {
     //     return PetApi.getPet()
