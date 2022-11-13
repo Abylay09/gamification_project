@@ -59,18 +59,18 @@ function Ticket() {
                         pagination={{
                             clickable: true,
                         }}
-                        loop={true}
+                        loop={false}
                         modules={[Pagination]}
                         className="my-swiper">
-                        <SwiperSlide>
-                            <img src={Library} alt="" />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <img src={Library} alt="" />
-                        </SwiperSlide>
-                        <SwiperSlide>
-                            <img src={Library} alt="" />
-                        </SwiperSlide>
+                        {
+                            coupon.offer.images.map(item => {
+                                return (
+                                    <SwiperSlide>
+                                        <img src={item.path} alt="" />
+                                    </SwiperSlide>
+                                )
+                            })
+                        }
                     </Swiper>
                 </Col>
             </Row>
@@ -133,7 +133,7 @@ function Ticket() {
                             </Stack>
                         </TabPanel>
                     </Tabs>
-                    <BuyModal myMoney = {myInfo.data?.profile?.gold} uid={coupon.offer.uid} cost={coupon.offer.price}
+                    <BuyModal myMoney={myInfo.data?.profile?.gold} uid={coupon.offer.uid} cost={coupon.offer.price}
                         show={show}
                         close={() => setShow(!show)}
                         showSuccess={() => setShowSuccess(true)}

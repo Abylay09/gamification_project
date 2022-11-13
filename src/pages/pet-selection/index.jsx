@@ -30,7 +30,11 @@ import "swiper/css/navigation";
 import "./index.scss"
 import CatRoom from './environment/CatRoom';
 import Valley from './environment/Valley';
-
+import Tiger from './components/Tiger';
+import Taryk from './components/Taryk';
+import Rabbit from './components/Rabbit'
+import Cat from './components/Cat'
+import SF from './components/SF'
 function PetSliderPage(props) {
     const navigate = useNavigate()
     const language = useSelector(state => state.language.language);
@@ -80,13 +84,15 @@ function PetSliderPage(props) {
                             e.target.classList.toggle("active-pet")
                             // e.target.classList.toggle("active-pet")
                         }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
-                            <Canvas camera={{ fov: 70, position: [0, 55, 115] }} >
+                            <Canvas camera={{ fov: 70, position: [0, 35, 95] }} >
                                 <Suspense fallback={null}>
-                                    <ambientLight />
                                     <directionalLight intensity={1} position={[0, 0, -50]} />
                                     <directionalLight intensity={3} position={[0, 0, 50]} />
-                                    {/* <directionalLight intensity={1} position={[0, 20, 50]} /> */}
-                                    <AbandonedRoom />
+                                    <Taryk />
+                                    {/* <ambientLight />
+                                    <directionalLight intensity={1} position={[0, 0, -50]} />
+                                    <directionalLight intensity={3} position={[0, 0, 50]} />
+                                    <AbandonedRoom /> */}
                                     <OrbitControls enablePan={false} enableZoom={true} enableRotate={true} />
                                 </Suspense>
                             </Canvas>
@@ -99,8 +105,16 @@ function PetSliderPage(props) {
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
                         }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
-                            <Canvas camera={{ fov: 55, position: [0, 10, 25] }}>
-                                <color attach="background" args={["#D3D3D3"]} />
+                            <Canvas camera={{ fov: 55, position: [0, 8, 25] }}>
+                                <Suspense fallback={null}>
+                                    <ambientLight intensity={0.1} />
+                                    <pointLight intensity={1.2} position={[0, 20, 20]} />
+                                    <pointLight intensity={0.1} position={[0, 5, 20]} />
+                                    <pointLight intensity={0.1} position={[0, 2, -20]} />
+                                    <Rabbit />
+                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                </Suspense>
+                                {/* <color attach="background" args={["#D3D3D3"]} />
                                 <Suspense fallback={null}>
                                     <ambientLight intensity={0.1} />
                                     <pointLight intensity={1.2} position={[0, 20, 20]} />
@@ -108,7 +122,7 @@ function PetSliderPage(props) {
                                     <pointLight intensity={0.1} position={[0, 2, -20]} />
                                     <Valley />
                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
-                                </Suspense>
+                                </Suspense> */}
                             </Canvas>
                         </div>
                     </SwiperSlide>
@@ -119,7 +133,15 @@ function PetSliderPage(props) {
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
                         }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
-                            <Canvas camera={{ fov: 70, position: [0, 30, 45] }}>
+                            <Canvas camera={{ fov: 70, position: [0, 10, 45] }}>
+                                <ambientLight />
+                                <directionalLight intensity={0.5} position={[0, 0, 50]} />
+                                <directionalLight intensity={0.4} position={[0, 0, 20]} />
+                                <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                <Cat />
+                            </Canvas>
+                            {/* <Canvas camera={{ fov: 70, position: [0, 30, 45] }}>
                                 <color attach="background" args={["#D3D3D3"]} />
                                 <Suspense fallback={null}>
                                     <ambientLight />
@@ -129,7 +151,7 @@ function PetSliderPage(props) {
                                     <CatRoom />
                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                 </Suspense>
-                            </Canvas>
+                            </Canvas> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide id="Tiger">
@@ -143,10 +165,18 @@ function PetSliderPage(props) {
                                 <Suspense fallback={null}>
                                     <ambientLight />
                                     <directionalLight intensity={0.5} position={[0, 0, 20]} />
-                                    <Jungle />
+                                    <Tiger />
                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                 </Suspense>
                             </Canvas>
+                            {/* <Canvas camera={{ fov: 65, position: [0, 20, 120] }}>
+                                <Suspense fallback={null}>
+                                    <ambientLight />
+                                    <directionalLight intensity={0.5} position={[0, 0, 20]} />
+                                    <Jungle />
+                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                </Suspense>
+                            </Canvas> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide id="Wolf">
@@ -156,7 +186,16 @@ function PetSliderPage(props) {
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
                         }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
-                            <Canvas camera={{ fov: 60, position: [0, 50, 90] }}>
+                            <Canvas camera={{ fov: 60, position: [0, 20, 70] }}>
+                                <Suspense fallback={null}>
+                                    <ambientLight intensity={2} />
+                                    <directionalLight intensity={3} position={[0, 0, 20]} />
+                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                    <Wolf />
+                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                </Suspense>
+                            </Canvas>
+                            {/* <Canvas camera={{ fov: 60, position: [0, 50, 90] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight intensity={2} />
                                     <directionalLight intensity={3} position={[0, 0, 20]} />
@@ -164,7 +203,7 @@ function PetSliderPage(props) {
                                     <Camping />
                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                 </Suspense>
-                            </Canvas>
+                            </Canvas> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide id="Sf">
@@ -174,7 +213,17 @@ function PetSliderPage(props) {
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
                         }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
-                            <Canvas camera={{ fov: 58, position: [0, 10, 35] }}>
+                            <Canvas camera={{ fov: 58, position: [0, 10, 25] }}>
+                                <Suspense fallback={null}>
+                                    <ambientLight />
+                                    <directionalLight intensity={1} position={[0, 50, 50]} />
+                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                    <directionalLight intensity={1} position={[0, 0, 30]} />
+                                    <SF />
+                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                </Suspense>
+                            </Canvas>
+                            {/* <Canvas camera={{ fov: 58, position: [0, 10, 35] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
                                     <directionalLight intensity={1} position={[0, 50, 50]} />
@@ -183,7 +232,7 @@ function PetSliderPage(props) {
                                     <SkyIsland />
                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                 </Suspense>
-                            </Canvas>
+                            </Canvas> */}
                         </div>
                     </SwiperSlide>
                     <SwiperSlide id="Cougar">
@@ -193,7 +242,16 @@ function PetSliderPage(props) {
                             document.querySelectorAll('canvas').forEach(item => item.classList.remove('active-pet'));
                             e.target.classList.toggle("active-pet")
                         }} style={{ height: "100%", width: "100%", margin: "0 auto", borderRadius: "12px" }}>
-                            <Canvas camera={{ fov: 55, position: [0, 15, 40] }}>
+                            <Canvas camera={{ fov: 55, position: [0, 15, 25] }}>
+                                <Suspense fallback={null}>
+                                    <ambientLight />
+                                    <directionalLight intensity={3} position={[0, 50, 80]} />
+                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                    <Cougar />
+                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                </Suspense>
+                            </Canvas>
+                            {/* <Canvas camera={{ fov: 55, position: [0, 15, 40] }}>
                                 <Suspense fallback={null}>
                                     <ambientLight />
                                     <directionalLight intensity={3} position={[0, 50, 80]} />
@@ -201,13 +259,13 @@ function PetSliderPage(props) {
                                     <Tropics />
                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                 </Suspense>
-                            </Canvas>
+                            </Canvas> */}
                         </div>
                     </SwiperSlide>
                 </Swiper>
                 {pet ? (<CommonButton color={button} onClick={() => savePet()} text={language.select} />) : ""}
             </div>
-        </Container>
+        </Container >
     )
 }
 

@@ -34,16 +34,16 @@ export default function MemoryImages() {
 
   }, [])
 
-  // useEffect(() => {
-  //   const timer = setInterval(() => {
-  //     setTime(prev => prev - 1)
-  //   }, 1000)
-  //   if (time == 0) {
-  //     setFinish(true)
-  //     sendData()
-  //   }
-  //   return () => clearInterval(timer)
-  // }, [time])
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(prev => prev - 1)
+    }, 1000)
+    if (time == 0) {
+      setFinish(true)
+      sendData()
+    }
+    return () => clearInterval(timer)
+  }, [time])
 
   useEffect(() => {
     generateVariants();
@@ -92,7 +92,7 @@ export default function MemoryImages() {
         }
 
       }
-      let final = shuffleArray(shuffleArray(imageVariants).slice(0, leverRef.current).concat(images))
+      let final = shuffleArray(shuffleArray(imageVariants).slice(0, leverRef.current - 1).concat(images))
       setVariants(final)
     } else {
       return

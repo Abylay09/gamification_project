@@ -11,7 +11,7 @@ import RightArrow from "assets/common/right-arrow.svg"
 import "./index.scss"
 import Loading from 'components/loading/Loading'
 
-function ShopPage() { 
+function ShopPage() {
     const language = useSelector(state => state.language.language)
     const navigate = useNavigate()
 
@@ -41,18 +41,24 @@ function ShopPage() {
                     <img src={RightArrow} alt="" />
                 </div>
             </Stack>
-            <Stack style={{ marginBottom: '-24px' }}>
+            {/* <Stack style={{ marginBottom: '-24px' }}> */}
+            <Stack style={{ marginBottom: '16px' }}>
                 {
                     Object.keys(coupon.offers).map((item, index) => {
                         return (
                             <div>
                                 <h4 className='section-title my-4' >{index + 1} {language.level}</h4>
-
                                 {coupon.offers[item].map(another => {
                                     return (
                                         <ShopItem merchant_title={another.merchant_title} level={another.level}
-                                            title={another.title} price={another.price}
-                                            openTicket={() => navigate(`/ticket/${another.uid}`)} />
+                                            title={another.title} price={another.price} hasbuy = {another.hasBuy}
+                                            openTicket={() => {
+                                                if(another.hasBuy){
+                                                    navigate(`/ticket/${another.uid}`)
+                                                }else{
+                                                    return
+                                                }
+                                            }} />
                                     )
                                 })}
 

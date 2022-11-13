@@ -36,7 +36,7 @@ function Layout({ children }) {
 
     return (
         <Container style={{ position: " relative" }} className="d-flex min-vh-100 flex-column">
-            <Row className='d-flex align-items-center g-0 py-3'>
+            <Row className='d-flex align-items-center g-0 py-3 layout-menu'>
                 <Col className='d-flex align-items-center' xs={8} style={{ gap: "16px" }}>
                     <img src={star} alt="" />
                     <span>{info?.profile?.level}</span>

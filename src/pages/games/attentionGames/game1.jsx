@@ -89,7 +89,7 @@ export default class Game1 extends React.Component {
   render(navigation) {
     return this.state.time > 0 ? (
       <Container className='container-custom-attention-1'>
-        <GameHeader title={"Запоминание порядка"} />
+        <GameHeader title={"Найди число"} />
         <Row>
           <Col xs="6">
             Баллы: {this.state.exp}

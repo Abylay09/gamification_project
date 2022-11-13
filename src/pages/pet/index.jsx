@@ -50,6 +50,7 @@ function PetPage() {
 
 
     useEffect(() => {
+
         setTimeout(() => {
             const tab_content = document.querySelector(".tab-inner__content");
             const my_pet = document.querySelector(".my-pet");
@@ -95,7 +96,15 @@ function PetPage() {
                                     switch (MyPet.data.profile.pet) {
                                         case 'Cat':
                                             return <div style={{ width: "100%", height: "100%" }}>
-                                                <Canvas camera={{ fov: 70, position: [0, 30, 45] }}
+                                                <Canvas camera={{ fov: 70, position: [0, 10, 45] }}>
+                                                    <ambientLight />
+                                                    <directionalLight intensity={0.5} position={[0, 0, 50]} />
+                                                    <directionalLight intensity={0.4} position={[0, 0, 20]} />
+                                                    <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    <Cat />
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 70, position: [0, 30, 45] }}
                                                     style={{ width: "100%", height: "100%" }}>
                                                     <color attach="background" args={["#D3D3D3"]} />
                                                     <Suspense fallback={null}>
@@ -103,14 +112,23 @@ function PetPage() {
                                                         <directionalLight intensity={0.5} position={[0, 0, 50]} />
                                                         <directionalLight intensity={0.4} position={[0, 0, 20]} />
                                                         <directionalLight intensity={0.8} position={[0, 0, -20]} />
-                                                        {/* <Cat /> */}
                                                         <CatRoom />
                                                         <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                     </Suspense>
-                                                </Canvas>
+                                                </Canvas> */}
                                             </div>
                                         case 'Wolf':
-                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 55, position: [0, 50, 90] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 60, position: [0, 20, 70] }}>
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight intensity={2} />
+                                                        <directionalLight intensity={3} position={[0, 0, 20]} />
+                                                        <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                        <Wolf />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 55, position: [0, 50, 90] }}>
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={3} position={[0, 0, 20]} />
@@ -118,22 +136,42 @@ function PetPage() {
                                                     <Camping />
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
-                                            </Canvas>
+                                            </Canvas> */}
                                             </div>
                                         case 'Taryk':
-                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 60, position: [0, 55, 115] }} >
-                                                <Suspense fallback={null}>
-                                                    <ambientLight />
-                                                    <directionalLight intensity={1} position={[0, 0, -50]} />
-                                                    <directionalLight intensity={3} position={[0, 0, 50]} />
-                                                    <directionalLight intensity={1} position={[0, 20, 50]} />
-                                                    <AbandonedRoom />
-                                                    <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
-                                                </Suspense>
-                                            </Canvas>
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 70, position: [0, 35, 95] }} >
+                                                    <Suspense fallback={null}>
+                                                        <directionalLight intensity={1} position={[0, 0, -50]} />
+                                                        <directionalLight intensity={3} position={[0, 0, 50]} />
+                                                        <Taryk />
+                                                        <OrbitControls enablePan={false} enableZoom={true} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 60, position: [0, 55, 115] }} >
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight />
+                                                        <directionalLight intensity={1} position={[0, 0, -50]} />
+                                                        <directionalLight intensity={3} position={[0, 0, 50]} />
+                                                        <directionalLight intensity={1} position={[0, 20, 50]} />
+                                                        <AbandonedRoom />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas> */}
                                             </div>
                                         case 'Rabbit':
-                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 55, position: [0, 10, 25] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 55, position: [0, 8, 25] }}>
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight intensity={0.1} />
+                                                        <pointLight intensity={1.2} position={[0, 20, 20]} />
+                                                        <pointLight intensity={0.1} position={[0, 5, 20]} />
+                                                        <pointLight intensity={0.1} position={[0, 2, -20]} />
+                                                        <Rabbit />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 55, position: [0, 10, 25] }}>
                                                 <color attach="background" args={["#D3D3D3"]} />
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
@@ -143,10 +181,19 @@ function PetPage() {
                                                     <Valley />
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
-                                            </Canvas>
+                                            </Canvas> */}
                                             </div>
                                         case 'Tiger':
-                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 60, position: [0, 20, 120] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 65, position: [0, 20, 120] }}>
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight />
+                                                        <directionalLight intensity={0.5} position={[0, 0, 20]} />
+                                                        <Tiger />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 60, position: [0, 20, 120] }}>
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={1} position={[0, 0, 20]} />
@@ -154,10 +201,21 @@ function PetPage() {
                                                     <Jungle />
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
-                                            </Canvas>
+                                            </Canvas> */}
                                             </div>
                                         case 'Sf':
-                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 58, position: [0, 10, 35] }}>
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 58, position: [0, 10, 25] }}>
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight />
+                                                        <directionalLight intensity={1} position={[0, 50, 50]} />
+                                                        <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                        <directionalLight intensity={1} position={[0, 0, 30]} />
+                                                        <SF />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 58, position: [0, 10, 35] }}>
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={3} position={[0, 50, 80]} />
@@ -166,10 +224,20 @@ function PetPage() {
                                                     <SkyIsland />
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
-                                            </Canvas>
+                                            </Canvas> */}
                                             </div>
                                         case 'Cougar':
-                                            return <div style={{ height: "100%", width: "100%" }}> <Canvas camera={{ fov: 55, position: [0, 15, 40] }} >
+                                            return <div style={{ height: "100%", width: "100%" }}>
+                                                <Canvas camera={{ fov: 55, position: [0, 15, 25] }}>
+                                                    <Suspense fallback={null}>
+                                                        <ambientLight />
+                                                        <directionalLight intensity={3} position={[0, 50, 80]} />
+                                                        <directionalLight intensity={0.8} position={[0, 0, -20]} />
+                                                        <Cougar />
+                                                        <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
+                                                    </Suspense>
+                                                </Canvas>
+                                                {/* <Canvas camera={{ fov: 55, position: [0, 15, 40] }} >
                                                 <Suspense fallback={null}>
                                                     <ambientLight />
                                                     <directionalLight intensity={3} position={[0, 50, 80]} />
@@ -178,7 +246,7 @@ function PetPage() {
                                                     <Tropics />
                                                     <OrbitControls enablePan={false} enableZoom={false} enableRotate={true} />
                                                 </Suspense>
-                                            </Canvas>
+                                            </Canvas> */}
                                             </div>
                                         default:
                                             return <Button

@@ -1,5 +1,10 @@
 .container-custom-memory-1{
   margin-top: 80px;
+  background: url("../../../assets/games/bg/memory-images-bg.jpg");
+  background-size: cover;
+  background-position: center center;
+  height: calc(100vh - 80px);
+  padding-top: 25px;
   .grid {
     width: 100%;
     display: flex;
