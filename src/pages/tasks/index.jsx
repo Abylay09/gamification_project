@@ -27,10 +27,14 @@ function TaskPage() {
     const navigate = useNavigate();
     const params = useParams()
     const ref = useRef(null)
-    const itemEls = useRef(new Array())
+    let itemEls = useRef(new Array())
     const queryClient = useQueryClient()
 
     const { data: query, status, refetch, isLoading } = useQuery(["task-info"], () => {
+        setInputValue([])
+        console.log(inputValue)
+        if(itemEls.length)
+            itemEls.replace(0, itemEls.length)
         return getDataList.getTask(params.id)
     }, {
         cacheTime: 0,
@@ -58,8 +62,8 @@ function TaskPage() {
         refetch();
     };
 
-    if (!inputValue.length && query && query.data.type !== 'test')
-        setInputValue(new Array(query.data.answers_length).fill())
+    // if (!inputValue.length && query && query.data.type !== 'test')
+    //     setInputValue(new Array(query.data.answers_length).fill())
 
     const mutation = useMutation(answer => {
         return postDataList.checkTask(answer)
@@ -83,6 +87,7 @@ function TaskPage() {
     }
     const updateValue = (value, index) => {
         let newValue = JSON.parse(JSON.stringify(inputValue))
+        console.log(inputValue)
         newValue[index] = value
         setInputValue(newValue)
     }
@@ -92,7 +97,6 @@ function TaskPage() {
         if (!!~findIndex)
             newValue.splice(findIndex, 1)
         else newValue.push(value + "_" + index)
-        console.log(newValue)
         setInputValue(newValue)
     }
 
@@ -141,10 +145,12 @@ function TaskPage() {
                             {/* {inputValue.length <= 0 ? <p>{language.your_answer}</p> : ""} */}
                         </div>
                     </div>
-                    <Button className='w-100 py-3 mt-auto btn-sticky' disabled={inputValue.some(x => !x) || inputValue.length !== query.data.answers_length} variant="primary" onClick={() => {
+                    {inputValue}
+                    <Button className='w-100 py-3 mt-auto btn-sticky' disabled={inputValue.some(x => !x) || inputValue.length < query.data.answers_length} variant="primary" onClick={() => {
                         if (inputValue.length !== 0) {
+                            console.log(inputValue, itemEls)
                             if (itemEls && itemEls.current && itemEls.current.length) {
-                                itemEls.current.forEach(x => x.value = '')
+                                itemEls.current.forEach(x => x ? x.value = '' : "")
                             }
                             mutation.mutate({ uid: query.data.task_uid, answer: inputValue.map(x => (x + "").split("_")[0]), attempt: setAttempt(attempt + 1), time }, {
                                 onSuccess: (data) => {
@@ -153,7 +159,7 @@ function TaskPage() {
                                         queryClient.invalidateQueries(['personal-info'])
                                     } else {
                                         setNotCorrect(true)
-                                        setInputValue(new Array(query.data.answers_length).fill())
+                                        setInputValue([])
                                         queryClient.invalidateQueries(['personal-info'])
                                     }
                                 }
