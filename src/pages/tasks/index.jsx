@@ -145,7 +145,6 @@ function TaskPage() {
                             {/* {inputValue.length <= 0 ? <p>{language.your_answer}</p> : ""} */}
                         </div>
                     </div>
-                    {inputValue}
                     <Button className='w-100 py-3 mt-auto btn-sticky' disabled={inputValue.some(x => !x) || inputValue.length < query.data.answers_length} variant="primary" onClick={() => {
                         if (inputValue.length !== 0) {
                             console.log(inputValue, itemEls)
